@@ -5,32 +5,22 @@
  */
 package peixepop;
 
-import java.util.ArrayList;
-
 /**
  *
- * @author Developer
+ * @author Paulo
  */
-public class Sala {
+public class Pez {
     
+    private String tamano;
     private String codigo;
     private String nombre;
-    private Planta planta;
-    private ArrayList<Piscina> piscinas;
+    private Piscina piscina;
 
-    public Sala(String codigo, String nombre, Planta planta) {
+    public Pez(String tamano, String codigo, String nombre, Piscina piscina) {
+        this.tamano = tamano;
         this.codigo = codigo;
         this.nombre = nombre;
-        this.piscinas = new ArrayList<Piscina>();
-        this.planta = planta;
-    }
-
-    public Planta getPlanta() {
-        return planta;
-    }
-
-    public void setPlanta(Planta planta) {
-        this.planta = planta;
+        this.piscina = piscina;
     }
 
     public String getCodigo() {
@@ -49,15 +39,12 @@ public class Sala {
         this.nombre = nombre;
     }
 
-    public ArrayList<Piscina> getPiscinas() {
-        return piscinas;
+    public String getTamano() {
+        return tamano;
     }
 
-    public void setPiscinas(ArrayList<Piscina> piscinas) {
-        this.piscinas = piscinas;
+    public void setTamano(String tamano) {
+        this.tamano = tamano;
     }
     
-    public void anadirPiscinas(){
-        
-    }
 }

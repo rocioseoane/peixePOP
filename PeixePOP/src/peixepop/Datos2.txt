@@ -1,0 +1,36 @@
+S;1;Sala de hologramas
+S;2;Sala Nemo
+P;1;Piscina de Jose
+P;2;Piscina de Ángel
+P;3;Piscina de Miguel
+P;4;Piscina de Paulo
+A;G;1;Megalodón
+A;G;2;Tiburonazo Elefante
+A;G;3;Tiburonazo Jirafa
+A;G;4;Tiburonazo MA;Mut
+A;M;1;Tiburón Mazorca
+A;M;2;Tiburón Basurero
+A;M;3;Tiburón Perezoso
+A;M;4;Tiburón Dientes de Sable
+A;M;5;Tiburón CA;Mello
+A;M;6;Tiburón Mesa
+A;M;7;Tiburón Puerta
+A;M;8;Tiburón Pizarra
+A;P;1;Tiburoncín Hormiga
+A;P;2;Tiburoncín Pollo
+A;P;3;Tiburoncín Cucaracha
+A;P;4;Tiburoncín Grillo
+A;P;5;Tiburoncín Termita
+A;P;6;Tiburoncín Libélula
+A;P;7;Tiburoncín Erizo
+A;P;8;Tiburoncín Caracol
+A;P;9;Tiburoncín Estrella
+A;P;10;Tiburoncín Ciempiés
+A;P;11;Tiburoncín Mosca
+A;P;12;Tiburoncín HA;Mster
+P;A;1;Ayahuasca
+P;A;2;Peyote
+P;A;3;Opio
+P;A;4;Hongos
+P;T;1;Cannabis
+P;T;2;Coca

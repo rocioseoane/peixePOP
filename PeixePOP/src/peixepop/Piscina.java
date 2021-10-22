@@ -5,6 +5,8 @@
  */
 package peixepop;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Developer
@@ -13,20 +15,9 @@ public class Piscina {
     
     private String codigo;
     private String nombre;
-    private Double temperaturaAgua;
-    private String tipo;
-    private boolean aguaSalada; 
-    private boolean limpia;
+    private Planta planta;
+    private ArrayList<Pez> peces;
 
-    public Piscina(String codigo, String nombre, Double temperaturaAgua, String tipo, boolean aguaSalada, boolean limpia) {
-        this.codigo = codigo;
-        this.nombre = nombre;
-        this.temperaturaAgua = temperaturaAgua;
-        this.tipo = tipo;
-        this.aguaSalada = aguaSalada;
-        this.limpia = limpia;
-    }
-    
     public String getCodigo() {
         return codigo;
     }
@@ -43,36 +34,30 @@ public class Piscina {
         this.nombre = nombre;
     }
 
-    public Double getTemperaturaAgua() {
-        return temperaturaAgua;
+    public ArrayList<Pez> getPeces() {
+        return peces;
     }
 
-    public void setTemperaturaAgua(Double temperaturaAgua) {
-        this.temperaturaAgua = temperaturaAgua;
+    public void setPeces(ArrayList<Pez> peces) {
+        this.peces = peces;
     }
 
-    public String getTipo() {
-        return tipo;
+    public Piscina(String codigo, String nombre, Planta planta, ArrayList<Pez> peces) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.peces = peces;
+        this.planta = planta;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public Planta getPlanta() {
+        return planta;
     }
 
-    public boolean isAguaSalada() {
-        return aguaSalada;
+    public void setPlanta(Planta planta) {
+        this.planta = planta;
     }
-
-    public void setAguaSalada(boolean aguaSalada) {
-        this.aguaSalada = aguaSalada;
+    
+    public void anadirPeces(){
+        
     }
-
-    public boolean isLimpia() {
-        return limpia;
-    }
-
-    public void setLimpia(boolean limpia) {
-        this.limpia = limpia;
-    }
-
 }
