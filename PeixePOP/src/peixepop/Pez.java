@@ -14,13 +14,13 @@ public class Pez {
     private String tamano;
     private String codigo;
     private String nombre;
-    private Piscina piscina;
+    private Estanque estanque;
 
-    public Pez(String tamano, String codigo, String nombre, Piscina piscina) {
+    public Pez(String tamano, String codigo, String nombre) {
         this.tamano = tamano;
         this.codigo = codigo;
         this.nombre = nombre;
-        this.piscina = piscina;
+        this.estanque = null;
     }
 
     public String getCodigo() {

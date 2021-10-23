@@ -11,13 +11,20 @@ import java.util.ArrayList;
  *
  * @author Developer
  */
-public class Piscina {
+public class Estanque {
     
     private String codigo;
     private String nombre;
     private Planta planta;
     private ArrayList<Pez> peces;
 
+    public Estanque(String codigo, String nombre, Planta planta, ArrayList<Pez> peces) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.peces = new ArrayList<Pez>();
+        this.planta = null;
+    }
+    
     public String getCodigo() {
         return codigo;
     }
@@ -40,13 +47,6 @@ public class Piscina {
 
     public void setPeces(ArrayList<Pez> peces) {
         this.peces = peces;
-    }
-
-    public Piscina(String codigo, String nombre, Planta planta, ArrayList<Pez> peces) {
-        this.codigo = codigo;
-        this.nombre = nombre;
-        this.peces = peces;
-        this.planta = planta;
     }
 
     public Planta getPlanta() {

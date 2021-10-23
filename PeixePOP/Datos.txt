@@ -1,0 +1,36 @@
+S01Sala de hologramas
+S02Sala Nemo
+E001Estanque de Jose
+E002Estanque de Ángel
+E003Estanque de Miguel
+E004Estanque de Paulo
+AG001Megalodón
+AG002Tiburonazo Elefante
+AG003Tiburonazo Jirafa
+AG004Tiburonazo Mamut
+AM001Tiburón Mazorca
+AM002Tiburón Basurero
+AM003Tiburón Perezoso
+AM004Tiburón Dientes de Sable
+AM005Tiburón Camello
+AM006Tiburón Mesa
+AM007Tiburón Puerta
+AM008Tiburón Pizarra
+AP001Tiburoncín Hormiga
+AP002Tiburoncín Pollo
+AP003Tiburoncín Cucaracha
+AP004Tiburoncín Grillo
+AP005Tiburoncín Termita
+AP006Tiburoncín Libélula
+AP007Tiburoncín Erizo
+AP008Tiburoncín Caracol
+AP009Tiburoncín Estrella
+AP010Tiburoncín Ciempiés
+AP011Tiburoncín Mosca
+AP012Tiburoncín Hamster
+PA001Ayahuasca
+PA002Peyote
+PA003Opio
+PA004Hongos
+PT001Cannabis
+PT002Coca

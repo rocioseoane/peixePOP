@@ -16,13 +16,13 @@ public class Sala {
     private String codigo;
     private String nombre;
     private Planta planta;
-    private ArrayList<Piscina> piscinas;
+    private ArrayList<Estanque> estanques;
 
-    public Sala(String codigo, String nombre, Planta planta) {
+    public Sala(String codigo, String nombre) {
         this.codigo = codigo;
         this.nombre = nombre;
-        this.piscinas = new ArrayList<Piscina>();
-        this.planta = planta;
+        this.estanques = new ArrayList<Estanque>();
+        this.planta = null;
     }
 
     public Planta getPlanta() {
@@ -49,15 +49,12 @@ public class Sala {
         this.nombre = nombre;
     }
 
-    public ArrayList<Piscina> getPiscinas() {
-        return piscinas;
+    public ArrayList<Estanque> getEstanques() {
+        return estanques;
     }
 
-    public void setPiscinas(ArrayList<Piscina> piscinas) {
-        this.piscinas = piscinas;
+    public void setPiscinas(ArrayList<Estanque> estanques) {
+        this.estanques = estanques;
     }
     
-    public void anadirPiscinas(){
-        
-    }
 }
