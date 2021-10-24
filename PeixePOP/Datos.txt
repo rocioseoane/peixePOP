@@ -1,9 +1,9 @@
-S01Sala de hologramas
-S02Sala Nemo
-E001Estanque de Jose
-E002Estanque de Ángel
-E003Estanque de Miguel
-E004Estanque de Paulo
+SM001Sala de hologramas
+SE002Sala Nemo
+EE001Estanque de Jose
+EE002Estanque de Ángel
+EE003Estanque de Miguel
+EE004Estanque de Paulo
 AG001Megalodón
 AG002Tiburonazo Elefante
 AG003Tiburonazo Jirafa
@@ -34,3 +34,4 @@ PA003Opio
 PA004Hongos
 PT001Cannabis
 PT002Coca
+

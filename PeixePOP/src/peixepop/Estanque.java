@@ -15,14 +15,24 @@ public class Estanque {
     
     private String codigo;
     private String nombre;
+    private String tipo;
     private Planta planta;
     private ArrayList<Pez> peces;
 
-    public Estanque(String codigo, String nombre, Planta planta, ArrayList<Pez> peces) {
+    public Estanque(String codigo, String nombre, String tipo, Planta planta, ArrayList<Pez> peces) {
         this.codigo = codigo;
         this.nombre = nombre;
+        this.tipo = tipo;
         this.peces = new ArrayList<Pez>();
         this.planta = null;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
     
     public String getCodigo() {

@@ -51,38 +51,28 @@ public class PeixePOP {
     }
     static void clasificar(String linea) {
         
-        String id;
-        String nombre;
-        String tipo;
-        
+        String tipo = linea.substring(1,2);
+        String id = linea.substring(2,5);
+        String nombre = linea.substring(5,linea.length());
+                
         switch(linea.charAt(0)) {
             //Sala
             case 'S': {
-                id = linea.substring(1,3);
-                nombre = linea.substring(3,linea.length());
-                System.out.println("Sala: " + id + " " + nombre);
+                System.out.println("Sala: " + tipo + " " + id + " " + nombre);
                 break;
             }
             //Estanque
             case 'E': {
-                id = linea.substring(1,4);
-                nombre = linea.substring(4,linea.length());
-                System.out.println("Estanque: " + id + " " + nombre);
+                System.out.println("Estanque: " + tipo + " " + id + " " + nombre);
                 break;
             }
             //Animal
             case 'A': {
-                tipo = linea.substring(1,2);
-                id = linea.substring(2,5);
-                nombre = linea.substring(5,linea.length());
                 System.out.println("Animal: " + tipo + " " + id + " " + nombre);
                 break;
             }
             //Planta
             case 'P': {
-                tipo = linea.substring(1,2);
-                id = linea.substring(2,5);
-                nombre = linea.substring(5,linea.length());
                 System.out.println("Planta: " + tipo + " " + id + " " + nombre);
                 break;
             }

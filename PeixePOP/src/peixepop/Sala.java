@@ -14,15 +14,25 @@ import java.util.ArrayList;
 public class Sala {
     
     private String codigo;
+    private String tipo;
     private String nombre;
     private Planta planta;
     private ArrayList<Estanque> estanques;
 
-    public Sala(String codigo, String nombre) {
+    public Sala(String codigo, String nombre, String tipo) {
         this.codigo = codigo;
         this.nombre = nombre;
+        this.tipo = tipo;
         this.estanques = new ArrayList<Estanque>();
         this.planta = null;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public Planta getPlanta() {
