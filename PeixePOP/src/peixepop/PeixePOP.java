@@ -33,6 +33,7 @@ public class PeixePOP {
         FileReader fr = null;
         BufferedReader br = null;
         String linea;
+        // Si el archivo existe clasificamos las entradas según su tipo de objeto en ArrayLists
         if (archivo.exists()) {
             try {
                 fr = new FileReader(archivo);
@@ -47,8 +48,14 @@ public class PeixePOP {
                 System.exit(0);
             }
         }
+        contenidoListas();
+        estanques.get(0).setPeces(peces);
+        estanques.get(0).setPlanta(plantas.get(0));
+        salas.get(0).setPiscinas(estanques);
+        
 
     }
+    //Clasifica los objetos según su tipo
     static void clasificar(String linea) {
         
         String tipo = linea.substring(1,2);
@@ -58,26 +65,55 @@ public class PeixePOP {
         switch(linea.charAt(0)) {
             //Sala
             case 'S': {
-                System.out.println("Sala: " + tipo + " " + id + " " + nombre);
+                salas.add(new Sala(id, nombre, tipo));
                 break;
             }
             //Estanque
             case 'E': {
-                System.out.println("Estanque: " + tipo + " " + id + " " + nombre);
+                estanques.add(new Estanque(id, nombre, tipo));
                 break;
             }
             //Animal
             case 'A': {
-                System.out.println("Animal: " + tipo + " " + id + " " + nombre);
+                peces.add(new Pez(tipo,id,nombre));
                 break;
             }
             //Planta
             case 'P': {
-                System.out.println("Planta: " + tipo + " " + id + " " + nombre);
+                plantas.add(new Planta(tipo,id,nombre));
                 break;
             }
         } 
     }
+    
+    static void contenidoListas() {
+        //Salas
+        System.out.println("***********Salas*************");
+        for(int i=0; i<salas.size(); i++) {
+            Sala temp = salas.get(i);
+            System.out.println("Sala: " + temp.getTipo() + " " + temp.getCodigo() + " " + temp.getNombre());
+        }
+        //Estanque
+        System.out.println("***********Estanques*************");
+        for(int i=0; i<estanques.size(); i++) {
+            Estanque temp = estanques.get(i);
+            System.out.println("Estanque: " +temp.getTipo() + " " + temp.getCodigo() + " " + temp.getNombre());
+        }
+        //Animales
+        System.out.println("***********Animales*************");
+        for(int i=0; i<peces.size(); i++) {
+            Pez temp = peces.get(i);
+            System.out.println("Animal: " +temp.getTamano() + " " + temp.getCodigo() + " " + temp.getNombre());
+        }
+        //Plantas
+        System.out.println("***********Plantas*************");
+        for(int i=0; i<plantas.size(); i++) {
+            Planta temp = plantas.get(i);
+            System.out.println("Planta: " +temp.getMedioDeVida() + " " + temp.getCodigo() + " " + temp.getNombre());
+        }
+    }
+    
+    
     
 
 }

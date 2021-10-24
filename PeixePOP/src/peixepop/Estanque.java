@@ -19,7 +19,7 @@ public class Estanque {
     private Planta planta;
     private ArrayList<Pez> peces;
 
-    public Estanque(String codigo, String nombre, String tipo, Planta planta, ArrayList<Pez> peces) {
+    public Estanque(String codigo, String nombre, String tipo) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.tipo = tipo;
