@@ -15,7 +15,7 @@ AM004Tiburón Dientes de Sable
 AM005Tiburón Camello
 AM006Tiburón Mesa
 AM007Tiburón Puerta
-AM008Tiburón Pizarra
+AM008Tiburón Porro
 AP001Tiburoncín Hormiga
 AP002Tiburoncín Pollo
 AP003Tiburoncín Cucaracha
