@@ -13,9 +13,13 @@ import java.util.ArrayList;
  */
 public class Sala {
     
+    private final int maxEstanques = 2;
+    private final int maxPlanta = 1;
+    
     private String codigo;
     private String tipo;
     private String nombre;
+    private int numEstanques;
     private Planta planta;
     private ArrayList<Estanque> estanques;
 
@@ -63,8 +67,9 @@ public class Sala {
         return estanques;
     }
 
-    public void setPiscinas(ArrayList<Estanque> estanques) {
+    public void setEstanques(ArrayList<Estanque> estanques) {
         this.estanques = estanques;
     }
+    
     
 }

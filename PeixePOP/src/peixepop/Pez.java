@@ -12,7 +12,7 @@ package peixepop;
 public class Pez {
     
     private String tamano;
-    private String codigo;
+    public String codigo;
     private String nombre;
     private Estanque estanque;
 
