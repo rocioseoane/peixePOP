@@ -18,71 +18,37 @@ import java.util.ArrayList;
 public class Acuario {
 
     private String nombre;
-
+    private String rutaArchivo;
+            
     //Creamos cuatro Arrays vacios para contener los objetos que se vayan creando
-    static ArrayList<Sala> salas = new ArrayList<Sala>();
-    static ArrayList<Estanque> estanques = new ArrayList<Estanque>();
-    static ArrayList<Pez> peces = new ArrayList<Pez>();
-    static ArrayList<Planta> plantas = new ArrayList<Planta>();
+    private ArrayList<Sala> inventarioSalas;
+    private ArrayList<Estanque> inventarioEstanques;
+    private ArrayList<Pez> inventarioPeces;
+    private ArrayList<Planta> inventarioPlantas;
 
-    public Acuario(String nombre) {
+    public Acuario(String nombre, String rutaArchivo) {
         this.nombre = nombre;
+        this.rutaArchivo = rutaArchivo;
+        inventarioSalas = new ArrayList<Sala>();
+        inventarioEstanques = new ArrayList<Estanque>();
+        inventarioPeces = new ArrayList<Pez>();
+        inventarioPlantas = new ArrayList<Planta>();
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public static ArrayList<Sala> getSalas() {
-        return salas;
-    }
-
-    public static void setSalas(ArrayList<Sala> salas) {
-        Acuario.salas = salas;
-    }
-
-    public static ArrayList<Estanque> getEstanques() {
-        return estanques;
-    }
-
-    public static void setEstanques(ArrayList<Estanque> estanques) {
-        Acuario.estanques = estanques;
-    }
-
-    public static ArrayList<Pez> getPeces() {
-        return peces;
-    }
-
-    public static void setPeces(ArrayList<Pez> peces) {
-        Acuario.peces = peces;
-    }
-
-    public static ArrayList<Planta> getPlantas() {
-        return plantas;
-    }
-
-    public static void setPlantas(ArrayList<Planta> plantas) {
-        Acuario.plantas = plantas;
-    }
-
+    
     /**
      * Lee un fichero dado por parametro y clasifica los objetos leídos
-     *
-     * @param fichero Nombre del archivo a leer
      */
-    public void clasificarObjetos(File fichero) {
+    public void clasificarObjetos() {
         FileReader fr = null;
         BufferedReader br = null;
         String linea;
+        File archivo = new File(rutaArchivo);
 
         // Si el archivo existe clasificamos las entradas según su tipo de objeto en ArrayLists
-        if (fichero.exists()) {
+        if (archivo.exists()) {
             try {
-                fr = new FileReader(fichero);
+                fr = new FileReader(archivo);
                 br = new BufferedReader(fr);
                 linea = br.readLine();
                 while (linea != null) {
@@ -93,22 +59,22 @@ public class Acuario {
                     switch (linea.charAt(0)) {
                         //Sala
                         case 'S': {
-                            salas.add(new Sala(id, nombre, tipo));
+                            inventarioSalas.add(new Sala(id, nombre, tipo));
                             break;
                         }
                         //Estanque
                         case 'E': {
-                            estanques.add(new Estanque(id, nombre, tipo));
+                            inventarioEstanques.add(new Estanque(id, nombre, tipo));
                             break;
                         }
                         //Animal
                         case 'A': {
-                            peces.add(new Pez(tipo, id, nombre));
+                            inventarioPeces.add(new Pez(tipo, id, nombre));
                             break;
                         }
                         //Planta
                         case 'P': {
-                            plantas.add(new Planta(tipo, id, nombre));
+                            inventarioPlantas.add(new Planta(tipo, id, nombre));
                             break;
                         }
                     }
@@ -128,26 +94,26 @@ public class Acuario {
     public void mostrarInventario() {
         //Salas
         System.out.println("***********Salas*************");
-        for (int i = 0; i < salas.size(); i++) {
-            Sala temp = salas.get(i);
+        for (int i = 0; i < inventarioSalas.size(); i++) {
+            Sala temp = inventarioSalas.get(i);
             System.out.println("Sala: " + temp.getTipo() + " " + temp.getCodigo() + " " + temp.getNombre());
         }
         //Estanque
         System.out.println("***********Estanques*************");
-        for (int i = 0; i < estanques.size(); i++) {
-            Estanque temp = estanques.get(i);
+        for (int i = 0; i < inventarioEstanques.size(); i++) {
+            Estanque temp = inventarioEstanques.get(i);
             System.out.println("Estanque: " + temp.getTipo() + " " + temp.getCodigo() + " " + temp.getNombre());
         }
         //Animales
         System.out.println("***********Animales*************");
-        for (int i = 0; i < peces.size(); i++) {
-            Pez temp = peces.get(i);
+        for (int i = 0; i < inventarioPeces.size(); i++) {
+            Pez temp = inventarioPeces.get(i);
             System.out.println("Animal: " + temp.getTamano() + " " + temp.getCodigo() + " " + temp.getNombre());
         }
         //Plantas
         System.out.println("***********Plantas*************");
-        for (int i = 0; i < plantas.size(); i++) {
-            Planta temp = plantas.get(i);
+        for (int i = 0; i < inventarioPlantas.size(); i++) {
+            Planta temp = inventarioPlantas.get(i);
             System.out.println("Planta: " + temp.getMedioDeVida() + " " + temp.getCodigo() + " " + temp.getNombre());
         }
     }

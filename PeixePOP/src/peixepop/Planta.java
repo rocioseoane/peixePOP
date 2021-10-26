@@ -15,7 +15,6 @@ public class Planta{
     private String codigo;
     private String nombre;
     
-
     public Planta(String medioDeVida, String codigo, String nombre) {
         this.medioDeVida = medioDeVida;
         this.codigo = codigo;
