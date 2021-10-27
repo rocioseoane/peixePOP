@@ -28,16 +28,17 @@ public class Acuario {
     private String nombreFichero;
     private ArrayList<ArrayList<Object>> inventario;
     
-    // Cuantos objetos tiene el acuario
+    // Cuantos objetos tiene el acuario por separado
     private int totalSalas;
     private int totalEstanques;
     private int totalTiburones;
     private int totalPlantas;
 
+    // Falta este docstring
     public Acuario(String nombre, String nombreFichero) {
         this.nombre = nombre;
         this.nombreFichero = nombreFichero;
-        this.inventario = new ArrayList<ArrayList<Object>>(); // Hay que inicializarlo con algo
+        this.inventario = new ArrayList<ArrayList<Object>>();
         this.totalSalas = nObjetosFichero("S");
         this.totalEstanques = nObjetosFichero("E");
         this.totalTiburones = nObjetosFichero("T");
@@ -45,16 +46,47 @@ public class Acuario {
     }
 
     /**
-     * Muestra el inventario que hay en el acurio disponible que son: - Salas -
-     * Estanques - Peces - Plantas
+     * Muestra el inventario disponible que hay en el acuario que son: 
+     *      - Salas
+     *      - Estanques
+     *      - Peces
+     *      - Plantas
      */
     public void mostrarInventario() {
-        System.out.println(inventario);
+        System.out.println("----- INVENTARIO -----");
+        
+        // Mostrar salas
+        System.out.println("******* Salas *******");
+        for (Object sala : inventario.get(idSala)) {
+            Sala s = (Sala) sala;
+            System.out.println(s.getNombre());
+        }
+        
+        // Mostrar estanques
+        System.out.println("***** Estanques *****");
+        for (Object estanque : inventario.get(idEstanque)) {
+            Estanque e = (Estanque) estanque;
+            System.out.println(e.getNombre());
+        }
+        
+        // Mostrar tiburones
+        System.out.println("***** Tiburones *****");
+        for (Object tiburon : inventario.get(idTiburon)) {
+            Tiburon t = (Tiburon) tiburon;
+            System.out.println(t.getNombre());
+        }
+        
+        // Mostrar plantas
+        System.out.println("**** Plantas ****");
+        for (Object planta : inventario.get(idPlanta)) {
+            Planta p = (Planta) planta;
+            System.out.println(p.getNombre());
+        }
     }
 
     /**
-     * 
-     * 
+     * Rellena el inventario con los objetos que se encontraron en el fichero
+     * dado en el constructor
      */
     public void rellenarInventario() {
         agregarSalas();
@@ -64,8 +96,9 @@ public class Acuario {
     }
     
     /**
-     * Agrega las salas que hay en el fichero dado por parámetro en el 
-     * constructor
+     * Se añade un nuevo arrayList en el inventario y agrega las salas que se 
+     * encontraron en el fichero pasado en el constructor al nuevo arrayList
+     * del inventario
      */
     private void agregarSalas() {
         String codigoSala;
@@ -79,10 +112,15 @@ public class Acuario {
             codigoSala = atributosSalas()[i][2];
             nombreSala = atributosSalas()[i][3];
             tipoSala = atributosSalas()[i][1];
-            inventario.get(idSala).add(new Sala(codigoSala, nombreSala, tipoSala).getNombre());
+            inventario.get(idSala).add(new Sala(codigoSala, nombreSala, tipoSala));
         }
     }
-    
+   
+    /**
+     * Se añade un nuevo arrayList en el inventario y agrega los estanques que  
+     * se encontraron en el fichero pasado en el constructor al nuevo arrayList
+     * del inventario
+     */
     private void agregarEstanques() {
         String codigoEstanque;
         String nombreEstanque;
@@ -95,10 +133,15 @@ public class Acuario {
             codigoEstanque = atributosEstanques()[i][2];
             nombreEstanque = atributosEstanques()[i][3];
             tipoEstanque = atributosEstanques()[i][1];
-            inventario.get(idEstanque).add(new Estanque(codigoEstanque, nombreEstanque, tipoEstanque).getNombre());
+            inventario.get(idEstanque).add(new Estanque(codigoEstanque, nombreEstanque, tipoEstanque));
         }
     }
     
+    /**
+     * Se añade un nuevo arrayList en el inventario y agrega los tiburones que  
+     * se encontraron en el fichero pasado en el constructor al nuevo arrayList
+     * del inventario
+     */
     private void agregarTiburones() {
         String codigoTiburon;
         String nombreTiburon;
@@ -111,10 +154,15 @@ public class Acuario {
             codigoTiburon = atributosTiburones()[i][2];
             nombreTiburon = atributosTiburones()[i][3];
             tamanoTiburon = atributosTiburones()[i][1];
-            inventario.get(idTiburon).add(new Tiburon(tamanoTiburon, codigoTiburon, nombreTiburon).getNombre());
+            inventario.get(idTiburon).add(new Tiburon(tamanoTiburon, codigoTiburon, nombreTiburon));
         }
     }
     
+    /**
+     * Se añade un nuevo arrayList en el inventario y agrega las plantas que  
+     * se encontraron en el fichero pasado en el constructor al nuevo arrayList
+     * del inventario
+     */
     private void agregarPlantas() {
         String codigoPlanta;
         String nombrePlanta;
@@ -127,17 +175,18 @@ public class Acuario {
             codigoPlanta = atributosPlantas()[i][2];
             nombrePlanta = atributosPlantas()[i][3];
             medioPlanta = atributosPlantas()[i][1];
-            inventario.get(idPlanta).add(new Planta(medioPlanta, codigoPlanta, nombrePlanta).getNombre());
+            inventario.get(idPlanta).add(new Planta(medioPlanta, codigoPlanta, nombrePlanta));
         }
     }
     
     /**
-     * Método para saber cuantos objetos de esa clase existen en el fichero
+     * Método para calcular cuantos objetos de esa clase existen en el fichero
+     * pasado por el constructor
      * @param String Meter el character de la clase en mayúsculas
      * @return int Devuelve el total de clases que hay
      */
     private int nObjetosFichero(String clase) {
-        // TODO parametro opcional para saber el segundo campo del fichero por 
+        // TODO: parametro opcional para saber el segundo campo del fichero por 
         // si lo necesitamos para diferenciar los tiburones en tamaño
         BufferedReader br = null;
         String letra;
@@ -260,8 +309,8 @@ public class Acuario {
     
     /**
      * Método que lee el fichero pasado por el constructor, busca los estanques 
-     * que hay y guarda cada atributo de cada sala en un array 2d
-     * @return String[][] Un array 2d con los atributos de las estanques encontrados
+     * que hay y guarda cada atributo de cada estanque en un array 2d
+     * @return String[][] Un array 2d con los atributos de los estanques encontrados
      */
     private String[][] atributosEstanques() {
         BufferedReader br = null;
@@ -304,6 +353,11 @@ public class Acuario {
         return estanques;
     }
     
+    /**
+     * Método que lee el fichero pasado por el constructor, busca los tiburones 
+     * que hay y guarda cada atributo de cada tiburon en un array 2d
+     * @return String[][] Un array 2d con los atributos de los tiburones encontrados
+     */
     private String[][] atributosTiburones() {
         BufferedReader br = null;
         String[][] tiburones = new String[totalTiburones][4];
@@ -345,6 +399,11 @@ public class Acuario {
         return tiburones;
     }
     
+    /**
+     * Método que lee el fichero pasado por el constructor, busca las plantas 
+     * que hay y guarda cada atributo de cada planta en un array 2d
+     * @return String[][] Un array 2d con los atributos de las plantas encontradas
+     */
     private String[][] atributosPlantas() {
         BufferedReader br = null;
         String[][] plantas = new String[totalPlantas][4];
