@@ -13,13 +13,12 @@ import java.util.ArrayList;
  */
 public class Sala {
     
-    private final int maxEstanques = 2;
-    private final int maxPlanta = 1;
+    public final int maxEstanques = 2;
+    public final int maxPlanta = 1;
     
     private String codigo;
     private String tipo;
     private String nombre;
-    private int numEstanques;
     private Planta planta;
     private ArrayList<Estanque> estanques;
 
@@ -67,8 +66,25 @@ public class Sala {
         return estanques;
     }
 
-    public void setEstanques(ArrayList<Estanque> estanques) {
-        this.estanques = estanques;
+    public void setEstanques(Estanque estanque) {
+        this.estanques.add(estanque);
+    }
+    
+    
+    
+    /**
+     * Itera entre los estanques y elimina el que corresponda con el ID
+     * @param id Introducimos el ID del estanque a eliminar 
+     * @return boolean
+     */
+    public boolean eliminarEstanque(String id) {
+        for (Estanque estanque : estanques) {
+            if(estanque.getCodigo().equals(id)) {
+                estanques.remove(estanque);
+                return true;
+            }
+        }
+        return false;
     }
     
     

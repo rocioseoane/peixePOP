@@ -18,7 +18,7 @@ public class PeixePOP {
     public static void main(String[] args) {
         // Creamos un String con el nombre del archivo con los datos
         String data = "Datos.txt";
-        
+      
         // Ruta absoluta del fichero que contiene los datos
         String rutaAbsoluta = new File(data).getAbsolutePath();
         
@@ -26,7 +26,8 @@ public class PeixePOP {
         Acuario acuario = new Acuario("PeixePOP", rutaAbsoluta);
         
         acuario.clasificarObjetos();
-        acuario.mostrarInventario();
-        
+        //acuario.mostrarInventario();
+        acuario.asignarEstanques();
+        acuario.mostrarEstanquesSala();
     }
 }

@@ -13,10 +13,10 @@ import java.util.ArrayList;
  */
 public class Estanque {
     
-    private final int maxPecesGrandes = 1;
-    private final int maxPecesMedianos = 2;
-    private final int maxPecesPequenos = 3;
-    private final int maxPlantas = 2;
+    public final int maxPecesGrandes = 1;
+    public final int maxPecesMedianos = 2;
+    public final int maxPecesPequenos = 3;
+    public final int maxPlantas = 2;
     
     private String codigo;
     private String nombre;
