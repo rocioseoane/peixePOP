@@ -25,6 +25,8 @@ public class PeixePOP {
         // Creamos nuestro acuario
         Acuario acuario = new Acuario("PeixePOP", rutaFichero);
         
-        acuario.nombresSalas();
+        acuario.rellenarInventario();
+        acuario.mostrarInventario();
+        
     }
 }

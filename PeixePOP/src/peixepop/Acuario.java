@@ -17,19 +17,31 @@ import java.util.Vector;
  */
 public class Acuario {
 
+    // Para buscar por el inventario
+    private final int idSala = 0;
+    private final int idEstanque = 1;
+    private final int idTiburon = 2;
+    private final int idPlanta = 3;
+    
+    // Atributos de nuestro acuario
     private String nombre;
     private String nombreFichero;
-    private ArrayList<Object>[][] inventario;
+    private ArrayList<ArrayList<Object>> inventario;
     
-    private final int totalSalas = nObjetosFichero("S");
-    private final int totalEstanques = nObjetosFichero("E");
-    private final int totalTiburones = nObjetosFichero("T");
-    private final int totalPlantas = nObjetosFichero("P");
+    // Cuantos objetos tiene el acuario
+    private int totalSalas;
+    private int totalEstanques;
+    private int totalTiburones;
+    private int totalPlantas;
 
     public Acuario(String nombre, String nombreFichero) {
         this.nombre = nombre;
         this.nombreFichero = nombreFichero;
-        this.inventario = new ArrayList[4][2]; // Hay que inicializarlo con algo
+        this.inventario = new ArrayList<ArrayList<Object>>(); // Hay que inicializarlo con algo
+        this.totalSalas = nObjetosFichero("S");
+        this.totalEstanques = nObjetosFichero("E");
+        this.totalTiburones = nObjetosFichero("T");
+        this.totalPlantas = nObjetosFichero("P");
     }
 
     /**
@@ -37,7 +49,7 @@ public class Acuario {
      * Estanques - Peces - Plantas
      */
     public void mostrarInventario() {
-        
+        System.out.println(inventario);
     }
 
     /**
@@ -45,15 +57,86 @@ public class Acuario {
      * 
      */
     public void rellenarInventario() {
+        agregarSalas();
+        agregarEstanques();
+        agregarTiburones();
+        agregarPlantas();
+    }
+    
+    /**
+     * Agrega las salas que hay en el fichero dado por parámetro en el 
+     * constructor
+     */
+    private void agregarSalas() {
+        String codigoSala;
+        String nombreSala;
+        String tipoSala;
         
+        inventario.add(new ArrayList<Object>());
+
+        // Crear objetos salas
+        for (int i = 0; i < totalSalas; i++) {
+            codigoSala = atributosSalas()[i][2];
+            nombreSala = atributosSalas()[i][3];
+            tipoSala = atributosSalas()[i][1];
+            inventario.get(idSala).add(new Sala(codigoSala, nombreSala, tipoSala).getNombre());
+        }
+    }
+    
+    private void agregarEstanques() {
+        String codigoEstanque;
+        String nombreEstanque;
+        String tipoEstanque;
+        
+        inventario.add(new ArrayList<Object>());
+        
+        // Crear objetos estanques
+        for (int i = 0; i < totalEstanques; i++) {
+            codigoEstanque = atributosEstanques()[i][2];
+            nombreEstanque = atributosEstanques()[i][3];
+            tipoEstanque = atributosEstanques()[i][1];
+            inventario.get(idEstanque).add(new Estanque(codigoEstanque, nombreEstanque, tipoEstanque).getNombre());
+        }
+    }
+    
+    private void agregarTiburones() {
+        String codigoTiburon;
+        String nombreTiburon;
+        String tamanoTiburon;
+        
+        inventario.add(new ArrayList<Object>());
+        
+        // Crear objetos estanques
+        for (int i = 0; i < totalTiburones; i++) {
+            codigoTiburon = atributosTiburones()[i][2];
+            nombreTiburon = atributosTiburones()[i][3];
+            tamanoTiburon = atributosTiburones()[i][1];
+            inventario.get(idTiburon).add(new Tiburon(tamanoTiburon, codigoTiburon, nombreTiburon).getNombre());
+        }
+    }
+    
+    private void agregarPlantas() {
+        String codigoPlanta;
+        String nombrePlanta;
+        String medioPlanta;
+        
+        inventario.add(new ArrayList<Object>());
+        
+        // Crear objetos estanques
+        for (int i = 0; i < totalPlantas; i++) {
+            codigoPlanta = atributosPlantas()[i][2];
+            nombrePlanta = atributosPlantas()[i][3];
+            medioPlanta = atributosPlantas()[i][1];
+            inventario.get(idPlanta).add(new Planta(medioPlanta, codigoPlanta, nombrePlanta).getNombre());
+        }
     }
     
     /**
      * Método para saber cuantos objetos de esa clase existen en el fichero
      * @param String Meter el character de la clase en mayúsculas
-     * @retun int Devuelve el total de clases que hay
+     * @return int Devuelve el total de clases que hay
      */
-    public int nObjetosFichero(String clase) {
+    private int nObjetosFichero(String clase) {
         // TODO parametro opcional para saber el segundo campo del fichero por 
         // si lo necesitamos para diferenciar los tiburones en tamaño
         BufferedReader br = null;
@@ -129,10 +212,17 @@ public class Acuario {
         }
     }
     
-    public void nombresSalas() {
+    /**
+     * Método que lee el fichero pasado por el constructor, busca las salas que
+     * hay y guarda cada atributo de cada sala en un array 2d
+     * @return String[][] Un array 2d con los atributos de las salas encontradas
+     */
+    private String[][] atributosSalas() {
         BufferedReader br = null;
-        Vector<String> v = new Vector();
+        String[][] salas = new String[totalSalas][4];
         String letra;
+        
+        int nSala = 0;
         
         try {
             br = new BufferedReader(new FileReader(nombreFichero));
@@ -141,7 +231,10 @@ public class Acuario {
             while (texto != null) {
                 letra = texto.split(":")[0]; 
                 if (letra.equals("S")) {
-                    v.add(texto.split(":")[3]);
+                    for (int i = 0; i < 4; i++) {
+                        salas[nSala][i] = texto.split(":")[i];
+                    }
+                    nSala++;
                 }
                 texto = br.readLine();
             }
@@ -162,7 +255,134 @@ public class Acuario {
             }
         }
         
-        System.out.println(v);
+        return salas;
     }
     
+    /**
+     * Método que lee el fichero pasado por el constructor, busca los estanques 
+     * que hay y guarda cada atributo de cada sala en un array 2d
+     * @return String[][] Un array 2d con los atributos de las estanques encontrados
+     */
+    private String[][] atributosEstanques() {
+        BufferedReader br = null;
+        String[][] estanques = new String[totalEstanques][4];
+        String letra;
+        
+        int nEstanque = 0;
+        
+        try {
+            br = new BufferedReader(new FileReader(nombreFichero));
+            String texto = br.readLine();
+            
+            while (texto != null) {
+                letra = texto.split(":")[0]; 
+                if (letra.equals("E")) {
+                    for (int i = 0; i < 4; i++) {
+                        estanques[nEstanque][i] = texto.split(":")[i];
+                    }
+                    nEstanque++;
+                }
+                texto = br.readLine();
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: Fichero no encontrado");
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error de lectura del fichero");
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (br != null) {
+                    br.close();
+                }
+            } catch (Exception e) {
+                System.out.println("Error al cerrar el fichero");
+                System.out.println(e.getMessage());
+            }
+        }
+        
+        return estanques;
+    }
+    
+    private String[][] atributosTiburones() {
+        BufferedReader br = null;
+        String[][] tiburones = new String[totalTiburones][4];
+        String letra;
+        
+        int nTiburon = 0;
+        
+        try {
+            br = new BufferedReader(new FileReader(nombreFichero));
+            String texto = br.readLine();
+            
+            while (texto != null) {
+                letra = texto.split(":")[0]; 
+                if (letra.equals("T")) {
+                    for (int i = 0; i < 4; i++) {
+                        tiburones[nTiburon][i] = texto.split(":")[i];
+                    }
+                    nTiburon++;
+                }
+                texto = br.readLine();
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: Fichero no encontrado");
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error de lectura del fichero");
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (br != null) {
+                    br.close();
+                }
+            } catch (Exception e) {
+                System.out.println("Error al cerrar el fichero");
+                System.out.println(e.getMessage());
+            }
+        }
+        
+        return tiburones;
+    }
+    
+    private String[][] atributosPlantas() {
+        BufferedReader br = null;
+        String[][] plantas = new String[totalPlantas][4];
+        String letra;
+        
+        int nPlantas = 0;
+        
+        try {
+            br = new BufferedReader(new FileReader(nombreFichero));
+            String texto = br.readLine();
+            
+            while (texto != null) {
+                letra = texto.split(":")[0]; 
+                if (letra.equals("P")) {
+                    for (int i = 0; i < 4; i++) {
+                        plantas[nPlantas][i] = texto.split(":")[i];
+                    }
+                    nPlantas++;
+                }
+                texto = br.readLine();
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: Fichero no encontrado");
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error de lectura del fichero");
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (br != null) {
+                    br.close();
+                }
+            } catch (Exception e) {
+                System.out.println("Error al cerrar el fichero");
+                System.out.println(e.getMessage());
+            }
+        }
+        
+        return plantas;
+    }
 }
