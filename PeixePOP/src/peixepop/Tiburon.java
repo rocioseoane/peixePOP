@@ -9,14 +9,14 @@ package peixepop;
  *
  * @author Paulo
  */
-public class Pez {
+public class Tiburon {
     
     private String tamano;
     public String codigo;
     private String nombre;
     private Estanque estanque;
 
-    public Pez(String tamano, String codigo, String nombre) {
+    public Tiburon(String tamano, String codigo, String nombre) {
         this.tamano = tamano;
         this.codigo = codigo;
         this.nombre = nombre;

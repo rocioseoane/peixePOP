@@ -22,13 +22,13 @@ public class Estanque {
     private String nombre;
     private String tipo;
     private Planta planta;
-    private ArrayList<Pez> peces;
+    private ArrayList<Tiburon> peces;
 
     public Estanque(String codigo, String nombre, String tipo) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.tipo = tipo;
-        this.peces = new ArrayList<Pez>();
+        this.peces = new ArrayList<Tiburon>();
         this.planta = null;
     }
 
@@ -56,11 +56,11 @@ public class Estanque {
         this.nombre = nombre;
     }
 
-    public ArrayList<Pez> getPeces() {
+    public ArrayList<Tiburon> getPeces() {
         return peces;
     }
 
-    public void setPeces(ArrayList<Pez> peces) {
+    public void setPeces(ArrayList<Tiburon> peces) {
         this.peces = peces;
     }
 

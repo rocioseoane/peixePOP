@@ -1,36 +1,36 @@
-SM001Sala de hologramas
-SE002Sala Nemo
-EE001Estanque de Jose
-EE002Estanque de Ángel
-EE003Estanque de Miguel
-EE004Estanque de Paulo
-AG001Megalodón
-AG002Tiburonazo Elefante
-AG003Tiburonazo Jirafa
-AG004Tiburonazo Mamut
-AM001Tiburón Mazorca
-AM002Tiburón Basurero
-AM003Tiburón Perezoso
-AM004Tiburón Dientes de Sable
-AM005Tiburón Camello
-AM006Tiburón Mesa
-AM007Tiburón Puerta
-AM008Tiburón Porro
-AP001Tiburoncín Hormiga
-AP002Tiburoncín Pollo
-AP003Tiburoncín Cucaracha
-AP004Tiburoncín Grillo
-AP005Tiburoncín Termita
-AP006Tiburoncín Libélula
-AP007Tiburoncín Erizo
-AP008Tiburoncín Caracol
-AP009Tiburoncín Estrella
-AP010Tiburoncín Ciempiés
-AP011Tiburoncín Mosca
-AP012Tiburoncín Hamster
-PA001Ayahuasca
-PA002Peyote
-PA003Opio
-PA004Hongos
-PT001Cannabis
-PT002Coca
+S:M:001:Sala de hologramas
+S:E:002:Sala Nemo
+E:E:001:Estanque de Jose
+E:E:002:Estanque de Angel
+E:E:003:Estanque de Miguel
+E:E:004:Estanque de Paulo
+T:G:001:Megalodón
+T:G:002:Tiburonazo Elefante
+T:G:003:Tiburonazo Jirafa
+T:G:004:Tiburonazo Mamut
+T:M:001:Tiburón Mazorca
+T:M:002:Tiburón Basurero
+T:M:003:Tiburón Perezoso
+T:M:004:Tiburón Dientes de Sable
+T:M:005:Tiburón Camello
+T:M:006:Tiburón Mesa
+T:M:007:Tiburón Puerta
+T:M:008:Tiburón Porro
+T:P:001:Tiburoncín Hormiga
+T:P:002:Tiburoncín Pollo
+T:P:003:Tiburoncín Cucaracha
+T:P:004:Tiburoncín Grillo
+T:P:005:Tiburoncín Termita
+T:P:006:Tiburoncín Libélula
+T:P:007:Tiburoncín Erizo
+T:P:008:Tiburoncín Caracol
+T:P:009:Tiburoncín Estrella
+T:P:010:Tiburoncín Ciempiés
+T:P:011:Tiburoncín Mosca
+T:P:012:Tiburoncín Hamster
+P:A:001:Ayahuasca
+P:A:002:Peyote
+P:A:003:Opio
+P:A:004:Hongos
+P:T:001:Cannabis
+P:T:002:Coca
