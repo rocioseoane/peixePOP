@@ -13,22 +13,22 @@ import java.util.ArrayList;
  */
 public class Estanque {
     
-    public final int maxPecesGrandes = 1;
-    public final int maxPecesMedianos = 2;
-    public final int maxPecesPequenos = 3;
+    public final int maxTiburonesGrandes = 1;
+    public final int maxTiburonesMedianos = 2;
+    public final int maxTiburonesPequenos = 3;
     public final int maxPlantas = 2;
     
     private String codigo;
     private String nombre;
     private String tipo;
     private Planta planta;
-    private ArrayList<Tiburon> peces;
+    private ArrayList<Tiburon> tiburones;
 
     public Estanque(String codigo, String nombre, String tipo) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.tipo = tipo;
-        this.peces = new ArrayList<Tiburon>();
+        this.tiburones = new ArrayList<Tiburon>();
         this.planta = null;
     }
 
@@ -56,12 +56,12 @@ public class Estanque {
         this.nombre = nombre;
     }
 
-    public ArrayList<Tiburon> getPeces() {
-        return peces;
+    public ArrayList<Tiburon> getTiburones() {
+        return tiburones;
     }
 
-    public void setPeces(ArrayList<Tiburon> peces) {
-        this.peces = peces;
+    public void setTiburon(Tiburon tiburon) {
+        this.tiburones.add(tiburon);
     }
 
     public Planta getPlanta() {

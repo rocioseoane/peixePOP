@@ -106,6 +106,30 @@ public class Acuario {
     
     // mirar
     public void asignarTiburonesACadaEstanque() {
+        Tiburon[] tiburonesGrandes = new Tiburon[nObjetosFichero("T", "G")];
+        Tiburon[] tiburonesMedianos = new Tiburon[nObjetosFichero("T", "M")];
+        Tiburon[] tiburonesPequenos  = new Tiburon[nObjetosFichero("T", "P")];
+        int indice = 0;
+
+        for (int i = 0; i < nObjetosFichero("T", "G"); i++) {
+            tiburonesGrandes[i] = inventarioTiburones.get(indice);
+            indice++;
+        }
+
+        for (int i = 0; i < nObjetosFichero("T", "M"); i++) {
+            tiburonesMedianos[i] = inventarioTiburones.get(indice);
+            indice++;
+        }
+
+        for (int i = 0; i < nObjetosFichero("T", "M"); i++) {
+            tiburonesPequenos[i] = inventarioTiburones.get(indice);
+            indice++;
+        }
+        
+        for (int i = 0; i < totalEstanques; i++) {
+            System.out.println(inventarioEstanques.get(i).getNombre());
+            
+        }
         
         
     }
@@ -226,8 +250,6 @@ public class Acuario {
      * @return int Devuelve el total de clases que hay
      */
     private int nObjetosFichero(String clase) {
-        // TODO: parametro opcional para saber el segundo campo del fichero por 
-        // si lo necesitamos para diferenciar los tiburones en tamaño
         BufferedReader br = null;
         String letra;
         int total = 0;
@@ -267,6 +289,53 @@ public class Acuario {
     }
     
     /**
+     * Método para calcular cuantos objetos tiburon hay dependiendo de su tamaño
+     * existen en el fichero pasado por el constructor
+     * @param String Letra de la clase en mayúsculas a contar
+     * @return int Devuelve el total de clases que hay
+     */
+    private int nObjetosFichero(String clase, String tipo) {
+        BufferedReader br = null;
+        String campo1;
+        String campo2;
+        int total = 0;
+        
+        try {
+            br = new BufferedReader(new FileReader(nombreFichero));
+            String texto = br.readLine();
+            
+            while (texto != null) {
+                campo1 = texto.split(":")[0]; 
+                campo2 = texto.split(":")[1]; 
+                if (campo1.equals(clase) && campo2.equals(tipo)) {
+                    total++;
+                }
+                
+                texto = br.readLine();
+            }
+            
+            return total;
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: Fichero no encontrado");
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error de lectura del fichero");
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (br != null) {
+                    br.close();
+                }
+            } catch (Exception e) {
+                System.out.println("Error al cerrar el fichero");
+                System.out.println(e.getMessage());
+            }
+        }
+        
+        return 0;
+    }
+     
+    /**
      * Lee el fichero pasado por el constructor y muestra el contenido que hay
      * dentro del fichero
      */
@@ -302,8 +371,8 @@ public class Acuario {
     }
     
     /**
-     * Método que lee el fichero pasado por el constructor, busca las salas que
-     * hay y guarda cada atributo de cada sala en un array 2d
+     * Método que lee el fichero pasado por el constructor, busca los objetos que
+     * hay y guarda cada atributo de cada objeto en su array 
      * @param String Atributo de los objetos que quieres
      * @param int Total de objetos que hay en el fichero para definir el array 2d
      * @return String[][] Un array 2d con los atributos de las salas encontradas
