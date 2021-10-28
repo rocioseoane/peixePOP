@@ -7,13 +7,11 @@ package peixepop;
 
 import java.io.File;
 
-
 /**
  *
  * @author Developer
  */
 public class PeixePOP {
-    
     
     public static void main(String[] args) {
         // Creamos un String con el nombre del archivo con los datos

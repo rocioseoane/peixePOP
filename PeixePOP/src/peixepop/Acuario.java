@@ -9,26 +9,25 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Vector;
 
 /**
  *
  * @author Developer
  */
 public class Acuario {
-
-    // Para buscar por el inventario
-    private final int idSala = 0;
-    private final int idEstanque = 1;
-    private final int idTiburon = 2;
-    private final int idPlanta = 3;
+    
+    private final int totalAtributos = 4;
     
     // Atributos de nuestro acuario
     private String nombre;
     private String nombreFichero;
-    private ArrayList<ArrayList<Object>> inventario;
     
-    // Cuantos objetos tiene el acuario por separado
+    private ArrayList<Sala> inventarioSalas;
+    private ArrayList<Estanque> inventarioEstanques;
+    private ArrayList<Tiburon> inventarioTiburones;
+    private ArrayList<Planta> inventarioPlantas;
+
+    // Cuantos objetos tiene tipo el acuario por separado
     private int totalSalas;
     private int totalEstanques;
     private int totalTiburones;
@@ -38,7 +37,14 @@ public class Acuario {
     public Acuario(String nombre, String nombreFichero) {
         this.nombre = nombre;
         this.nombreFichero = nombreFichero;
-        this.inventario = new ArrayList<ArrayList<Object>>();
+        
+        // Inventarios
+        this.inventarioSalas = new ArrayList<Sala>();
+        this.inventarioEstanques = new ArrayList<Estanque>();
+        this.inventarioTiburones = new ArrayList<Tiburon>();
+        this.inventarioPlantas = new ArrayList<Planta>();
+        
+        // Cuantos objetos hay de cada tipo
         this.totalSalas = nObjetosFichero("S");
         this.totalEstanques = nObjetosFichero("E");
         this.totalTiburones = nObjetosFichero("T");
@@ -57,30 +63,26 @@ public class Acuario {
         
         // Mostrar salas
         System.out.println("******* Salas *******");
-        for (Object sala : inventario.get(idSala)) {
-            Sala s = (Sala) sala;
-            System.out.println(s.getNombre());
+        for (Sala sala : inventarioSalas) {
+            System.out.println(sala.getNombre());
         }
         
         // Mostrar estanques
         System.out.println("***** Estanques *****");
-        for (Object estanque : inventario.get(idEstanque)) {
-            Estanque e = (Estanque) estanque;
-            System.out.println(e.getNombre());
+        for (Estanque estanque : inventarioEstanques) {
+            System.out.println(estanque.getNombre());
         }
         
         // Mostrar tiburones
         System.out.println("***** Tiburones *****");
-        for (Object tiburon : inventario.get(idTiburon)) {
-            Tiburon t = (Tiburon) tiburon;
-            System.out.println(t.getNombre());
+        for (Tiburon tiburon : inventarioTiburones) {
+            System.out.println(tiburon.getNombre());
         }
         
         // Mostrar plantas
         System.out.println("**** Plantas ****");
-        for (Object planta : inventario.get(idPlanta)) {
-            Planta p = (Planta) planta;
-            System.out.println(p.getNombre());
+        for (Planta planta : inventarioPlantas) {
+            System.out.println(planta.getNombre());
         }
     }
 
@@ -96,93 +98,77 @@ public class Acuario {
     }
     
     /**
-     * Se añade un nuevo arrayList en el inventario y agrega las salas que se 
-     * encontraron en el fichero pasado en el constructor al nuevo arrayList
-     * del inventario
+     * Agrega las salas que se encontraron en el fichero pasado en el
+     * constructor al arrayList inventarioSalas
      */
     private void agregarSalas() {
         String codigoSala;
         String nombreSala;
         String tipoSala;
         
-        inventario.add(new ArrayList<Object>());
-
-        // Crear objetos salas
         for (int i = 0; i < totalSalas; i++) {
-            codigoSala = atributosSalas()[i][2];
-            nombreSala = atributosSalas()[i][3];
-            tipoSala = atributosSalas()[i][1];
-            inventario.get(idSala).add(new Sala(codigoSala, nombreSala, tipoSala));
+            codigoSala = getAtributosObj("S", totalSalas)[i][2];
+            nombreSala = getAtributosObj("S", totalSalas)[i][3];
+            tipoSala = getAtributosObj("S", totalSalas)[i][1];
+            inventarioSalas.add(new Sala(codigoSala, nombreSala, tipoSala));
         }
     }
    
     /**
-     * Se añade un nuevo arrayList en el inventario y agrega los estanques que  
-     * se encontraron en el fichero pasado en el constructor al nuevo arrayList
-     * del inventario
+     * Agrega los estanques que se encontraron en el fichero pasado en el
+     * constructor al arrayList inventarioEstanques
      */
     private void agregarEstanques() {
         String codigoEstanque;
         String nombreEstanque;
         String tipoEstanque;
         
-        inventario.add(new ArrayList<Object>());
-        
-        // Crear objetos estanques
         for (int i = 0; i < totalEstanques; i++) {
-            codigoEstanque = atributosEstanques()[i][2];
-            nombreEstanque = atributosEstanques()[i][3];
-            tipoEstanque = atributosEstanques()[i][1];
-            inventario.get(idEstanque).add(new Estanque(codigoEstanque, nombreEstanque, tipoEstanque));
+            codigoEstanque = getAtributosObj("E", totalEstanques)[i][2];
+            nombreEstanque = getAtributosObj("E", totalEstanques)[i][3];
+            tipoEstanque = getAtributosObj("E", totalEstanques)[i][1];
+            inventarioEstanques.add(new Estanque(codigoEstanque, nombreEstanque, tipoEstanque));
         }
     }
     
     /**
-     * Se añade un nuevo arrayList en el inventario y agrega los tiburones que  
-     * se encontraron en el fichero pasado en el constructor al nuevo arrayList
-     * del inventario
+     * Agrega los tiburones que se encontraron en el fichero pasado en el
+     * constructor al arrayList inventarioTiburones
      */
     private void agregarTiburones() {
         String codigoTiburon;
         String nombreTiburon;
         String tamanoTiburon;
         
-        inventario.add(new ArrayList<Object>());
-        
-        // Crear objetos estanques
         for (int i = 0; i < totalTiburones; i++) {
-            codigoTiburon = atributosTiburones()[i][2];
-            nombreTiburon = atributosTiburones()[i][3];
-            tamanoTiburon = atributosTiburones()[i][1];
-            inventario.get(idTiburon).add(new Tiburon(tamanoTiburon, codigoTiburon, nombreTiburon));
+            codigoTiburon = getAtributosObj("T", totalTiburones)[i][2];
+            nombreTiburon = getAtributosObj("T", totalTiburones)[i][3];
+            tamanoTiburon = getAtributosObj("T", totalTiburones)[i][1];
+            inventarioTiburones.add(new Tiburon(tamanoTiburon, codigoTiburon, nombreTiburon));
         }
     }
     
     /**
-     * Se añade un nuevo arrayList en el inventario y agrega las plantas que  
-     * se encontraron en el fichero pasado en el constructor al nuevo arrayList
-     * del inventario
+     * Agrega las plantas que se encontraron en el fichero pasado en el
+     * constructor al arrayList inventarioPlantas
      */
     private void agregarPlantas() {
         String codigoPlanta;
         String nombrePlanta;
         String medioPlanta;
         
-        inventario.add(new ArrayList<Object>());
-        
-        // Crear objetos estanques
         for (int i = 0; i < totalPlantas; i++) {
-            codigoPlanta = atributosPlantas()[i][2];
-            nombrePlanta = atributosPlantas()[i][3];
-            medioPlanta = atributosPlantas()[i][1];
-            inventario.get(idPlanta).add(new Planta(medioPlanta, codigoPlanta, nombrePlanta));
+            codigoPlanta = getAtributosObj("P", totalPlantas)[i][2];
+            nombrePlanta = getAtributosObj("P", totalPlantas)[i][3];
+            medioPlanta = getAtributosObj("P", totalPlantas)[i][1];
+            inventarioPlantas.add(new Planta(medioPlanta, codigoPlanta, nombrePlanta));
         }
     }
     
     /**
      * Método para calcular cuantos objetos de esa clase existen en el fichero
      * pasado por el constructor
-     * @param String Meter el character de la clase en mayúsculas
+     * @param String Letra de la clase en mayúsculas a contar
      * @return int Devuelve el total de clases que hay
      */
     private int nObjetosFichero(String clase) {
@@ -264,11 +250,13 @@ public class Acuario {
     /**
      * Método que lee el fichero pasado por el constructor, busca las salas que
      * hay y guarda cada atributo de cada sala en un array 2d
+     * @param String Atributo de los objetos que quieres
+     * @param int Total de objetos que hay en el fichero para definir el array 2d
      * @return String[][] Un array 2d con los atributos de las salas encontradas
      */
-    private String[][] atributosSalas() {
+    private String[][] getAtributosObj(String atributo, int totalObj) {
         BufferedReader br = null;
-        String[][] salas = new String[totalSalas][4];
+        String[][] salas = new String[totalObj][totalAtributos];
         String letra;
         
         int nSala = 0;
@@ -279,7 +267,7 @@ public class Acuario {
             
             while (texto != null) {
                 letra = texto.split(":")[0]; 
-                if (letra.equals("S")) {
+                if (letra.equals(atributo)) {
                     for (int i = 0; i < 4; i++) {
                         salas[nSala][i] = texto.split(":")[i];
                     }
@@ -307,141 +295,4 @@ public class Acuario {
         return salas;
     }
     
-    /**
-     * Método que lee el fichero pasado por el constructor, busca los estanques 
-     * que hay y guarda cada atributo de cada estanque en un array 2d
-     * @return String[][] Un array 2d con los atributos de los estanques encontrados
-     */
-    private String[][] atributosEstanques() {
-        BufferedReader br = null;
-        String[][] estanques = new String[totalEstanques][4];
-        String letra;
-        
-        int nEstanque = 0;
-        
-        try {
-            br = new BufferedReader(new FileReader(nombreFichero));
-            String texto = br.readLine();
-            
-            while (texto != null) {
-                letra = texto.split(":")[0]; 
-                if (letra.equals("E")) {
-                    for (int i = 0; i < 4; i++) {
-                        estanques[nEstanque][i] = texto.split(":")[i];
-                    }
-                    nEstanque++;
-                }
-                texto = br.readLine();
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("Error: Fichero no encontrado");
-            System.out.println(e.getMessage());
-        } catch (Exception e) {
-            System.out.println("Error de lectura del fichero");
-            System.out.println(e.getMessage());
-        } finally {
-            try {
-                if (br != null) {
-                    br.close();
-                }
-            } catch (Exception e) {
-                System.out.println("Error al cerrar el fichero");
-                System.out.println(e.getMessage());
-            }
-        }
-        
-        return estanques;
-    }
-    
-    /**
-     * Método que lee el fichero pasado por el constructor, busca los tiburones 
-     * que hay y guarda cada atributo de cada tiburon en un array 2d
-     * @return String[][] Un array 2d con los atributos de los tiburones encontrados
-     */
-    private String[][] atributosTiburones() {
-        BufferedReader br = null;
-        String[][] tiburones = new String[totalTiburones][4];
-        String letra;
-        
-        int nTiburon = 0;
-        
-        try {
-            br = new BufferedReader(new FileReader(nombreFichero));
-            String texto = br.readLine();
-            
-            while (texto != null) {
-                letra = texto.split(":")[0]; 
-                if (letra.equals("T")) {
-                    for (int i = 0; i < 4; i++) {
-                        tiburones[nTiburon][i] = texto.split(":")[i];
-                    }
-                    nTiburon++;
-                }
-                texto = br.readLine();
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("Error: Fichero no encontrado");
-            System.out.println(e.getMessage());
-        } catch (Exception e) {
-            System.out.println("Error de lectura del fichero");
-            System.out.println(e.getMessage());
-        } finally {
-            try {
-                if (br != null) {
-                    br.close();
-                }
-            } catch (Exception e) {
-                System.out.println("Error al cerrar el fichero");
-                System.out.println(e.getMessage());
-            }
-        }
-        
-        return tiburones;
-    }
-    
-    /**
-     * Método que lee el fichero pasado por el constructor, busca las plantas 
-     * que hay y guarda cada atributo de cada planta en un array 2d
-     * @return String[][] Un array 2d con los atributos de las plantas encontradas
-     */
-    private String[][] atributosPlantas() {
-        BufferedReader br = null;
-        String[][] plantas = new String[totalPlantas][4];
-        String letra;
-        
-        int nPlantas = 0;
-        
-        try {
-            br = new BufferedReader(new FileReader(nombreFichero));
-            String texto = br.readLine();
-            
-            while (texto != null) {
-                letra = texto.split(":")[0]; 
-                if (letra.equals("P")) {
-                    for (int i = 0; i < 4; i++) {
-                        plantas[nPlantas][i] = texto.split(":")[i];
-                    }
-                    nPlantas++;
-                }
-                texto = br.readLine();
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("Error: Fichero no encontrado");
-            System.out.println(e.getMessage());
-        } catch (Exception e) {
-            System.out.println("Error de lectura del fichero");
-            System.out.println(e.getMessage());
-        } finally {
-            try {
-                if (br != null) {
-                    br.close();
-                }
-            } catch (Exception e) {
-                System.out.println("Error al cerrar el fichero");
-                System.out.println(e.getMessage());
-            }
-        }
-        
-        return plantas;
-    }
 }
