@@ -9,6 +9,8 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  *
@@ -55,7 +57,7 @@ public class Acuario {
      * Muestra el inventario disponible que hay en el acuario que son: 
      *      - Salas
      *      - Estanques
-     *      - Peces
+     *      - Tiburones
      *      - Plantas
      */
     public void mostrarInventario() {
@@ -86,6 +88,58 @@ public class Acuario {
         }
     }
 
+    // Asigna 2 estanques a cada sala, si pones impares pone ArrayIndexOutOfBoundsException
+    public void asignarEstanquesACadaSala() {
+        int[] numAleatorios = numerosAleatoriosNoRepetidos(0, totalEstanques, totalEstanques);
+        shuffleArray(numAleatorios);
+        int cont = 0;
+        
+        for (int i = 0; i < inventarioSalas.size(); i++) {
+            System.out.println(inventarioSalas.get(i).getNombre());
+            for (int j = 0; j < inventarioSalas.get(0).maxEstanques; j++) {
+                inventarioSalas.get(i).setEstanques(inventarioEstanques.get(numAleatorios[cont]));
+                System.out.println("    " + inventarioSalas.get(i).getEstanques().get(j).getNombre());
+                cont++;
+            }
+        }
+    }
+    
+    // mirar
+    public void asignarTiburonesACadaEstanque() {
+        
+        
+    }
+    
+    // Genera un array de int con numeros que le pasas por parametro
+    public int[] numerosAleatoriosNoRepetidos(int start, int end, int count) {
+        Random rng = new Random();
+
+        int[] result = new int[count];
+        int cur = 0;
+        int remaining = end - start;
+        for (int i = start; i < end && count > 0; i++) {
+            double probability = rng.nextDouble();
+            if (probability < ((double) count) / (double) remaining) {
+                count--;
+                result[cur++] = i;
+            }
+            remaining--;
+        }
+        return result;
+    }
+    
+    // Cambia de posicion el array de numeros generados aleatoriamente
+    public void shuffleArray(int[] ar) {
+        Random rnd = ThreadLocalRandom.current();
+        
+        for (int i = ar.length - 1; i > 0; i--) {
+            int index = rnd.nextInt(i + 1);
+            int a = ar[index];
+            ar[index] = ar[i];
+            ar[i] = a;
+        }
+    }
+    
     /**
      * Rellena el inventario con los objetos que se encontraron en el fichero
      * dado en el constructor

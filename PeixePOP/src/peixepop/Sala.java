@@ -14,12 +14,10 @@ import java.util.ArrayList;
 public class Sala {
     
     public final int maxEstanques = 2;
-    public final int maxPlanta = 1;
     
     private String codigo;
     private String tipo;
     private String nombre;
-    private Planta planta;
     private ArrayList<Estanque> estanques;
 
     public Sala(String codigo, String nombre, String tipo) {
@@ -27,7 +25,6 @@ public class Sala {
         this.nombre = nombre;
         this.tipo = tipo;
         this.estanques = new ArrayList<Estanque>();
-        this.planta = null;
     }
 
     public String getTipo() {
@@ -36,14 +33,6 @@ public class Sala {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
-    }
-
-    public Planta getPlanta() {
-        return planta;
-    }
-
-    public void setPlanta(Planta planta) {
-        this.planta = planta;
     }
 
     public String getCodigo() {
@@ -69,8 +58,6 @@ public class Sala {
     public void setEstanques(Estanque estanque) {
         this.estanques.add(estanque);
     }
-    
-    
     
     /**
      * Itera entre los estanques y elimina el que corresponda con el ID

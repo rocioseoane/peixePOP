@@ -6,6 +6,9 @@
 package peixepop;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 /**
  *
@@ -24,7 +27,8 @@ public class PeixePOP {
         Acuario acuario = new Acuario("PeixePOP", rutaFichero);
         
         acuario.rellenarInventario();
-        acuario.mostrarInventario();
+        //acuario.mostrarInventario();
+        acuario.asignarTiburonesACadaEstanque();
         
     }
 }
