@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package peixepop;
 
 import java.io.File;
 
 /**
- *
- * @author Developer
+ * Clase deonde se ejecuta el programa
+ * @author Angel, Jose, Miguel, Paulo
  */
 public class PeixePOP {
     
@@ -20,12 +15,16 @@ public class PeixePOP {
         // Ruta absoluta del fichero que contiene los datos
         String rutaFichero = new File(fichero).getAbsolutePath();
         
-        // Creamos nuestro acuario
+        // Creamos nuestro objeto acuario
         Acuario acuario = new Acuario("PeixePOP", rutaFichero);
         
+        // Recogemos los datos del fichero y los metemos en el inventario
         acuario.rellenarInventario();
+        
+        // Asignar a cada sala sus estanques y tiburones correspondientes
         acuario.asignarJerarquia();
+        
+        // Se muestra como está diseñado el acuario
         acuario.mostrarJeraquia();
-
     }
 }

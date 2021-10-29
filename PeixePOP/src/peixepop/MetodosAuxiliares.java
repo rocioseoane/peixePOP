@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package peixepop;
 
 import java.util.Random;
@@ -14,7 +9,13 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class MetodosAuxiliares {
     
-    // Genera un array de int con numeros que le pasas por parametro
+    /**
+     * Método que genera números aleatorios ordenados entre un rango 
+     * @param start Donde empieza el rango, incluyendo ese número
+     * @param end Donde acaba el rango, incluyendo ese número
+     * @param count De ese rango definido coje x números
+     * @return 
+     */
     public int[] numerosAleatoriosNoRepetidos(int start, int end, int count) {
         Random rng = new Random();
 
@@ -30,20 +31,26 @@ public class MetodosAuxiliares {
             remaining--;
         }
         
+        // Desordenamos los numeros que nos dió;
+        // e.g no devuelve esto (0, 3, 7, 8) => con shuffle (7, 3, 9, 0)
         shuffleArray(result);
         
         return result;
     }
     
-    // Cambia de posicion el array de numeros generados aleatoriamente
-    private void shuffleArray(int[] ar) {
+    /**
+     * Método que recoge un array por parámetro y cambia de posición los
+     * contenidos de ese array
+     * @param array El array que quieres desordenar
+     */
+    private void shuffleArray(int[] array) {
         Random rnd = ThreadLocalRandom.current();
         
-        for (int i = ar.length - 1; i > 0; i--) {
+        for (int i = array.length - 1; i > 0; i--) {
             int index = rnd.nextInt(i + 1);
-            int a = ar[index];
-            ar[index] = ar[i];
-            ar[i] = a;
+            int a = array[index];
+            array[index] = array[i];
+            array[i] = a;
         }
     }
 }
