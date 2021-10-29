@@ -89,18 +89,20 @@ public class Acuario {
      * Enseña la jerarquia que tiene el acuario y como se organizan las cosas
      */
     public void mostrarJeraquia() {
+        int count = 0;
+        
         for (int i = 0; i < totalSalas; i++) {
             System.out.println(inventarioSalas.get(i).getNombre() + ":");
-            for (int j = 0; j < inventarioSalas.get(i).maxEstanques; j++) {
+            for (int j = 0; j < inventarioSalas.get(0).maxEstanques; j++) {
                 System.out.println("    " + inventarioSalas.get(i).getEstanques().get(j).getNombre() + ":");
                 for (int k = 0; k < inventarioEstanques.get(0).maxTiburones; k++) {
-                    System.out.println("\t" + inventarioEstanques.get(j).getTiburones().get(k).getNombre());
+                    System.out.println("\t" + inventarioEstanques.get(count).getTiburones().get(k).getNombre());
                 }
+                count++;
             }
         }
     }
     
-
     public void asignarEstanquesACadaSala() {
         int[] numAleatorios = ma.numerosAleatoriosNoRepetidos(0, totalEstanques, totalEstanques);
         int cont = 0;
