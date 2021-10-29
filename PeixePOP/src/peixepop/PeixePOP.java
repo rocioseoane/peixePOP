@@ -28,8 +28,8 @@ public class PeixePOP {
         
         acuario.rellenarInventario();
         //acuario.mostrarInventario();
-        //acuario.asignarTiburonesACadaEstanque();
-        
-        acuario.asignarTiburonesACadaEstanque();
+        acuario.asignarJerarquia();
+        acuario.mostrarJeraquia();
+
     }
 }
