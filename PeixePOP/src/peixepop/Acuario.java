@@ -49,6 +49,7 @@ public class Acuario {
         this.totalEstanques = nObjetosFichero("E");
         this.totalTiburones = nObjetosFichero("T");
         this.totalPlantas = nObjetosFichero("P");
+        
         ma = new MetodosAuxiliares();
     }
 
@@ -84,18 +85,22 @@ public class Acuario {
         asignarTiburonesACadaEstanque();
     }
     
-    // mirar
+    /**
+     * Enseña la jerarquia que tiene el acuario y como se organizan las cosas
+     */
     public void mostrarJeraquia() {
-        for (Sala sala : inventarioSalas) {
-            System.out.println(sala.getNombre() + ":");
-            for (Estanque estanque : inventarioEstanques) {
-                System.out.println("\t" + estanque.getNombre() + ":");
+        for (int i = 0; i < totalSalas; i++) {
+            System.out.println(inventarioSalas.get(i).getNombre() + ":");
+            for (int j = 0; j < inventarioSalas.get(i).maxEstanques; j++) {
+                System.out.println("    " + inventarioSalas.get(i).getEstanques().get(j).getNombre() + ":");
+                for (int k = 0; k < inventarioEstanques.get(0).maxTiburones; k++) {
+                    System.out.println("\t" + inventarioEstanques.get(j).getTiburones().get(k).getNombre());
+                }
             }
         }
     }
     
 
-    // Asigna 2 estanques a cada sala, si pones impares pone ArrayIndexOutOfBoundsException
     public void asignarEstanquesACadaSala() {
         int[] numAleatorios = ma.numerosAleatoriosNoRepetidos(0, totalEstanques, totalEstanques);
         int cont = 0;
