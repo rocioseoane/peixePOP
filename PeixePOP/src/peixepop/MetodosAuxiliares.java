@@ -4,8 +4,8 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- *
- * @author Developer
+ * Clase auxiliar para el acuario
+ * @author Angel, Jose, Miguel, Paulo
  */
 public class MetodosAuxiliares {
     
