@@ -128,7 +128,7 @@ public class Acuario {
 
         for (int i = 0; i < inventarioSalas.size(); i++) {
             for (int j = 0; j < inventarioSalas.get(0).maxEstanques; j++) {
-                inventarioSalas.get(i).setEstanques(inventarioEstanques.get(numAleatorios[cont]));
+                inventarioSalas.get(i).agregarEstanques(inventarioEstanques.get(numAleatorios[cont]));
                 cont++;
             }
         }
@@ -148,7 +148,7 @@ public class Acuario {
 
         for (int i = 0; i < inventarioEstanques.size(); i++) {
             for (int j = 0; j < inventarioEstanques.get(0).maxTiburones; j++) {
-                inventarioEstanques.get(i).setTiburon(inventarioTiburones.get(numAleatorios[cont]));
+                inventarioEstanques.get(i).agregarTiburones(inventarioTiburones.get(numAleatorios[cont]));
                 cont++;
             }
         }

@@ -88,7 +88,7 @@ public class Estanque {
     /**
      * @param tiburon Se le añade un tiburon al estanque
      */
-    public void setTiburon(Tiburon tiburon) {
+    public void agregarTiburones(Tiburon tiburon) {
         this.tiburones.add(tiburon);
     }
 

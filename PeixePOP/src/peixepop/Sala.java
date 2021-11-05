@@ -88,7 +88,7 @@ public class Sala {
     /**
      * @param estanque Se le añade un estanque a la sala
      */
-    public void setEstanques(Estanque estanque) {
+    public void agregarEstanques(Estanque estanque) {
         this.estanques.add(estanque);
     }
     
