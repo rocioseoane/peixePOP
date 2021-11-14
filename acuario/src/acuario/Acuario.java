@@ -1,4 +1,4 @@
-package peixepop;
+package acuario;
 
 import common.ConnDB;
 import java.io.BufferedReader;
@@ -65,16 +65,12 @@ public class Acuario {
      */
     public void mostrarInventario() {
         System.out.println("--- INVENTARIO DEL ACUARIO " + nombre.toUpperCase() + " ---");
-
         // Mostrar salas
         System.out.println("\t******* Salas *******");
         bbdd.mostrarDatosSalas();
-        
-
         // Mostrar estanques
         System.out.println("\t***** Estanques *****");
         bbdd.mostrarDatosEstanques();
-
         // Mostrar tiburones
         System.out.println("\t***** Tiburones *****");
         bbdd.mostrarDatosTiburones();

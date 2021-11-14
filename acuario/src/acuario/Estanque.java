@@ -1,4 +1,4 @@
-package peixepop;
+package acuario;
 
 import java.util.ArrayList;
 

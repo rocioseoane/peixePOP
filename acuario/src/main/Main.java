@@ -1,8 +1,8 @@
 package main;
 
 import java.io.File;
-import peixepop.Acuario;
-import tienda.TiendaAcuario;
+import acuario.Acuario;
+import tienda.Tienda;
 
 /**
  * Clase deonde se ejecuta el programa
@@ -30,6 +30,6 @@ public class Main {
             acuario.mostrarJeraquia();
         } catch (Exception e) {
         }        
-        TiendaAcuario tienda=new TiendaAcuario();
+        Tienda tienda=new Tienda();
     }
 }

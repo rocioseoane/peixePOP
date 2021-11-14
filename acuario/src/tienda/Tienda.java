@@ -6,9 +6,9 @@ package tienda;
 import common.ConnDB;
 import java.util.ArrayList;
 
-public class TiendaAcuario {
+public class Tienda {
   
-    public TiendaAcuario() {
+    public Tienda() {
         // Instanciación conector JDBC
         ConnDB bbdd=ConnDB.getInstance();
         // Preparamos estructuras de datos

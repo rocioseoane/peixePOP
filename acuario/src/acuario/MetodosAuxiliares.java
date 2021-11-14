@@ -1,4 +1,4 @@
-package peixepop;
+package acuario;
 
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
