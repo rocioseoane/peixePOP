@@ -1,5 +1,6 @@
 package peixepop;
 
+import common.ConnDB;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -10,6 +11,9 @@ import java.util.ArrayList;
  * @author Angel, Jose, Miguel, Paulo
  */
 public class Acuario {
+    
+    // JDBC Conector BBDD
+    ConnDB bbdd=ConnDB.getInstance();
 
     // Total de campos que tiene cada objeto
     private final int TOTAL_CAMPOS = 4;
@@ -64,21 +68,16 @@ public class Acuario {
 
         // Mostrar salas
         System.out.println("\t******* Salas *******");
-        for (Sala sala : inventarioSalas) {
-            System.out.println("\t" + sala.getNombre());
-        }
+        bbdd.mostrarDatosSalas();
+        
 
         // Mostrar estanques
         System.out.println("\t***** Estanques *****");
-        for (Estanque estanque : inventarioEstanques) {
-            System.out.println("\t" + estanque.getNombre());
-        }
+        bbdd.mostrarDatosEstanques();
 
         // Mostrar tiburones
         System.out.println("\t***** Tiburones *****");
-        for (Tiburon tiburon : inventarioTiburones) {
-            System.out.println("\t" + tiburon.getDescripcion());
-        }
+        bbdd.mostrarDatosTiburones();
     }
     
     /**
