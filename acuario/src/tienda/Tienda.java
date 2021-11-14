@@ -6,19 +6,31 @@ package tienda;
 import common.ConnDB;
 
 public class Tienda {
+    
+    // Conector JDBC
+        private static ConnDB bbdd=ConnDB.getInstance();
+        private static Tienda instanciaUnica=null;
   
-    public Tienda() {
-        // Instanciación conector JDBC
-        ConnDB bbdd=ConnDB.getInstance();
+    private Tienda(){}
+    
+    public static Tienda getInstance(){
+        if (instanciaUnica==null){
+            instanciaUnica=new Tienda();
+        }
+        return instanciaUnica;
+    }
+    
+    public void test(){
+        System.out.println("\n\n****************************\n\t\t TEST TIENDA");
+        
+        System.out.println("Llega un cliente, un trabajador le atiende y pone 3 artículos en su carrito de compra");
+        Cliente c = bbdd.getClienteRandom();
+        Trabajador t=bbdd.getTrabajadorRandom();
         
         // Creamos un objeto de tipo pedido y otro de tipo factura
         Pedido p = null;
         Factura f;
 
-        System.out.println("Llega un cliente, un trabajador le atiende y pone 3 artículos en su carrito de compra");
-        Cliente c = bbdd.getClienteRandom();
-        Trabajador t=bbdd.getTrabajadorRandom();
-        
         int codCarrito=(int) Math.random();
         Carrito carrito=new Carrito(codCarrito);
         for (int i = 0; i < 3; i++) {

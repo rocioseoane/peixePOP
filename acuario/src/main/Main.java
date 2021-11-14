@@ -29,7 +29,10 @@ public class Main {
             // Se muestra como está diseñado el acuario
             acuario.mostrarJeraquia();
         } catch (Exception e) {
-        }        
-        Tienda tienda=new Tienda();
+            e.printStackTrace();
+        }
+        
+        Tienda tienda=Tienda.getInstance();
+        tienda.test();
     }
 }
