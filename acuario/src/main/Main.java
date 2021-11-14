@@ -33,6 +33,7 @@ public class Main {
         }
         
         Tienda tienda=Tienda.getInstance();
+        tienda.dataDump();
         tienda.test();
     }
 }

@@ -11,13 +11,31 @@ public class Tienda {
         private static ConnDB bbdd=ConnDB.getInstance();
         private static Tienda instanciaUnica=null;
   
-    private Tienda(){}
+    private Tienda(){
+    }
     
     public static Tienda getInstance(){
         if (instanciaUnica==null){
             instanciaUnica=new Tienda();
         }
         return instanciaUnica;
+    }
+    
+    // Este método muestra todo lo almacenado en la BBDD
+    public void dataDump(){
+        System.out.println("\n\n****************************\n\t\t CONTENIDOS BBDD TIENDA");
+        System.out.println("\nDATOS DE ARTÍCULOS");
+        bbdd.cargaDatos("SELECT * FROM articulos");
+        bbdd.mostrarDatosArticulos();
+        System.out.println("******************\n");
+        System.out.println("\nDATOS DE CLIENTES");
+        bbdd.cargaDatos("SELECT * FROM clientes");
+        bbdd.mostrarDatosClientes();
+        System.out.println("******************\n");
+        System.out.println("\nDATOS DE TRABAJADORES");
+        bbdd.cargaDatos("SELECT * FROM trabajadores");
+        bbdd.mostrarDatosTrabajadores();
+        System.out.println("******************\n");
     }
     
     public void test(){

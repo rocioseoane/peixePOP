@@ -5,19 +5,20 @@
 ##  Tienda Acuario (CIF A11199938H)
 ##  Fecha: null
 #######################################################
-##  Código Cliente: 556431011978
-##  Nombre Cliente: Sofía
-##  Direccion: Marbella
-##  Teléfono: 87876545
+##  Código Cliente: 323419092000
+##  Nombre Cliente: Lucas
+##  Direccion: Ourense
+##  Teléfono: 888888888
 #######################################################
 ## Cantidad -- Descripcion                    -- Precio
 -------------------------------------------------------
-          1 -- Temómetro                      -- 1,00
-          1 -- Acondicionador para agua del grifo -- 3,49
+          1 -- Cladophora 3-4cm               -- 2,75
+          1 -- Alimento en escamas            -- 25,00
+          1 -- Alimento en escamas            -- 25,00
 -------------------------------------------------------
-## Importe (antes de impuestos)                  3,71
-## Impuestos (21%)                               ,78
-## IMPORTE TOTAL                                 4,49
+## Importe (antes de impuestos)                  43,60
+## Impuestos (21%)                               9,15
+## IMPORTE TOTAL                                 52,75
 #######################################################
 ## Observaciones
 ## 
