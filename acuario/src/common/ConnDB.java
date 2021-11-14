@@ -256,6 +256,40 @@ public class ConnDB {
         return a;
     }
     
+    public Articulo getArticuloRandom(){
+        Articulo a=null;
+        this.cargaDatos("SELECT * FROM articulos ORDER BY RAND() LIMIT 1");
+        try {
+            while (rs.next()) {
+                String codigo = rs.getString("codigo");
+                String nombre = rs.getString("descripcion");
+                int stock = Integer.parseInt(rs.getString("stock"));
+                double precio = Double.parseDouble(rs.getString("precio"));
+                int tipo_articulo = Integer.parseInt(rs.getString("tipo_articulo"));
+                switch(tipo_articulo){
+                    case 1:
+                        a=new AnimalAcuatico(codigo,nombre,stock,precio);
+                        break;
+                    case 2:
+                        a=new PlantaAcuatica(codigo,nombre,stock,precio);
+                        break;
+                    case 3:
+                        a=new Alimento(codigo,nombre,stock,precio);
+                        break;
+                    case 4:
+                        a=new Accesorio(codigo,nombre,stock,precio);
+                        break;
+                    case 5:
+                        a=new Pecera(codigo,nombre,stock,precio);
+                        break;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return a;
+    }
+    
     // API CLIENTES
     public ArrayList<Cliente> getClientes(){
         ArrayList<Cliente> lista=new ArrayList();
@@ -277,6 +311,23 @@ public class ConnDB {
     public Cliente getClienteByCodigo(String codigoCliente){
         Cliente c=null;
         this.cargaDatos("SELECT * FROM clientes WHERE codigo="+codigoCliente);
+        try {
+            while (rs.next()) {
+                String codigo = rs.getString("codigo");
+                String nombre = rs.getString("nombre");
+                String direccion=rs.getString("direccion");
+                String telefono=rs.getString("telefono");
+                c=new Cliente(codigo,nombre,direccion,telefono);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return c;
+    }
+    
+    public Cliente getClienteRandom(){
+        Cliente c=null;
+        this.cargaDatos("SELECT * FROM clientes  ORDER BY RAND() LIMIT 1");
         try {
             while (rs.next()) {
                 String codigo = rs.getString("codigo");
@@ -313,6 +364,24 @@ public class ConnDB {
     public Trabajador getTrabajadorByCodigo(String codigoTrabajador){
         Trabajador t=null;
         this.cargaDatos("SELECT * FROM trabajadores WHERE codigo="+codigoTrabajador);
+        try {
+            while (rs.next()) {
+                String codigo = rs.getString("codigo");
+                String nombre = rs.getString("nombre");
+                String direccion=rs.getString("direccion");
+                String telefono=rs.getString("telefono");
+                Double salario = Double.parseDouble(rs.getString("salario"));
+                t=new Trabajador(codigo, nombre, direccion, telefono, salario);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return t;
+    }
+    
+    public Trabajador getTrabajadorRandom(){
+        Trabajador t=null;
+        this.cargaDatos("SELECT * FROM trabajadores ORDER BY RAND() LIMIT 1");
         try {
             while (rs.next()) {
                 String codigo = rs.getString("codigo");
