@@ -1,10 +1,11 @@
 package tienda;
 
+import common.ConnDB;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Factura {
     
@@ -88,6 +89,7 @@ public class Factura {
         System.out.println("Imprimiendo factura...");
         String nombreFichero=numero+".txt";
         String fichero = new File(nombreFichero).getAbsolutePath();
+        DecimalFormat df = new DecimalFormat("#.00");
         try {
             FileWriter fw=new FileWriter(fichero, false);
             // Cabecera
@@ -96,34 +98,41 @@ public class Factura {
             fw.write("#######################################################\n");
             fw.write("##  Número de factura: "+numero+"\n");
             fw.write("##  Tienda Acuario (CIF A11199938H)\n");
-            fw.write("##  Fecha: "+fecha.toString()+"\n");
+            fw.write("##  Fecha: "+fecha+"\n");
             fw.write("#######################################################\n");
             // Datos del cliente
-            fw.write("##  Código Cliente: "+codigoCliente+"\n");
-            // ###############################################
-            // Pendiente incluir datos auténticos del cliente
-            // ###############################################
+            ConnDB bbdd=ConnDB.getInstance();
+            Cliente c=bbdd.getClienteByCodigo(codigoCliente);
+            fw.write("##  Código Cliente: "+c.getCodigo()+"\n");
+            fw.write("##  Nombre Cliente: "+c.getNombre()+"\n");
+            fw.write("##  Direccion: "+c.getDireccion()+"\n");
+            fw.write("##  Teléfono: "+c.getTelefono()+"\n");
             fw.write("#######################################################\n");
             // Lineas de la factura
             fw.write("## Cantidad -- Descripcion                    -- Precio\n");
             fw.write("-------------------------------------------------------\n");
             // Recorremos el array para obtener los datos de cada linea
             for(LineaFactura lf : listaLineasFactura){
-                fw.write(lf.getCantidad()+" - "+lf.getDescripcion()+" - "+lf.getPrecio()+"\n");
+                String cantidad=String.format("%11d",lf.getCantidad());
+                String descripcion=String.format("%-30s",lf.getDescripcion());
+                String precio=String.format(df.format(lf.getPrecio()));
+                fw.write(cantidad+" -- "+descripcion+" -- "+precio+"\n");
             }
             // Desglose precio, impuestos e importe
             fw.write("-------------------------------------------------------\n");
             double precio = importeTotal/1.21;
             double impuestos = importeTotal-precio;
-            fw.write("## Importe (antes de impuestos)                 "+precio+"\n");
-            fw.write("## Impuestos (21%)                              "+impuestos+"\n");
-            fw.write("## IMPORTE TOTAL                                "+importeTotal+"\n");
+            fw.write("## Importe (antes de impuestos)                  "+df.format(precio)+"\n");
+            fw.write("## Impuestos (21%)                               "+df.format(impuestos)+"\n");
+            fw.write("## IMPORTE TOTAL                                 "+df.format(importeTotal)+"\n");
             // Observaciones
             fw.write("#######################################################\n");
             fw.write("## Observaciones\n");
             fw.write("## \n");
             fw.write("#######################################################\n");
             fw.close();
+            
+            System.out.println("Factura guardada como "+fichero);
         }catch(IOException ioe){
             System.out.println(ioe.getLocalizedMessage());
         }

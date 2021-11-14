@@ -10,9 +10,9 @@ public abstract class Persona {
     private String direccion;
     private String telefono;
 
-    public Persona(String codigo, String nombre, String direcccion, String telefono) {
+    public Persona(String codigo, String nombre, String direccion, String telefono) {
         this.nombre = nombre;
-        this.direccion = direcccion;
+        this.direccion = direccion;
         this.telefono = telefono;
         this.codigo = codigo;
     }
@@ -33,12 +33,12 @@ public abstract class Persona {
         this.nombre = nombre;
     }
 
-    public String getDirecccion() {
+    public String getDireccion() {
         return direccion;
     }
 
-    public void setDirecccion(String direcccion) {
-        this.direccion = direcccion;
+    public void setDireccion(String direcccion) {
+        this.direccion = direccion;
     }
 
     public String getTelefono() {
