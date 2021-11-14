@@ -5,13 +5,11 @@ package tienda;
 
 public abstract class Persona {
 
-    //atributos
     private String codigo;
     private String nombre;
     private String direccion;
     private String telefono;
 
-    //constructor
     public Persona(String codigo, String nombre, String direcccion, String telefono) {
         this.nombre = nombre;
         this.direccion = direcccion;
@@ -19,7 +17,6 @@ public abstract class Persona {
         this.codigo = codigo;
     }
 
-    //getters y setters
     public String getCodigo() {
         return codigo;
     }

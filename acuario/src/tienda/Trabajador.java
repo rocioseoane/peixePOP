@@ -7,16 +7,13 @@ import java.util.Date;
 
 public class Trabajador extends Persona {
 
-    //atributo
     private Double salario;
 
-    //constructor
     public Trabajador(String codigo, String nombre, String direcccion, String telefono, Double salario) {
         super(codigo, nombre, direcccion, telefono);
         this.salario = salario;
     }
 
-    //getters y setters
     public Double getSalario() {
         return salario;
     }

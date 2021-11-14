@@ -14,10 +14,8 @@ public class Factura {
     private Date fecha;
     private double impTotal;
     private boolean pagado;
-
     private final ArrayList<LineaFactura> listaLineasFactura;
 
-    //constructor
     public Factura(String codigoCliente, double impTotal, boolean pagado) {
         this.listaLineasFactura = new ArrayList();
         this.numero = numeroFactura++;

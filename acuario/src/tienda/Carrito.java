@@ -15,7 +15,7 @@ public class Carrito {
     private int codigo;
 
     public Carrito(int codigo) {
-        this.carrito = new ArrayList<Articulo>();
+        this.carrito = new ArrayList<>();
         this.codigo = codigo;
     }
     

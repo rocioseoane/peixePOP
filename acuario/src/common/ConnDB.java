@@ -15,19 +15,27 @@ import java.sql.Statement;
 public class ConnDB {
 
     // Atributos
-    public Connection conn;
-    private ResultSet rs;
+    private static ConnDB instanciaUnica;
+    public static Connection conn;
+    private static ResultSet rs;
 
     /**
      * Constructor para conectarse la base de datos por defecto
      */
-    public ConnDB() {
+    private ConnDB() {
         try {
             conn = DriverManager.getConnection("jdbc:mysql://easybyte.club:2223/peixepop", "jdbc", "peixejdbc@Servo2021*");
             System.out.println("Conectado a la base de datos!");
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    
+    public static ConnDB getInstance(){
+        if (instanciaUnica==null){
+            instanciaUnica=new ConnDB();
+        }
+        return instanciaUnica;
     }
 
     /**

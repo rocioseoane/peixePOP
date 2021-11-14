@@ -4,11 +4,9 @@ import java.util.ArrayList;
 
 public class Pedido {
 
-    //atributos
     private String codigo;
     private Date fecha;
     private boolean recibido;
-    //cada pedido es una lista de lineas de pedido    
     private final ArrayList<LineaPedido> listaLineasPedido;
 
     public Pedido(String codigo, Date fecha, boolean recibido) {
@@ -18,7 +16,6 @@ public class Pedido {
         this.listaLineasPedido = new ArrayList();
     }
 
-    //getters y setters
     public String getCodigo() {
         return codigo;
     }

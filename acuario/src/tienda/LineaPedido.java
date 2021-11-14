@@ -36,6 +36,4 @@ public class LineaPedido {
         this.precio = precio;
     }
 
-   
-   
 }

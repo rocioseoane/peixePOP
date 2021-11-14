@@ -4,6 +4,7 @@
 package tienda;
 
 import java.util.Scanner;
+
 public class Cliente extends Persona {
 
     public Cliente(String codigo, String nombre, String direcccion, String telefono) {
@@ -17,23 +18,15 @@ public class Cliente extends Persona {
      * para este MPV estos metodos no se utilizarán
      */
     public boolean solicitarFactura(Scanner leer) {
-        boolean solicita = false;
-        System.out.println("¿Desea solicitar Factura? ");
+        System.out.println("¿Desea solicitar Factura? (s/n) ");
         String respuesta = leer.nextLine();
-        if (respuesta.equalsIgnoreCase("si")) {
-            solicita = true;
-        }
-        return solicita;
+        return respuesta.equalsIgnoreCase("s");
     }
 
     public boolean solicitarPedido(Scanner leer) {
-        boolean solicita = false;
-        System.out.println("¿Desea solicitar Pedido? ");
+        System.out.println("¿Desea solicitar Pedido? (s/n)");
         String respuesta = leer.nextLine();
-        if (respuesta.equalsIgnoreCase("si")) {
-            solicita = true;
-        }
-        return solicita;
+        return respuesta.equalsIgnoreCase("si");
     }
 
     /**
@@ -43,7 +36,6 @@ public class Cliente extends Persona {
      */
     public void pagarCompra(Double importe) {
         System.out.println("El total a pagar es " + importe + " euros");
-
     }
 
 }
