@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: easybyte.club:2223:3306
--- Tiempo de generación: 12-11-2021 a las 12:24:55
+-- Tiempo de generación: 14-11-2021 a las 11:38:50
 -- Versión del servidor: 8.0.27
 -- Versión de PHP: 7.4.20
 
@@ -124,7 +124,7 @@ INSERT INTO `estanques` (`codigo`, `tipo`, `nombre`, `codigo_sala`) VALUES
 --
 
 CREATE TABLE `factura` (
-  `codigo` char(12) NOT NULL,
+  `codigo` bigint UNSIGNED NOT NULL,
   `codigo_cliente` char(12) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `importe_total` float NOT NULL,
@@ -138,11 +138,11 @@ CREATE TABLE `factura` (
 --
 
 CREATE TABLE `lineas_facturas` (
-  `codigo` char(12) NOT NULL,
+  `codigo` bigint UNSIGNED NOT NULL,
   `cantidad` smallint NOT NULL,
   `descripcion` varchar(50) NOT NULL,
   `precio` float NOT NULL,
-  `codigo_factura` char(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
+  `codigo_factura` bigint UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -156,7 +156,7 @@ CREATE TABLE `lineas_pedidos` (
   `codigo_articulo` char(12) NOT NULL,
   `cantidad` int NOT NULL,
   `precio` float NOT NULL,
-  `codigo_pedido` char(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
+  `codigo_pedido` bigint UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -166,7 +166,7 @@ CREATE TABLE `lineas_pedidos` (
 --
 
 CREATE TABLE `pedidos` (
-  `codigo` char(12) NOT NULL,
+  `codigo` bigint UNSIGNED NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `recibido` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -190,12 +190,12 @@ CREATE TABLE `plantas` (
 --
 
 INSERT INTO `plantas` (`codigo`, `medio_de_vida`, `nombre`, `codigo_estanque`, `codigo_sala`) VALUES
-('6589ayca6567', 'Acuatico', 'Ayahuasca', NULL, NULL),
-('6765cais8469', 'Terrestre', 'Cannabis', NULL, NULL),
-('6779coca8469', 'Terrestre', 'Coca', NULL, NULL),
-('7279hoos6567', 'Acuatico', 'Hongos', NULL, NULL),
-('7980opio6567', 'Acuatico', 'Opio', NULL, NULL),
-('8069acco6567', 'Acuatico', 'Peyote', NULL, NULL);
+('6589ayca6567', 'Acuatico', 'Ayahuasca', 'esel7765inno', NULL),
+('6765cais8469', 'Terrestre', 'Cannabis', NULL, 'exva7285sald'),
+('6779coca8469', 'Terrestre', 'Coca', NULL, 'inor7769meea'),
+('7279hoos6567', 'Acuatico', 'Hongos', 'eslo8065exno', NULL),
+('7980opio6567', 'Acuatico', 'Opio', 'esse7479exno', NULL),
+('8069acco6567', 'Acuatico', 'Peyote', 'esel7773exno', NULL);
 
 -- --------------------------------------------------------
 
@@ -319,28 +319,32 @@ ALTER TABLE `estanques`
 -- Indices de la tabla `factura`
 --
 ALTER TABLE `factura`
-  ADD PRIMARY KEY (`codigo`);
+  ADD PRIMARY KEY (`codigo`),
+  ADD UNIQUE KEY `codigo` (`codigo`),
+  ADD KEY `CLIENTE_TIENE_FACTURAS` (`codigo_cliente`);
 
 --
 -- Indices de la tabla `lineas_facturas`
 --
 ALTER TABLE `lineas_facturas`
   ADD PRIMARY KEY (`codigo`),
-  ADD KEY `FACTURA_TIENE_LINEASFACTURA` (`codigo_factura`);
+  ADD UNIQUE KEY `codigo` (`codigo`),
+  ADD KEY `codigo_factura` (`codigo_factura`);
 
 --
 -- Indices de la tabla `lineas_pedidos`
 --
 ALTER TABLE `lineas_pedidos`
   ADD PRIMARY KEY (`codigo`),
-  ADD KEY `PEDIDOS_TIENE_LINEASPEDIDOS` (`codigo_pedido`),
-  ADD KEY `LINEASPEDIDOS_TIENEN_ARTICULOS` (`codigo_articulo`);
+  ADD KEY `LINEASPEDIDOS_TIENEN_ARTICULOS` (`codigo_articulo`),
+  ADD KEY `PEDIDO_TIENE_LINEASPEDIDOS` (`codigo_pedido`);
 
 --
 -- Indices de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  ADD PRIMARY KEY (`codigo`);
+  ADD PRIMARY KEY (`codigo`),
+  ADD UNIQUE KEY `codigo` (`codigo`);
 
 --
 -- Indices de la tabla `plantas`
@@ -370,6 +374,28 @@ ALTER TABLE `trabajadores`
   ADD PRIMARY KEY (`codigo`);
 
 --
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `factura`
+--
+ALTER TABLE `factura`
+  MODIFY `codigo` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `lineas_facturas`
+--
+ALTER TABLE `lineas_facturas`
+  MODIFY `codigo` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `pedidos`
+--
+ALTER TABLE `pedidos`
+  MODIFY `codigo` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- Restricciones para tablas volcadas
 --
 
@@ -380,17 +406,23 @@ ALTER TABLE `estanques`
   ADD CONSTRAINT `SALA_TIENE_ESTANQUES` FOREIGN KEY (`codigo_sala`) REFERENCES `salas` (`codigo`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
+-- Filtros para la tabla `factura`
+--
+ALTER TABLE `factura`
+  ADD CONSTRAINT `CLIENTE_TIENE_FACTURAS` FOREIGN KEY (`codigo_cliente`) REFERENCES `clientes` (`codigo`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
 -- Filtros para la tabla `lineas_facturas`
 --
 ALTER TABLE `lineas_facturas`
-  ADD CONSTRAINT `FACTURA_TIENE_LINEASFACTURA` FOREIGN KEY (`codigo_factura`) REFERENCES `factura` (`codigo`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `codigo_factura` FOREIGN KEY (`codigo_factura`) REFERENCES `factura` (`codigo`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Filtros para la tabla `lineas_pedidos`
 --
 ALTER TABLE `lineas_pedidos`
   ADD CONSTRAINT `LINEASPEDIDOS_TIENEN_ARTICULOS` FOREIGN KEY (`codigo_articulo`) REFERENCES `articulos` (`codigo`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `PEDIDOS_TIENE_LINEASPEDIDOS` FOREIGN KEY (`codigo_pedido`) REFERENCES `pedidos` (`codigo`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `PEDIDO_TIENE_LINEASPEDIDOS` FOREIGN KEY (`codigo_pedido`) REFERENCES `pedidos` (`codigo`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Filtros para la tabla `plantas`
