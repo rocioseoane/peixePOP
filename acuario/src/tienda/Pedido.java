@@ -1,15 +1,14 @@
 package tienda;
-import java.util.Date;
 import java.util.ArrayList;
 
 public class Pedido {
 
     private String codigo;
-    private Date fecha;
+    private String fecha;
     private boolean recibido;
-    private final ArrayList<LineaPedido> listaLineasPedido;
+    private ArrayList<LineaPedido> listaLineasPedido;
 
-    public Pedido(String codigo, Date fecha, boolean recibido) {
+    public Pedido(String codigo, String fecha, boolean recibido) {
         this.codigo = codigo;
         this.fecha = fecha;
         this.recibido = recibido;
@@ -24,11 +23,11 @@ public class Pedido {
         this.codigo = codigo;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
@@ -47,7 +46,7 @@ public class Pedido {
      * precio de cada artículo y la añade al arrayList de lineas de pedido
      */
     public void añadirLinea(Articulo a, int cantidad) {
-        LineaPedido lp = new LineaPedido(a.getCodigo(), cantidad, a.getPrecio());
+        LineaPedido lp = new LineaPedido(a, cantidad, a.getPrecio());
         System.out.println("Artículo: " + a.getDescripcion());
         System.out.println("Cantidad: " + cantidad);
         listaLineasPedido.add(lp);
@@ -56,7 +55,7 @@ public class Pedido {
     //lso siguientes metodos no se usarán en este MPV pero los hemos dejado implementados
     public void quitarLinea(LineaPedido linea) {
         for (LineaPedido l : listaLineasPedido) {
-            if (l.getCodigo().equals(linea.getCodigo())) {
+            if (l.getArticulo().equals(linea.getArticulo())) {
                 listaLineasPedido.remove(l);
             }
         }

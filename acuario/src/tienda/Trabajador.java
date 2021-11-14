@@ -28,7 +28,7 @@ public class Trabajador extends Persona {
      */
     public Pedido generarPedido() {
         java.util.Date fecha = new Date();
-        Pedido p = new Pedido("pedido1", fecha, false);
+        Pedido p = new Pedido("pedido1", fecha.toString(), false);
         System.out.println("****************************************\n");
         System.out.println("Se genera un pedido con los siguientes datos: ");
         System.out.println("Numero: " + p.getCodigo() + " Fecha: " + p.getFecha());

@@ -12,9 +12,11 @@ public class Tienda {
         // Instanciación conector JDBC
         ConnDB bbdd=ConnDB.getInstance();
         // Preparamos estructuras de datos
-        ArrayList<Trabajador> listaTrabajadores = new ArrayList();
-        ArrayList<Cliente> listaClientes = new ArrayList();
-        ArrayList<Articulo> listaArticulos = new ArrayList();
+        System.out.println("Cargando datos de la BBDD...");
+        ArrayList<Trabajador> listaTrabajadores = bbdd.getTrabajadores();
+        ArrayList<Cliente> listaClientes = bbdd.getClientes();
+        ArrayList<Articulo> listaArticulos = bbdd.getArticulos();
+        System.out.println("Lista de artículos cargada");
         // Creamos un objeto de tipo pedido y otro de tipo factura
         Pedido p = null;
         Factura f;

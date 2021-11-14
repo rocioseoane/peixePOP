@@ -6,6 +6,15 @@ import java.sql.SQLException;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import tienda.Articulo;
+import tienda.Cliente;
+import tienda.Factura;
+import tienda.LineaFactura;
+import tienda.LineaPedido;
+import tienda.Pedido;
+import tienda.Trabajador;
+import tienda.articulos.*;
 
 /**
  * Clase principal para conectarse a la base de datos
@@ -14,7 +23,6 @@ import java.sql.Statement;
  */
 public class ConnDB {
 
-    // Atributos
     private static ConnDB instanciaUnica;
     public static Connection conn;
     private static ResultSet rs;
@@ -44,7 +52,6 @@ public class ConnDB {
      */
     public void cargaDatos(String query) {
         Statement stmt = null;
-
         try {
             stmt = (Statement) conn.createStatement();
             rs = stmt.executeQuery(query);
@@ -176,5 +183,274 @@ public class ConnDB {
             System.out.println(e.getMessage());
         }
     }
+    
+    
+    
+    // MÉTODOS AÑADIDOS PARA LA TIENDA
+    // API ARTICULOS
+    public ArrayList<Articulo> getArticulos(){
+        ArrayList<Articulo> lista=new ArrayList();
+        this.cargaDatos("SELECT * FROM articulos");
+        try {
+            while (rs.next()) {
+                String codigo = rs.getString("codigo");
+                String nombre = rs.getString("descripcion");
+                int stock = Integer.parseInt(rs.getString("stock"));
+                double precio = Double.parseDouble(rs.getString("precio"));
+                int tipo_articulo = Integer.parseInt(rs.getString("tipo_articulo"));
+                switch(tipo_articulo){
+                    case 1:
+                        lista.add(new AnimalAcuatico(codigo,nombre,stock,precio));
+                        break;
+                    case 2:
+                        lista.add(new PlantaAcuatica(codigo,nombre,stock,precio));
+                        break;
+                    case 3:
+                        lista.add(new Alimento(codigo,nombre,stock,precio));
+                        break;
+                    case 4:
+                        lista.add(new Accesorio(codigo,nombre,stock,precio));
+                        break;
+                    case 5:
+                        lista.add(new Pecera(codigo,nombre,stock,precio));
+                        break;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return lista;
+    }
+    
+    public Articulo getArticuloByCodigo(String codigoArticulo){
+        Articulo a=null;
+        this.cargaDatos("SELECT * FROM articulos WHERE codigo="+codigoArticulo);
+        try {
+            while (rs.next()) {
+                String codigo = rs.getString("codigo");
+                String nombre = rs.getString("descripcion");
+                int stock = Integer.parseInt(rs.getString("stock"));
+                double precio = Double.parseDouble(rs.getString("precio"));
+                int tipo_articulo = Integer.parseInt(rs.getString("tipo_articulo"));
+                switch(tipo_articulo){
+                    case 1:
+                        a=new AnimalAcuatico(codigo,nombre,stock,precio);
+                        break;
+                    case 2:
+                        a=new PlantaAcuatica(codigo,nombre,stock,precio);
+                        break;
+                    case 3:
+                        a=new Alimento(codigo,nombre,stock,precio);
+                        break;
+                    case 4:
+                        a=new Accesorio(codigo,nombre,stock,precio);
+                        break;
+                    case 5:
+                        a=new Pecera(codigo,nombre,stock,precio);
+                        break;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return a;
+    }
+    
+    // API CLIENTES
+    public ArrayList<Cliente> getClientes(){
+        ArrayList<Cliente> lista=new ArrayList();
+        this.cargaDatos("SELECT * FROM clientes");
+        try {
+            while (rs.next()) {
+                String codigo = rs.getString("codigo");
+                String nombre = rs.getString("nombre");
+                String direccion = rs.getString("direccion");
+                String telefono = rs.getString("telefono");
+                lista.add(new Cliente(codigo, nombre, direccion, telefono));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return lista;
+    }
+    
+    public Cliente getClienteByCodigo(String codigoCliente){
+        Cliente c=null;
+        this.cargaDatos("SELECT * FROM clientes WHERE codigo="+codigoCliente);
+        try {
+            while (rs.next()) {
+                String codigo = rs.getString("codigo");
+                String nombre = rs.getString("nombre");
+                String direccion=rs.getString("direccion");
+                String telefono=rs.getString("telefono");
+                c=new Cliente(codigo,nombre,direccion,telefono);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return c;
+    }
+    
+    // API TRABAJADORES
+    public ArrayList<Trabajador> getTrabajadores(){
+        ArrayList<Trabajador> lista=new ArrayList();
+        this.cargaDatos("SELECT * FROM trabajadores");
+        try {
+            while (rs.next()) {
+                String codigo = rs.getString("codigo");
+                String nombre = rs.getString("nombre");
+                String direccion = rs.getString("direccion");
+                String telefono = rs.getString("telefono");
+                Double salario = Double.parseDouble(rs.getString("salario"));
+                lista.add(new Trabajador(codigo, nombre, direccion, telefono, salario));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return lista;
+    }
+    
+    public Trabajador getTrabajadorByCodigo(String codigoTrabajador){
+        Trabajador t=null;
+        this.cargaDatos("SELECT * FROM trabajadores WHERE codigo="+codigoTrabajador);
+        try {
+            while (rs.next()) {
+                String codigo = rs.getString("codigo");
+                String nombre = rs.getString("nombre");
+                String direccion=rs.getString("direccion");
+                String telefono=rs.getString("telefono");
+                Double salario = Double.parseDouble(rs.getString("salario"));
+                t=new Trabajador(codigo, nombre, direccion, telefono, salario);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return t;
+    }
+
+    // API FACTURAS
+    public ArrayList<Factura> getFacturas(){
+        ArrayList<Factura> lista=new ArrayList();
+        this.cargaDatos("SELECT * FROM facturas");
+        try {
+            while (rs.next()) {
+                int numero = Integer.parseInt(rs.getString("codigo"));
+                String cliente = rs.getString("codigo_cliente");
+                String fecha = rs.getString("fecha");
+                Double importeTotal = Double.parseDouble(rs.getString("importeTotal"));
+                boolean pagada = Integer.parseInt(rs.getString("pagada"))==1;
+                Factura f=new Factura(numero, cliente, fecha, importeTotal,pagada);
+                ArrayList<LineaFactura> lineas=this.getLineasFacturaByNumeroFactura(numero);
+                for(LineaFactura l : lineas){
+                    f.añadirLinea(l);
+                }
+                lista.add(f);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return lista;
+    }
+    
+    public Factura getFacturaByNumero(int numeroFactura){
+        Factura f=null;
+        this.cargaDatos("SELECT * FROM facturas WHERE codigo="+numeroFactura);
+        try {
+            while (rs.next()) {
+                int numero = Integer.parseInt(rs.getString("codigo"));
+                String codigoCliente = rs.getString("codigo_cliente");
+                String fecha=rs.getString("fecha");
+                Double importeTotal = Double.parseDouble(rs.getString("importeTotal"));
+                boolean pagada = Integer.parseInt(rs.getString("pagada"))==1;
+                f=new Factura(numero,codigoCliente,fecha,importeTotal, pagada);
+                ArrayList<LineaFactura> lineas=this.getLineasFacturaByNumeroFactura(numero);
+                for(LineaFactura l : lineas){
+                    f.añadirLinea(l);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return f;
+    }
+    
+    public ArrayList<LineaFactura> getLineasFacturaByNumeroFactura(int numeroFactura){
+        ArrayList<LineaFactura> lista=new ArrayList();
+        this.cargaDatos("SELECT * FROM lineas_facturas WHERE codigo_factura="+numeroFactura);
+        try {
+            while (rs.next()) {
+                int cantidad = Integer.parseInt(rs.getString("cantidad"));
+                String descripcion = rs.getString("descripcion");
+                Double precio = Double.parseDouble(rs.getString("precio"));
+                LineaFactura lf=new LineaFactura(cantidad,descripcion,precio);
+                lista.add(lf);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return lista;
+    }
+    
+    
+    // API PEDIDOS
+    public ArrayList<Pedido> getPedidos(){
+        ArrayList<Pedido> lista=new ArrayList();
+        this.cargaDatos("SELECT * FROM pedidos");
+        try {
+            while (rs.next()) {
+                String codigo = rs.getString("codigo");
+                String fecha = rs.getString("fecha");
+                boolean recibido = Integer.parseInt(rs.getString("recibido"))==1;
+                Pedido p=new Pedido(codigo, fecha, recibido);
+                ArrayList<LineaPedido> lineas=this.getLineasPedidoByCodigoPedido(codigo);
+                for(LineaPedido l : lineas){
+                    p.añadirLinea(l.getArticulo(),l.getCantidad());
+                }
+                lista.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return lista;
+    }
+    
+    public Pedido getPedidoByCodigo(int codigoPedido){
+        Pedido p=null;
+        this.cargaDatos("SELECT * FROM pedidos WHERE codigo="+codigoPedido);
+        try {
+            while (rs.next()) {
+                String codigo = rs.getString("codigo");
+                String fecha = rs.getString("fecha");
+                boolean recibido = Integer.parseInt(rs.getString("recibido"))==1;
+                p=new Pedido(codigo, fecha, recibido);
+                ArrayList<LineaPedido> lineas=this.getLineasPedidoByCodigoPedido(codigo);
+                for(LineaPedido l : lineas){
+                    p.añadirLinea(l.getArticulo(),l.getCantidad());
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return p;
+    }
+    
+    public ArrayList<LineaPedido> getLineasPedidoByCodigoPedido(String codigoPedido){
+        ArrayList<LineaPedido> lista=new ArrayList();
+        this.cargaDatos("SELECT * FROM lineas_pedidos WHERE codigo_pedido="+codigoPedido);
+        try {
+            while (rs.next()) {
+                Articulo articulo=this.getArticuloByCodigo(rs.getString("codigo_articulo"));
+                int cantidad = Integer.parseInt(rs.getString("cantidad"));
+                Double precio = Double.parseDouble(rs.getString("precio"));
+                LineaPedido lp=new LineaPedido(articulo,cantidad,precio);
+                lista.add(lp);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return lista;
+    }
+    
+    
 
 }

@@ -7,22 +7,26 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Factura {
-
-    private static int numeroFactura = 0;
+    
     private int numero;
     private String codigoCliente;
-    private Date fecha;
-    private double impTotal;
+    private String fecha;
+    private double importeTotal;
     private boolean pagado;
-    private final ArrayList<LineaFactura> listaLineasFactura;
+    private final ArrayList<LineaFactura> listaLineasFactura=new ArrayList();
 
-    public Factura(String codigoCliente, double impTotal, boolean pagado) {
-        this.listaLineasFactura = new ArrayList();
-        this.numero = numeroFactura++;
+    public Factura(int numero, String codigoCliente, String fecha, double importeTotal, boolean pagado) {
+        this.numero=numero;
         this.codigoCliente = codigoCliente;
-        this.fecha = new Date();
-        this.impTotal = impTotal;
+        this.fecha = fecha;
+        this.importeTotal = importeTotal;
         this.pagado = pagado;
+    }
+    
+    public Factura (String codigoCliente, double importeTotal, boolean pagado){
+        this.codigoCliente=codigoCliente;
+        this.importeTotal=importeTotal;
+        this.pagado=pagado;
     }
 
     public int getNumero() {
@@ -41,20 +45,20 @@ public class Factura {
         this.codigoCliente = codigoCliente;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
     public double getimpTotal() {
-        return impTotal;
+        return importeTotal;
     }
 
-    public void setimpTotal(double impTotal) {
-        this.impTotal = impTotal;
+    public void setimpTotal(double importeTotal) {
+        this.importeTotal = importeTotal;
     }
 
     public boolean getPagado() {
@@ -109,11 +113,11 @@ public class Factura {
             }
             // Desglose precio, impuestos e importe
             fw.write("-------------------------------------------------------\n");
-            double precio = impTotal/1.21;
-            double impuestos = impTotal-precio;
+            double precio = importeTotal/1.21;
+            double impuestos = importeTotal-precio;
             fw.write("## Importe (antes de impuestos)                 "+precio+"\n");
             fw.write("## Impuestos (21%)                              "+impuestos+"\n");
-            fw.write("## IMPORTE TOTAL                                "+impTotal+"\n");
+            fw.write("## IMPORTE TOTAL                                "+importeTotal+"\n");
             // Observaciones
             fw.write("#######################################################\n");
             fw.write("## Observaciones\n");
