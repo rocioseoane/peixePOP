@@ -57,20 +57,20 @@ Se va a desarrollar un software para la gestión del inventario de las especies,
 ------------
 
 
-### Almacenamiento persistente de datos:
+### Almacenamiento persistente de datos.
 Lo básico para cualquier desarrollador en PHP es tener un ambiente de desarrollo local con las mismas versiones del servidor de producción. Existen herramientas como `MAMP` o `XAMPP` para este trabajo pero dependen del sistema operativo utilizado, sólo permiten una versión de los servicios esto genera problemas de compatibilidad.
 
 
 Para el acceso a datos de nuestro acuario en un principio hicimos uso de `ficheros.txt`, ahora vamos a trabajar con [PHP](https://www.php.net) y [MySQL](https://www.mysql.com)  utilizando [Doker](https://www.docker.com). 
 
-#### Doker al rescate
+#### Doker al rescate.
 La forma más sencilla de crear ambientes de desarrollo es con Docker, donde utilizamos el archivo `docker-compose.yml` para configurar las características (versiones, puertos, variables de entorno, etc) de los servicios que necesitamos.
 
-#### Requerimientos
+#### Requerimientos.
 
 * [Docker Desktop](https://www.docker.com/products/docker-desktop)
 
-#### Configurar el ambiente de desarrollo
+#### Configurar el ambiente de desarrollo.
 
 Puedes utilizar la configuración por defecto, pero en ocasiones es recomendable modificar la configuración para que sea igual al servidor de producción. La configuración se hará en el archivo `.yml` con algunas opciones como:
 
@@ -81,7 +81,7 @@ Puedes utilizar la configuración por defecto, pero en ocasiones es recomendable
 * `MYSQL_PASSWORD` clave de acceso para conectarse a MySQL.
 * `MYSQL_DATABASE` nombre de la base de datos que se crea por defecto.
 
-#### Instalar el ambiente de desarrollo
+#### Instalar el ambiente de desarrollo.
 Los contenedores se crean con el comando:
 
 ```bash
@@ -96,22 +96,22 @@ docker-compose down     # Detener y eliminar los contenedores
 ```
 
 
-#### Docker-compose.yml
+#### Docker-compose.yml.
 ![doker_compose](https://raw.githubusercontent.com/aandradeb/peixePOP/main/doker-compose-yml.jpg)
 
 
 
-#### PhpMyAdmin
+#### PhpMyAdmin.
 ![phpMyAdmin](https://raw.githubusercontent.com/aandradeb/peixePOP/main/phpMyAdmin.jpg)
 
 
 
-#### Conexión con Docker
+#### Conexión con Docker.
 ![Doker](https://raw.githubusercontent.com/aandradeb/peixePOP/main/doker.jpg)
 
 
 
-### Modelo entidad-relación Base de Datos utilizada.
+### Modelo entidad-relación de la Base de Datos.
 ![mod_ent_rel](https://raw.githubusercontent.com/aandradeb/peixePOP/main/entidad-relacion.jpg)
 
      
