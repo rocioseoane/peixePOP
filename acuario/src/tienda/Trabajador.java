@@ -1,6 +1,3 @@
-/*
- * 
- */
 package tienda;
 
 import java.util.Date;
@@ -36,15 +33,15 @@ public class Trabajador extends Persona {
     }
 
     /**
-     * @param c objeto cliente
+     * @param cliente objeto cliente
      * @param importeTotal total de la compra
      * @return deveulve un objeto de tipo factura
      */
-    public Factura generarFactura(Cliente c, double importeTotal) {
+    public Factura generarFactura(Cliente cliente, double importeTotal) {
         System.out.println("Se genera una factura con los siguientes datos: ");
-        System.out.println("Cliente: " + c.getNombre());
+        System.out.println("Cliente: " + cliente.getNombre());
         System.out.println("Importe total = " + importeTotal);
-        return new Factura(c.getCodigo(), importeTotal, true);
+        return new Factura(cliente.getCodigo(), importeTotal, true);
     }
 
    

@@ -6,7 +6,7 @@ public class Pedido {
     private String codigo;
     private String fecha;
     private boolean recibido;
-    private ArrayList<LineaPedido> listaLineasPedido;
+    private final ArrayList<LineaPedido> listaLineasPedido;
 
     public Pedido(String codigo, String fecha, boolean recibido) {
         this.codigo = codigo;
@@ -40,14 +40,14 @@ public class Pedido {
     }
 
     /**
-     * @param a objeto artículo
+     * @param articulo objeto artículo
      * @param cantidad del artículo que la hemos generado con Math.random() para
      * este MPV Crea un objeto LineaPedido con la cantidad, el código y el
      * precio de cada artículo y la añade al arrayList de lineas de pedido
      */
-    public void añadirLinea(Articulo a, int cantidad) {
-        LineaPedido lp = new LineaPedido(a, cantidad, a.getPrecio());
-        System.out.println("Artículo: " + a.getDescripcion());
+    public void añadirLinea(Articulo articulo, int cantidad) {
+        LineaPedido lp = new LineaPedido(articulo, cantidad, articulo.getPrecio());
+        System.out.println("Artículo: " + articulo.getDescripcion());
         System.out.println("Cantidad: " + cantidad);
         listaLineasPedido.add(lp);
     }

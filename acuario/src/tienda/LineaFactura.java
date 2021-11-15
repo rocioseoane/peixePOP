@@ -36,6 +36,4 @@ public class LineaFactura {
         this.precio = precio;
     }
 
-   
-
 }

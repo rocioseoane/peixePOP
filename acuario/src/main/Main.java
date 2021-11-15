@@ -6,7 +6,7 @@ import tienda.Tienda;
 
 /**
  * Clase deonde se ejecuta el programa
- * @author Angel, Jose, Miguel, Paulo
+ * @author Angel, Jose, Miguel, Paulo, Rocio, Yudaisy, Gianny, Emilio
  */
 public class Main {
     

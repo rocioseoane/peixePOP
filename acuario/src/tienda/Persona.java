@@ -1,6 +1,3 @@
-/*
- * 
- */
 package tienda;
 
 public abstract class Persona {
