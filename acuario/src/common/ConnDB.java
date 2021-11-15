@@ -1,5 +1,7 @@
 package common;
 
+import acuario.Estanque;
+import acuario.Planta;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -15,6 +17,8 @@ import tienda.LineaPedido;
 import tienda.Pedido;
 import tienda.Trabajador;
 import tienda.articulos.*;
+import acuario.Sala;
+import acuario.Tiburon;
 
 /**
  * Clase principal para conectarse a la base de datos
@@ -24,8 +28,8 @@ import tienda.articulos.*;
 public class ConnDB {
 
     private static ConnDB instanciaUnica;
-    public static Connection conn;
-    private static ResultSet rs;
+    private static Connection conn;
+    private ResultSet rs;
 
     /**
      * Constructor para conectarse la base de datos por defecto
@@ -33,9 +37,10 @@ public class ConnDB {
     private ConnDB() {
         try {
             conn = DriverManager.getConnection("jdbc:mysql://easybyte.club:2223/peixepop", "jdbc", "peixejdbc@Servo2021*");
-            System.out.println("Conectado a la base de datos!");
+            System.out.println(">>>>>>>>>>> La conexión a la Base de Datos se ha creado con éxito");
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getLocalizedMessage());
+            System.out.println(">>>>>>>>>>> No se puede conectar con la base de datos");
         }
     }
     
@@ -56,45 +61,151 @@ public class ConnDB {
             stmt = (Statement) conn.createStatement();
             rs = stmt.executeQuery(query);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getLocalizedMessage());
         }
     }
 
-    /**
-     * Muestra los datos de la tabla articulos
-     */
-    public void mostrarDatosArticulos() {
-        try {
+
+    // MÉTODOS AÑADIDOS PARA EL ACUARIO
+    // API SALAS
+    public ArrayList<Sala> getSalas(){
+        ArrayList<Sala> lista=new ArrayList();
+        this.cargaDatos("SELECT * FROM salas");
+        try{
             while (rs.next()) {
-                String codigo = rs.getString("codigo");
-                String descripcion = rs.getString("descripcion");
-                String stock = rs.getString("stock");
-                String precio = rs.getString("precio");
-                String tipoArticulo = rs.getString("tipo_articulo");
-                System.out.println(codigo + "," + descripcion + "," + stock + "," + precio + "," + tipoArticulo);
+                String codigo=rs.getString("codigo");
+                String nombre=rs.getString("nombre");
+                String tipo=rs.getString("tipo");
+                lista.add(new Sala(codigo,nombre,tipo));
+            }
+        } catch (SQLException e){
+            System.out.println(e.getLocalizedMessage());
+        }
+        return lista;
+    }
+    
+    public Sala getSalaByCodigo(String codigoSala){
+        Sala s=null;
+        this.cargaDatos("SELECT * FROM salas WHERE codigo='"+codigoSala+"'");
+        try{
+            while (rs.next()) {
+                String codigo=rs.getString("codigo");
+                String nombre=rs.getString("nombre");
+                String tipo=rs.getString("tipo");
+                s=new Sala(codigo,nombre,tipo);
+            }
+        } catch (SQLException e){
+            System.out.println(e.getLocalizedMessage());
+        }
+        return s;
+    }
+    
+    // API ESTANQUES
+    public ArrayList<Estanque> getEstanques(){
+        ArrayList<Estanque> lista=new ArrayList();
+        this.cargaDatos("SELECT * FROM estanques");
+        try{
+            while (rs.next()) {
+                String codigo=rs.getString("codigo");
+                String tipo=rs.getString("tipo");
+                String nombre=rs.getString("nombre");
+                String codigo_sala=rs.getString("codigo_sala");
+                lista.add(new Estanque(codigo,nombre,tipo,codigo_sala));
+            }
+        } catch (SQLException e){
+            System.out.println(e.getLocalizedMessage());
+        }
+        return lista;
+    }
+    
+    public Estanque getEstanqueByCodigo(String codigoEstanque){
+        Estanque e=null;
+        this.cargaDatos("SELECT * FROM estanques WHERE codigo='"+codigoEstanque+"'");
+        try{
+            while (rs.next()) {
+                String codigo=rs.getString("codigo");
+                String tipo=rs.getString("tipo");
+                String nombre=rs.getString("nombre");
+                String codigo_sala=rs.getString("codigo_sala");
+                e=new Estanque(codigo,nombre,tipo,codigo_sala);
+            }
+        } catch (SQLException ex){
+            System.out.println(ex.getLocalizedMessage());
+        }
+        return e;
+    }
+    
+    // API TIBURONES
+    public ArrayList<Tiburon> getTiburones(){
+        ArrayList<Tiburon> lista=new ArrayList();
+        this.cargaDatos("SELECT * FROM tiburones");
+        try{
+            while (rs.next()) {
+                String codigo=rs.getString("codigo");
+                String tamano=rs.getString("tamano");
+                String nombre=rs.getString("nombre");
+                String codigo_estanque=rs.getString("codigo_estanque");
+                lista.add(new Tiburon(tamano,codigo,nombre,codigo_estanque));
+            }
+        } catch (SQLException e){
+            System.out.println(e.getLocalizedMessage());
+        }
+        return lista;
+    }
+    
+    // API PLANTAS
+    public ArrayList<Planta> getPlantas(){
+        ArrayList<Planta> lista=new ArrayList();
+        this.cargaDatos("SELECT * FROM plantas");
+        try{
+            while (rs.next()) {
+                String codigo=rs.getString("codigo");
+                String medioDeVida=rs.getString("medio_de_vida");
+                String nombre=rs.getString("nombre");
+                String estanque="";
+                String sala="";
+                switch (medioDeVida){
+                    case "Acuatico":
+                        estanque=rs.getString("codigo_estanque");
+                        break;
+                    case "Terrestre":
+                        sala = rs.getString("codigo_sala");
+                        break;
+                }
+                lista.add(new Planta(medioDeVida,codigo,nombre,sala,estanque));
+            }
+        } catch (SQLException e){
+            System.out.println(e.getLocalizedMessage());
+        }
+        return lista;
+    }
+    
+    public int getNumeroFilas(char tabla){
+        int contador=0;
+        switch (tabla){
+            case 'S':
+                this.cargaDatos("SELECT * FROM salas");
+                break;
+            case 'E':
+                this.cargaDatos("SELECT * FROM estanques");
+                break;
+            case 'T':
+                this.cargaDatos("SELECT * FROM tiburones");
+                break;
+            case 'P':
+                this.cargaDatos("SELECT * FROM plantas");
+                break;
+        }
+        try {
+            while (rs.next()){
+                contador++;
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getLocalizedMessage());
         }
+        return contador;
     }
-
-    /**
-     * Muestra los datos de la tabla clientes
-     */
-    public void mostrarDatosClientes() {
-        try {
-            while (rs.next()) {
-                String codigo = rs.getString("codigo");
-                String nombre = rs.getString("nombre");
-                String direccion = rs.getString("direccion");
-                String telefono = rs.getString("telefono");
-                System.out.println(codigo + "," + nombre + "," + direccion + "," + telefono);
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
+       
     /**
      * Muestra los datos de la tabla estanques
      */
@@ -111,9 +222,6 @@ public class ConnDB {
             System.out.println(e.getMessage());
         }
     }
-
-    // TODO: Falta hacer enseñar las tablas: factura, lineas_facturas y 
-    // lineas pedidos por falta de datos
     
     /**
      * Muestra los datos de la tabla plantas
@@ -166,25 +274,7 @@ public class ConnDB {
         }
     }
 
-    /**
-     * Muestra los datos de la tabla trabajadores
-     */
-    public void mostrarDatosTrabajadores() {
-        try {
-            while (rs.next()) {
-                String codigo = rs.getString("codigo");
-                String nombre = rs.getString("nombre");
-                String direccion = rs.getString("direccion");
-                String telefono = rs.getString("telefono");
-                String salario = rs.getString("salario");
-                System.out.println(codigo + "," + nombre + "," + direccion + "," + telefono + "," + salario);
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-    
-    
+
     
     // MÉTODOS AÑADIDOS PARA LA TIENDA
     // API ARTICULOS
@@ -217,14 +307,14 @@ public class ConnDB {
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getLocalizedMessage());
         }
         return lista;
     }
     
     public Articulo getArticuloByCodigo(String codigoArticulo){
         Articulo a=null;
-        this.cargaDatos("SELECT * FROM articulos WHERE codigo="+codigoArticulo);
+        this.cargaDatos("SELECT * FROM articulos WHERE codigo='"+codigoArticulo+"'");
         try {
             while (rs.next()) {
                 String codigo = rs.getString("codigo");
@@ -251,7 +341,7 @@ public class ConnDB {
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getLocalizedMessage());
         }
         return a;
     }
@@ -285,7 +375,7 @@ public class ConnDB {
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getLocalizedMessage());
         }
         return a;
     }
@@ -303,14 +393,14 @@ public class ConnDB {
                 lista.add(new Cliente(codigo, nombre, direccion, telefono));
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getLocalizedMessage());
         }
         return lista;
     }
     
     public Cliente getClienteByCodigo(String codigoCliente){
         Cliente c=null;
-        this.cargaDatos("SELECT * FROM clientes WHERE codigo="+codigoCliente);
+        this.cargaDatos("SELECT * FROM clientes WHERE codigo='"+codigoCliente+"'");
         try {
             while (rs.next()) {
                 String codigo = rs.getString("codigo");
@@ -320,7 +410,7 @@ public class ConnDB {
                 c=new Cliente(codigo,nombre,direccion,telefono);
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getLocalizedMessage());
         }
         return c;
     }
@@ -337,7 +427,7 @@ public class ConnDB {
                 c=new Cliente(codigo,nombre,direccion,telefono);
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getLocalizedMessage());
         }
         return c;
     }
@@ -356,14 +446,14 @@ public class ConnDB {
                 lista.add(new Trabajador(codigo, nombre, direccion, telefono, salario));
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getLocalizedMessage());
         }
         return lista;
     }
     
     public Trabajador getTrabajadorByCodigo(String codigoTrabajador){
         Trabajador t=null;
-        this.cargaDatos("SELECT * FROM trabajadores WHERE codigo="+codigoTrabajador);
+        this.cargaDatos("SELECT * FROM trabajadores WHERE codigo='"+codigoTrabajador+"'");
         try {
             while (rs.next()) {
                 String codigo = rs.getString("codigo");
@@ -374,7 +464,7 @@ public class ConnDB {
                 t=new Trabajador(codigo, nombre, direccion, telefono, salario);
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getLocalizedMessage());
         }
         return t;
     }
@@ -392,7 +482,7 @@ public class ConnDB {
                 t=new Trabajador(codigo, nombre, direccion, telefono, salario);
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getLocalizedMessage());
         }
         return t;
     }
@@ -416,14 +506,14 @@ public class ConnDB {
                 lista.add(f);
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getLocalizedMessage());
         }
         return lista;
     }
     
     public Factura getFacturaByNumero(int numeroFactura){
         Factura f=null;
-        this.cargaDatos("SELECT * FROM facturas WHERE codigo="+numeroFactura);
+        this.cargaDatos("SELECT * FROM facturas WHERE codigo='"+numeroFactura+"'");
         try {
             while (rs.next()) {
                 int numero = Integer.parseInt(rs.getString("codigo"));
@@ -438,14 +528,14 @@ public class ConnDB {
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getLocalizedMessage());
         }
         return f;
     }
     
     public ArrayList<LineaFactura> getLineasFacturaByNumeroFactura(int numeroFactura){
         ArrayList<LineaFactura> lista=new ArrayList();
-        this.cargaDatos("SELECT * FROM lineas_facturas WHERE codigo_factura="+numeroFactura);
+        this.cargaDatos("SELECT * FROM lineas_facturas WHERE codigo_factura='"+numeroFactura+"'");
         try {
             while (rs.next()) {
                 int cantidad = Integer.parseInt(rs.getString("cantidad"));
@@ -455,11 +545,10 @@ public class ConnDB {
                 lista.add(lf);
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getLocalizedMessage());
         }
         return lista;
     }
-    
     
     // API PEDIDOS
     public ArrayList<Pedido> getPedidos(){
@@ -478,14 +567,14 @@ public class ConnDB {
                 lista.add(p);
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getLocalizedMessage());
         }
         return lista;
     }
     
     public Pedido getPedidoByCodigo(int codigoPedido){
         Pedido p=null;
-        this.cargaDatos("SELECT * FROM pedidos WHERE codigo="+codigoPedido);
+        this.cargaDatos("SELECT * FROM pedidos WHERE codigo='"+codigoPedido+"'");
         try {
             while (rs.next()) {
                 String codigo = rs.getString("codigo");
@@ -498,14 +587,14 @@ public class ConnDB {
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getLocalizedMessage());
         }
         return p;
     }
     
     public ArrayList<LineaPedido> getLineasPedidoByCodigoPedido(String codigoPedido){
         ArrayList<LineaPedido> lista=new ArrayList();
-        this.cargaDatos("SELECT * FROM lineas_pedidos WHERE codigo_pedido="+codigoPedido);
+        this.cargaDatos("SELECT * FROM lineas_pedidos WHERE codigo_pedido='"+codigoPedido+"'");
         try {
             while (rs.next()) {
                 Articulo articulo=this.getArticuloByCodigo(rs.getString("codigo_articulo"));
@@ -515,11 +604,63 @@ public class ConnDB {
                 lista.add(lp);
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getLocalizedMessage());
         }
         return lista;
     }
     
+    /**
+     * Muestra los datos de la tabla articulos
+     */
+    public void mostrarDatosArticulos() {
+        try {
+            while (rs.next()) {
+                String codigo = rs.getString("codigo");
+                String descripcion = rs.getString("descripcion");
+                String stock = rs.getString("stock");
+                String precio = rs.getString("precio");
+                String tipoArticulo = rs.getString("tipo_articulo");
+                System.out.println(codigo + "," + descripcion + "," + stock + "," + precio + "," + tipoArticulo);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Muestra los datos de la tabla clientes
+     */
+    public void mostrarDatosClientes() {
+        try {
+            while (rs.next()) {
+                String codigo = rs.getString("codigo");
+                String nombre = rs.getString("nombre");
+                String direccion = rs.getString("direccion");
+                String telefono = rs.getString("telefono");
+                System.out.println(codigo + "," + nombre + "," + direccion + "," + telefono);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     
+    /**
+     * Muestra los datos de la tabla trabajadores
+     */
+    public void mostrarDatosTrabajadores() {
+        try {
+            while (rs.next()) {
+                String codigo = rs.getString("codigo");
+                String nombre = rs.getString("nombre");
+                String direccion = rs.getString("direccion");
+                String telefono = rs.getString("telefono");
+                String salario = rs.getString("salario");
+                System.out.println(codigo + "," + nombre + "," + direccion + "," + telefono + "," + salario);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
 }

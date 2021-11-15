@@ -1,81 +1,110 @@
 package acuario;
 
+import common.ConnDB;
 import java.util.ArrayList;
 
 /**
  * Clase para crear un objeto tipo Estanque
  * @author Angel, Jose, Miguel, Paulo
  */
-class Estanque {
+public class Estanque {
     
     // Maximo de tiburones por estanque
+
+    /**
+     *
+     */
     public final int maxTiburones = 6;
     
-    // Código de la sala
+    // Código de estanque
     private String codigo;
     
-    // Nombre de la sala
+    // Nombre de estanque
     private String nombre;
     
-    // Tipo de la sala
+    // Tipo de estanque
     private String tipo;
+    
+    // Sala a la que pertenece
+    private Sala sala;
     
     // Tiburones que tiene cada estanque
     private ArrayList<Tiburon> tiburones;
+    
+    private ArrayList<Planta> plantas;
 
     /**
      * Constructor por defecto
      * @param codigo Identificador único de cada estanque
      * @param nombre Nombre de cada estanque
      * @param tipo En que está especializada el estanque
+     * @param sala Sala a la que petenece
      */
-    public Estanque(String codigo, String nombre, String tipo) {
+    
+    private final ConnDB bbdd=ConnDB.getInstance();
+    
+    public Estanque(String codigo, String nombre, String tipo, String codigo_sala) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.tipo = tipo;
+        this.sala = bbdd.getSalaByCodigo(codigo_sala);
         this.tiburones = new ArrayList<Tiburon>();
     }
 
     /**
-     * @return String Devuélve el tipo de la sala
+     * @return String Devuelve el tipo de estanque
      */
     public String getTipo() {
         return tipo;
     }
 
     /**
-     * @param tipo Se le asigna un tipo a la sala
+     * @param tipo Tipo de estanque
      */
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
     
     /**
-     * @return String Devuélve el código de la sala
+     * @return String Devuélve el código del estanque
      */
     public String getCodigo() {
         return codigo;
     }
 
     /**
-     * @param codigo Se le asigna un código a la sala
+     * @param codigo Codigo del estanque
      */
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 
     /**
-     * @return String Devuélve el nombre de la sala
+     * @return String Devuelve el nombre del estanque
      */
     public String getNombre() {
         return nombre;
     }
 
     /**
-     * @param nombre Se le asigna un nombre a la sala
+     * @param nombre Nombre del estanque
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    /**
+     * @param sala Sala a la que pertence el estanque
+     */
+    public void setSala(Sala sala) {
+        this.sala = sala;
+    }
+
+    /**
+     * @return Sala Sala a la que pertenece el estanque
+     */
+    public Sala getSala() {
+        return sala;
     }
     
     /**
@@ -84,12 +113,27 @@ class Estanque {
     public ArrayList<Tiburon> getTiburones() {
         return tiburones;
     }
-
+    
     /**
      * @param tiburon Se le añade un tiburon al estanque
      */
     public void agregarTiburones(Tiburon tiburon) {
         this.tiburones.add(tiburon);
+    }
+
+    
+    /**
+     * @return ArrayList Devuélve un arraylist con las plantas del estanque
+     */
+    public ArrayList<Planta> getPlantas() {
+        return plantas;
+    }
+    
+    /**
+     * @param planta Se le añade una planta al estanque
+     */
+    public void agregarPlanta(Planta planta) {
+        this.plantas.add(planta);
     }
 
 }

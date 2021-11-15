@@ -2,6 +2,7 @@
 package tienda;
 
 import common.ConnDB;
+import java.util.Date;
 
 public class Tienda {
     
@@ -20,8 +21,8 @@ public class Tienda {
     }
     
     // Este método muestra todos los datos almacenados en la BBDD
-    public void dataDump(){
-        System.out.println("\n\n****************************\n\t\t CONTENIDOS BBDD TIENDA");
+    public void mostrarTodo(){
+        System.out.println("\n\n--- INVENTARIO DE LA TIENDA ---");
         System.out.println("\nDATOS DE ARTÍCULOS");
         bbdd.cargaDatos("SELECT * FROM articulos");
         bbdd.mostrarDatosArticulos();
@@ -42,7 +43,7 @@ public class Tienda {
      * y se imprimirá una factura (que será volcada a un fichero de texto)
      */
     public void test(){
-        System.out.println("\n\n****************************\n\t\t TEST TIENDA");
+        System.out.println("\n\n\n************************************************\n\t\t TEST TIENDA");
         
         System.out.println("Llega un cliente, un trabajador le atiende y pone 3 artículos en su carrito de compra");
         Cliente c = bbdd.getClienteRandom();
@@ -71,7 +72,7 @@ public class Tienda {
             }
 
         }
-        System.out.println("****************************************\n");
+        System.out.println("************************************************\n");
         System.out.println("Para proceder a la venta, obtenemos el precio de cada articulo del carrito y pagamos");
         // Recorremos el carrito con un foreach y acumulamos el precio de cada articulo
         double importeTotal = 0;
@@ -81,7 +82,7 @@ public class Tienda {
         
         // Llamamos al metodo pagarCompra() del objeto cliente
         c.pagarCompra(importeTotal);
-        System.out.println("************************************************");
+        System.out.println("************************************************\n");
 
         System.out.println("Suponemos que el cliente quiere una factura");
         /* Llamamos al metodo generarFactura de nuestro objeto trabajador

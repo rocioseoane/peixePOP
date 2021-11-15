@@ -1,19 +1,26 @@
 package acuario;
 
-import common.Especie;
+import common.ConnDB;
 
 /**
  *
  * @author Developer
  */
-class Planta extends Especie{
+public class Planta extends Especie{
     
+    private final ConnDB bbdd=ConnDB.getInstance();
     private String medioDeVida;
-    
-    public Planta(String medioDeVida, String codigo, String nombre) {
+    private Sala sala=null;
+
+    public Planta(String medioDeVida, String codigo, String nombre, String codigo_sala, String codigo_estanque) {
         super(codigo, nombre);
         this.medioDeVida=medioDeVida;
-
+        if (!codigo_sala.equals("")){
+            this.setSala(bbdd.getSalaByCodigo(codigo_sala));
+        }
+        if (!codigo_estanque.equals("")){
+            this.setEstanque(bbdd.getEstanqueByCodigo(codigo_estanque));
+        }
     }
 
     /**
@@ -28,6 +35,14 @@ class Planta extends Especie{
      */
     public void setMedioDeVida(String medioDeVida) {
         this.medioDeVida = medioDeVida;
+    }
+    
+    public Sala getSala() {
+        return sala;
+    }
+
+    public void setSala(Sala sala) {
+        this.sala = sala;
     }
     
 }

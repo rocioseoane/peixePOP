@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Modela una Factura, que contiene los datos del encabezamiento y una lista
@@ -34,7 +35,7 @@ public class Factura {
     public Factura(int numero, String codigoCliente, String fecha, double importeTotal, boolean pagado) {
         this.numero=numero;
         this.codigoCliente = codigoCliente;
-        this.fecha = fecha;
+        this.fecha=fecha;
         this.importeTotal = importeTotal;
         this.pagado = pagado;
     }
@@ -46,6 +47,7 @@ public class Factura {
      * @param pagado        Un valor lógico que representa si la factura ha sido abonada
      */
     public Factura (String codigoCliente, double importeTotal, boolean pagado){
+        this.fecha =  Calendar.getInstance().getTime().toString();
         this.codigoCliente=codigoCliente;
         this.importeTotal=importeTotal;
         this.pagado=pagado;

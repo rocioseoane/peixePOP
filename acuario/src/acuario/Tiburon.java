@@ -1,17 +1,19 @@
 package acuario;
 
-import common.Especie;
+import common.ConnDB;
 
 /**
  * Clase para crear un objeto tipo Tiburón
  * @author Angel, Jose, Miguel, Paulo
  */
-class Tiburon extends Especie{
+public class Tiburon extends Especie{
     
+    private final ConnDB bbdd=ConnDB.getInstance();
     private String tamano;
     
-    public Tiburon(String tamano, String codigo, String nombre){
+    public Tiburon(String codigo, String nombre, String tamano, String codigo_estanque){
         super(codigo, nombre);
+        this.setEstanque(bbdd.getEstanqueByCodigo(codigo_estanque));
         this.tamano=tamano;
     }
     

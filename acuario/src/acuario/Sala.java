@@ -6,14 +6,14 @@ import java.util.ArrayList;
  * Clase para crear un objeto tipo Sala
  * @author Angel, Jose, Miguel, Paulo
  */
-class Sala {
+public class Sala {
     
     // Maximo de estanques por sala
     public final int maxEstanques = 2;
     
     // Código de la sala
     private String codigo;
-    
+
     // Nombre de la sala
     private String nombre;
     
@@ -22,6 +22,7 @@ class Sala {
     
     // Estanque que tiene la sala
     private ArrayList<Estanque> estanques;
+    private Planta planta=null;
 
     /**
      * Constructor por defecto
@@ -91,5 +92,14 @@ class Sala {
     public void agregarEstanques(Estanque estanque) {
         this.estanques.add(estanque);
     }
+    
+    public Planta getPlanta() {
+        return planta;
+    }
+
+    public void agregarPlanta(Planta planta) {
+        this.planta = planta;
+    }
+    
     
 }

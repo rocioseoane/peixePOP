@@ -1,4 +1,6 @@
-package common;
+package acuario;
+
+import acuario.Estanque;
 
 /**
  *
@@ -8,6 +10,7 @@ public abstract class Especie {
     
     private String codigo;
     private String descripcion;
+    private Estanque estanque=null;
     
     public Especie(String codigo, String descripcion) {
         this.codigo = codigo;
@@ -40,6 +43,20 @@ public abstract class Especie {
      */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    /**
+     * @return String Devuelve el estanque en el que se encuentra
+     */
+    public Estanque getEstanque() {
+        return estanque;
+    }
+
+    /**
+     * @param estanque Estanque en el que se encuentra
+     */
+    public void setEstanque(Estanque estanque) {
+        this.estanque=estanque;
     }
 
 }
