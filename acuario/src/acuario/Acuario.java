@@ -24,11 +24,6 @@ public class Acuario {
     public Acuario(String nombre) {
         this.bbdd=ConnDB.getInstance();
         this.nombre=nombre;
-//        this.totalSalas = bbdd.getNumeroFilas('S');
-//        this.totalEstanques = bbdd.getNumeroFilas('E');
-//        this.totalTiburones = bbdd.getNumeroFilas('T');
-//        this.totalPlantas = bbdd.getNumeroFilas('P');
-//        ma = new MetodosAuxiliares();
     }
     
     public void test() {
@@ -43,22 +38,19 @@ public class Acuario {
         asignarJerarquia();
         System.out.println(">>>>>>>>>>> Inventario configurado");        
         // Se muestra como está configurado el acuario
-        System.out.println(">>>>>>>>>>> Mostrando configuración...");
-        mostrarJeraquia();
+//        System.out.println(">>>>>>>>>>> Mostrando configuración...");
+//        mostrarJeraquia();
         System.out.println("******************\n");
     }
     
     public void cargarInventario() {
-        this.inventarioSalas=bbdd.getSalas();
+        inventarioSalas=bbdd.getSalas();
         System.out.println(">>>>>>>>>>> Salas cargadas");
-        this.inventarioEstanques=bbdd.getEstanques();
+        inventarioEstanques=bbdd.getEstanques();
         System.out.println(">>>>>>>>>>> Estanques cargados");
-        for (Estanque e : inventarioEstanques){
-            System.out.println(e.getNombre());
-        }
-        this.inventarioTiburones=bbdd.getTiburones();
+        inventarioTiburones=bbdd.getTiburones();
         System.out.println(">>>>>>>>>>> Tiburones cargados");
-        this.inventarioPlantas=bbdd.getPlantas();
+        inventarioPlantas=bbdd.getPlantas();
         System.out.println(">>>>>>>>>>> Plantas cargadas");
     }
     /**
@@ -130,11 +122,9 @@ public class Acuario {
     private void asignarEstanquesACadaSala() {
         for (Estanque e: inventarioEstanques){
             String codSala=e.getSala().getCodigo();
-            System.out.println("Configurando estanque: "+e.getNombre());
             for (Sala s : inventarioSalas){
                 if (s.getCodigo().equals(codSala)) {
                     s.agregarEstanques(e);
-                    System.out.println("Añadido a sala: "+s.getNombre());
                 }
             }
         }
