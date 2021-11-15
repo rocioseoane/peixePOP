@@ -662,5 +662,75 @@ public class ConnDB {
             System.out.println(e.getMessage());
         }
     }
+    
+    /**
+     * Muestra los datos de la tabla factura
+     */
+    public void mostrarDatosFacturas() {
+        try {
+            while (rs.next()) {
+                String codigo = rs.getString("codigo");
+                String codigoCliente = rs.getString("codigo_cliente");
+                String fecha = rs.getString("fecha");
+                String importeTotal = rs.getString("importe_total");
+                String pagada = rs.getString("pagada");
+                System.out.println(codigo + "," + codigoCliente + "," + fecha + "," + importeTotal + "," + pagada);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    /**
+     * Muestra los datos de la tabla lineas_facturas
+     */
+    public void mostrarDatosLineasFacturas() {
+        try {
+            while (rs.next()) {
+                String codigo = rs.getString("codigo");
+                String cantidad = rs.getString("cantidad");
+                String descripcion = rs.getString("descripcion");
+                String precio = rs.getString("precio");
+                String codigoFactura = rs.getString("codigo_factura");
+                System.out.println(codigo + "," + cantidad + "," + descripcion + "," + precio + "," + codigoFactura);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    /**
+     * Muestra los datos de la tabla lineas_facturas
+     */
+    public void mostrarDatosLineasPedidos() {
+        try {
+            while (rs.next()) {
+                String codigo = rs.getString("codigo");
+                String codigoArticulo = rs.getString("codigo_articulo");
+                String cantidad = rs.getString("cantidad");
+                String precio = rs.getString("precio");
+                String codigoPedido = rs.getString("codigo_pedido");
+                System.out.println(codigo + "," + codigoArticulo + "," + cantidad + "," + precio + "," + codigoPedido);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    /**
+     * Muestra los datos de la tabla pedidos
+     */
+    public void mostrarDatosPedidos() {
+        try {
+            while (rs.next()) {
+                String codigo = rs.getString("codigo");
+                String fecha = rs.getString("fecha");
+                String recibido = rs.getString("recibido");
+                System.out.println(codigo + "," + fecha + "," + recibido);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
 }
