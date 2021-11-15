@@ -48,6 +48,7 @@ Se puede clonar y examinar el código.Si los cambios se consideran oportunos, se
       y las facturas se identifican con un código y contienen los datos del cliente, los artículos solicitados,
       la cantidad, el precio unitario y el importe total.
      
-     
-     
+### Modelo entidad-relación Base de Datos utilizada.
+  ![alt text](https://github.com/aandradeb/peixePOP/blob/main/entidad-relacion.jpg?raw=true)
+
      
