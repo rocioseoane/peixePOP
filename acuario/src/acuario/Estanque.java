@@ -29,9 +29,9 @@ public class Estanque {
     private Sala sala;
     
     // Tiburones que tiene cada estanque
-    private ArrayList<Tiburon> tiburones;
+    private ArrayList<Tiburon> tiburones=new ArrayList();
     
-    private ArrayList<Planta> plantas;
+    private ArrayList<Planta> plantas=new ArrayList();
 
     /**
      * Constructor por defecto
@@ -43,12 +43,11 @@ public class Estanque {
     
     private final ConnDB bbdd=ConnDB.getInstance();
     
-    public Estanque(String codigo, String nombre, String tipo, String codigo_sala) {
+    public Estanque(String codigo, String tipo, String nombre, String codigo_sala) {
         this.codigo = codigo;
-        this.nombre = nombre;
         this.tipo = tipo;
+        this.nombre = nombre;
         this.sala = bbdd.getSalaByCodigo(codigo_sala);
-        this.tiburones = new ArrayList<Tiburon>();
     }
 
     /**

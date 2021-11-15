@@ -1,7 +1,5 @@
 package acuario;
 
-import acuario.Estanque;
-
 /**
  *
  * @author emilio
@@ -12,6 +10,11 @@ public abstract class Especie {
     private String descripcion;
     private Estanque estanque=null;
     
+    /**
+     * Constructor
+     * @param codigo Codigo identificativo del objeto
+     * @param descripcion Nombre descriptivo del objeto
+     */
     public Especie(String codigo, String descripcion) {
         this.codigo = codigo;
         this.descripcion = descripcion;

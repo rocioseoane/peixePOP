@@ -110,7 +110,7 @@ public class ConnDB {
                 String tipo=rs.getString("tipo");
                 String nombre=rs.getString("nombre");
                 String codigo_sala=rs.getString("codigo_sala");
-                lista.add(new Estanque(codigo,nombre,tipo,codigo_sala));
+                lista.add(new Estanque(codigo,tipo,nombre,codigo_sala));
             }
         } catch (SQLException e){
             System.out.println(e.getLocalizedMessage());
@@ -142,10 +142,10 @@ public class ConnDB {
         try{
             while (rs.next()) {
                 String codigo=rs.getString("codigo");
-                String tamano=rs.getString("tamano");
                 String nombre=rs.getString("nombre");
+                String tamano=rs.getString("tamano");
                 String codigo_estanque=rs.getString("codigo_estanque");
-                lista.add(new Tiburon(tamano,codigo,nombre,codigo_estanque));
+                lista.add(new Tiburon(codigo,nombre,tamano,codigo_estanque));
             }
         } catch (SQLException e){
             System.out.println(e.getLocalizedMessage());
@@ -162,17 +162,17 @@ public class ConnDB {
                 String codigo=rs.getString("codigo");
                 String medioDeVida=rs.getString("medio_de_vida");
                 String nombre=rs.getString("nombre");
-                String estanque="";
-                String sala="";
+                String cod_estanque="";
+                String cod_sala="";
                 switch (medioDeVida){
                     case "Acuatico":
-                        estanque=rs.getString("codigo_estanque");
+                        cod_estanque=rs.getString("codigo_estanque");
                         break;
                     case "Terrestre":
-                        sala = rs.getString("codigo_sala");
+                        cod_sala = rs.getString("codigo_sala");
                         break;
                 }
-                lista.add(new Planta(medioDeVida,codigo,nombre,sala,estanque));
+                lista.add(new Planta(medioDeVida,codigo,nombre,cod_estanque,cod_sala));
             }
         } catch (SQLException e){
             System.out.println(e.getLocalizedMessage());

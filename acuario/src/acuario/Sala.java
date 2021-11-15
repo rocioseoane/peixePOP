@@ -21,7 +21,7 @@ public class Sala {
     private String tipo;
     
     // Estanque que tiene la sala
-    private ArrayList<Estanque> estanques;
+    private ArrayList<Estanque> estanques = new ArrayList();
     private Planta planta=null;
 
     /**
@@ -34,7 +34,6 @@ public class Sala {
         this.codigo = codigo;
         this.nombre = nombre;
         this.tipo = tipo;
-        this.estanques = new ArrayList<Estanque>();
     }
 
     /**

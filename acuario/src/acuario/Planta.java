@@ -12,14 +12,14 @@ public class Planta extends Especie{
     private String medioDeVida;
     private Sala sala=null;
 
-    public Planta(String medioDeVida, String codigo, String nombre, String codigo_sala, String codigo_estanque) {
+    public Planta(String medioDeVida, String codigo, String nombre, String codigo_estanque, String codigo_sala) {
         super(codigo, nombre);
         this.medioDeVida=medioDeVida;
         if (!codigo_sala.equals("")){
-            this.setSala(bbdd.getSalaByCodigo(codigo_sala));
+            setSala(bbdd.getSalaByCodigo(codigo_sala));
         }
         if (!codigo_estanque.equals("")){
-            this.setEstanque(bbdd.getEstanqueByCodigo(codigo_estanque));
+            setEstanque(bbdd.getEstanqueByCodigo(codigo_estanque));
         }
     }
 
