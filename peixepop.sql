@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: easybyte.club:2223:3306
--- Tiempo de generación: 14-11-2021 a las 11:38:50
+-- Tiempo de generación: 16-11-2021 a las 10:55:49
 -- Versión del servidor: 8.0.27
 -- Versión de PHP: 7.4.20
 
@@ -131,6 +131,15 @@ CREATE TABLE `factura` (
   `pagada` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Volcado de datos para la tabla `factura`
+--
+
+INSERT INTO `factura` (`codigo`, `codigo_cliente`, `fecha`, `importe_total`, `pagada`) VALUES
+(1, '874306062006', '2020-05-08 16:09:39', 207.75, 1),
+(2, '556431011978', '2021-05-25 16:09:39', 407, 0),
+(3, '788023011988', '2021-11-02 23:59:39', 72.16, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -145,6 +154,19 @@ CREATE TABLE `lineas_facturas` (
   `codigo_factura` bigint UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Volcado de datos para la tabla `lineas_facturas`
+--
+
+INSERT INTO `lineas_facturas` (`codigo`, `cantidad`, `descripcion`, `precio`, `codigo_factura`) VALUES
+(1, 2, 'GoldFish', 5, 1),
+(2, 1, 'Cladophora 3-4cm', 2.75, 1),
+(3, 1, 'Termocalentadores', 195, 1),
+(4, 25, 'Anubia común', 15, 2),
+(5, 2, 'Filtros', 16, 2),
+(6, 2, 'Compresor de aire', 10.08, 3),
+(9, 1, 'Aspirador', 52, 3);
+
 -- --------------------------------------------------------
 
 --
@@ -152,12 +174,23 @@ CREATE TABLE `lineas_facturas` (
 --
 
 CREATE TABLE `lineas_pedidos` (
-  `codigo` char(12) NOT NULL,
+  `codigo` bigint UNSIGNED NOT NULL,
   `codigo_articulo` char(12) NOT NULL,
   `cantidad` int NOT NULL,
   `precio` float NOT NULL,
   `codigo_pedido` bigint UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `lineas_pedidos`
+--
+
+INSERT INTO `lineas_pedidos` (`codigo`, `codigo_articulo`, `cantidad`, `precio`, `codigo_pedido`) VALUES
+(1, '6765caon6869', 3, 100.4, 2),
+(2, '8365sakg5048', 5, 50, 1),
+(3, '8469tees6983', 5, 195, 3),
+(4, '7182gros6765', 70, 8.29, 3),
+(5, '8069peos4950', 5, 95, 1);
 
 -- --------------------------------------------------------
 
@@ -170,6 +203,15 @@ CREATE TABLE `pedidos` (
   `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `recibido` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `pedidos`
+--
+
+INSERT INTO `pedidos` (`codigo`, `fecha`, `recibido`) VALUES
+(1, '2021-10-10 12:05:50', 1),
+(2, '2021-10-08 09:25:40', 0),
+(3, '2021-11-13 19:06:47', 0);
 
 -- --------------------------------------------------------
 
@@ -336,6 +378,7 @@ ALTER TABLE `lineas_facturas`
 --
 ALTER TABLE `lineas_pedidos`
   ADD PRIMARY KEY (`codigo`),
+  ADD UNIQUE KEY `codigo` (`codigo`),
   ADD KEY `LINEASPEDIDOS_TIENEN_ARTICULOS` (`codigo_articulo`),
   ADD KEY `PEDIDO_TIENE_LINEASPEDIDOS` (`codigo_pedido`);
 
@@ -381,19 +424,25 @@ ALTER TABLE `trabajadores`
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `codigo` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `codigo` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `lineas_facturas`
 --
 ALTER TABLE `lineas_facturas`
-  MODIFY `codigo` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `codigo` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `lineas_pedidos`
+--
+ALTER TABLE `lineas_pedidos`
+  MODIFY `codigo` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `codigo` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `codigo` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
