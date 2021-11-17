@@ -29,7 +29,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/FlagshipDev/peixePOP">
-    <img src="https://raw.githubusercontent.com/aandradeb/peixePOP/main/acuario-tiburon.jpg" alt="peixePOP" width="80" height="80"/>
+    <img src="https://raw.githubusercontent.com/aandradeb/peixePOP/main/acuario-tiburon.jpg" alt="peixePOP"/>
   </a>
 
   <h3 align="center">PeixePOP - FlagshipDev Fork</h3>
@@ -39,157 +39,70 @@
     <a href="https://github.com/FlagshipDev/peixePOP"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/FlagshipDev/peixePOP">View Demo</a>
-    ·
-    <a href="https://github.com/FlagshipDev/peixePOP/issues">Reportar un Bug</a>
   </p>
 </div>
 
 
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Tabla de contenidos</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">Sobre el proyecto</a>
-      <ul>
-        <li><a href="#built-with">Creado con</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Primeros pasos</a>
-      <ul>
-        <li><a href="#prerequisites">Prerrequisitos</a></li>
-        <li><a href="#installation">Instalación</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Uso</a></li>
-    <li><a href="#contributing">Contribuidores</a></li>
-    <li><a href="#license">Licencia</a></li>
-    <li><a href="#contact">Contacto</a></li>
-  </ol>
-</details>
-
-
-
 <!-- ABOUT THE PROJECT -->
-## Sobre el proyecto
+## ¿Que es una API REST?
 
-[![Spring Boot][product-screenshot]](https://github.com/FlagshipDev/peixePOP)
+[![API-REST][product-screenshot]](https://github.com/FlagshipDev/peixePOP)
 
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
+Las API son conjuntos de definiciones y protocolos que se utilizan para diseñar e integrar el software de las aplicaciones. Suele considerarse como el contrato entre el proveedor de información y el usuario, donde se establece el contenido que se necesita por parte del consumidor (la llamada) y el que requiere el productor (la respuesta).
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should implement DRY principles to the rest of your life :smile:
+Las características de la arquitectura REST brindan una serie de beneficios a las aplicaciones que utilizan este concepto.
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
+Características:
+* Separación entre cliente y servidor:
+    Esto es importante para proteger el almacenamiento de datos, ya que no existe un tratamiento de las reglas comerciales, es decir, solo se intercambia informaciones sea para recuperar datos, o para insertar o eliminar nuevos registros.
+* Más visibilidad, confiabilidad y escalabilidad:
+    Debido a la separación cliente / servidor, hay mucha más facilidad durante el desarrollo de la aplicación. Esto se debe a que se puede escalar fácilmente, ya que no hay dificultad para vincular recursos.
+* Multiplataforma:
+    Las requisiciones HTTP realizadas en API Rest devuelven datos en formato JSON. Cabe mencionar que existen otros posibles formatos de retorno, como XML, sin embargo, JSON es el más utilizado. Por lo tanto, la mayoría de los sitios que trabajan con este modelo reciben este formato de datos.
+    <b>Esta característica es fundamental para el desarrollo de aplicaciones multiplataforma<b>. Eso se debe a que, al recibir los datos en este formato, la camada front-end de la aplicación es capaz de realizar el tratamiento adecuado para mostrar los resultados según el tipo de dispositivo utilizado.
 
-Use the `BLANK_README.md` to get started.
 
-<p align="right">(<a href="#top">back to top</a>)</p>
-
+<p align="right"><a href="#top">Volver al inicio</a></p>
 
 
-### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+### Recursos utilizados
 
-* [Next.js](https://nextjs.org/)
-* [React.js](https://reactjs.org/)
-* [Vue.js](https://vuejs.org/)
-* [Angular](https://angular.io/)
-* [Svelte](https://svelte.dev/)
-* [Laravel](https://laravel.com)
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
+Esta sección enumera los frameworks/bibliotecas principales utilizados para el proyecto.
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+* Gestor de proyectos - [Maven](https://maven.apache.org)
+* Lenguaje - [Java](https://www.java.com/es/)
+* Framework - [Spring Boot](https://spring.io/projects/spring-boot)
 
+<p align="right"><a href="#top">Volver al inicio</a></p>
 
 
 <!-- GETTING STARTED -->
-## Getting Started
+## Para empezar...
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-
-### Installation
-
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/your_username_/Project-Name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
-
-<p align="right">(<a href="#top">back to top</a>)</p>
+Uno de las máximas de la programación es: nunca te fíes de nada que llegue desde el cliente. Por ello, he pensado en la reestructuración de la API creada en PeixePOP y hacerla lo más segura posible. 
+Gracias a una API REST (aunque realmente solo se utilice para lectura de datos) y un back-end bien estructurado, tendremos disponible una arquitectura preparada para implementar cualquier tipo de aplicación en cualquier lenguaje y además, de una forma segura. 
 
 
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
+<p align="right"><a href="#top">Volver al inicio</a></p>
 
 
 <!-- ROADMAP -->
 ## Roadmap
 
-- [x] Add Changelog
-- [x] Add back to top links
-- [ ] Add Additional Templates w/ Examples
-- [ ] Add "components" document to easily copy & paste sections of the readme
-- [ ] Multi-language Support
-    - [ ] Chinese
-    - [ ] Spanish
+- [x] Acuario implementado con Maven
+- [x] Organizado el repositorio
+- [ ] *Pendiente*
+<!--- [ ] *Pendiente*
+- [ ] *Pendiente*
+    - [ ] *Pendiente*
+    - [ ] *Pendiente*
+    -->
 
-See the [open issues](https://github.com/FlagshipDev/peixePOP/issues) for a full list of proposed features (and known issues).
+Echa un vistazo a [problemas abiertos](https://github.com/FlagshipDev/peixePOP/issues) para obtener una lista completa de las características propuestas (y problemas conocidos).
 
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
+<p align="right"><a href="#top">Volver al inicio</a></p>
 
 
 <!-- LICENSE -->
@@ -197,19 +110,7 @@ Don't forget to give the project a star! Thanks again!
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- CONTACT -->
-## Contact
-
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
-
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
+<p align="right"><a href="#top">Volver al inicio</a></p>
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
