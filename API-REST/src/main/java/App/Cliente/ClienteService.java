@@ -1,4 +1,4 @@
-package Cliente;
+package App.Cliente;
 
 public class ClienteService {
 }

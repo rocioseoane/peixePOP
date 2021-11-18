@@ -1,4 +1,4 @@
-package Cliente;
+package App.Cliente;
 
 class ClienteNotFoundException extends RuntimeException {
 
