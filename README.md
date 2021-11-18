@@ -87,27 +87,28 @@ un "Run".
 
  <b>Jerarquía de archivos y clases</b>
  La jerarquía seguida para el correcto funcionamiento y orden de la aplicación es la siguiente:
-     +- App
-         +- App.java
-         |
-         +- Cliente
-         |   +- Cliente.java
-         |   +- ClienteController.java
-         |   +- ClienteNotFoundAdvice.java
-         |   +- ClienteNotFoundException.java
-         |   +- ClienteRepository.java
-         |   +- ClienteService.java
+<pre><code>+- App
+     +- App.java
+     |
+     +- Cliente
+     |  +- Cliente.java
+     |   +- ClienteController.java
+     |   +- ClienteNotFoundAdvice.java
+     |   +- ClienteNotFoundException.java
+     |   +- ClienteRepository.java
+     |   +- ClienteService.java&gt;
+</code></pre>
   
 Tenemos un paquete principal "App", con la clase main de la aplicación. Es importante que todo el código esté jerárquicamente por debajo del paquete principal "App", sino, Spring no identificará los controladores y servicios.
 El paquete Cliente mostrado anteriormente constituye el modelo a seguir para implementar nuevas tablas y controladores de estas de la API.
 
 Ahora bien, ¿Que hacen todas esas clases?
 
-  -> Cliente.java - Es un modelo de la entidad. Es básicamente una clase que plasma de manera exacta los componentes de nuestra tabla de la base de datos.
-  -> ClienteRepository.java - Es un interfaz que extienda "JpaRepository", la cual nos incluye todas las queries SQL de un CRUD*.
-  -> ClienteController.java - Es el controlador que gestiona las peticiones HTTP a nuestra aplicación.
-  -> ClienteService.java - Es la clase donde generamos los métodos con las queries que no vienen por defecto en el repository. En muchos casos estará vacía, ya que no siempre es                            necesario implementar nuevos consultas SQL.
-  -> ClienteNotFoundAdvice.java y ClienteNotFoundException.java - Son las excepciones que saltan en caso de que la petición de un resultado no esperado. Ejemplo: Se pide un                                                                       cliente según un código inválido => Saltaría una excepción "Client {codigo} not found".
+  * Cliente.java - Es un modelo de la entidad. Es básicamente una clase que plasma de manera exacta los componentes de nuestra tabla de la base de datos.
+  * ClienteRepository.java - Es un interfaz que extienda "JpaRepository", la cual nos incluye todas las queries SQL de un CRUD*.
+  * ClienteController.java - Es el controlador que gestiona las peticiones HTTP a nuestra aplicación.
+  * ClienteService.java - Es la clase donde generamos los métodos con las queries que no vienen por defecto en el repository. En muchos casos estará vacía, ya que no siempre es                            necesario implementar nuevos consultas SQL.
+  * ClienteNotFoundAdvice.java y ClienteNotFoundException.java - Son las excepciones que saltan en caso de que la petición de un resultado no esperado. Ejemplo: Se pide un                                                                       cliente según un código inválido => Saltaría una excepción "Client {codigo} not found".
   
 
 <p align="right"><a href="#top">Volver al inicio</a></p>
