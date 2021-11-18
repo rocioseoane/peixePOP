@@ -1,4 +1,4 @@
-package App.Cliente;
+package App.Sala;
 
 
 import org.junit.jupiter.api.Assertions;
@@ -13,15 +13,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class ClienteControllerTest {
+public class SalaControllerTest {
 
     @Autowired
     private MockMvc mvc;
 
     @Test
-    public void testClientedById() throws Exception {
-        String expectedResponse = "{\"codigo\":\"323419092000\",\"nombre\":\"Lucas\",\"direccion\":\"Ourense\",\"telefono\":\"888888888\"}";
-        String responseString = mvc.perform(get("/clientes/323419092000"))
+    public void testSaladById() throws Exception {
+        String expectedResponse = "{\"codigo\":\"exor7869samo\",\"nombre\":\"Sala Nemo\",\"tipo\":\"Exterior\"}";
+        String responseString = mvc.perform(get("/salas/exor7869samo"))
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse()
@@ -31,18 +31,11 @@ public class ClienteControllerTest {
     }
 
     @Test
-    public void testClienteFindAll() throws Exception {
-        mvc.perform(get("/clientes"))
+    public void testSalaFindAll() throws Exception {
+        mvc.perform(get("/salas"))
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse();
     }
 
-    @Test
-    public void testClienteRandom() throws Exception {
-        mvc.perform(get("/clientes/random"))
-                .andExpect(status().isOk())
-                .andReturn()
-                .getResponse();
-    }
 }

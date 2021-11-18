@@ -22,7 +22,7 @@ class ClienteController {
 
     @GetMapping("/")
     public @ResponseBody String greeting() {
-        return "API REST - PeixePOP";
+        return "API Running - PeixePOP";
     }
 
     @GetMapping("/clientes")
