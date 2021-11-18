@@ -79,31 +79,38 @@ Esta sección enumera los frameworks/bibliotecas principales utilizados para el 
 
 
 <!-- GETTING STARTED -->
-## Para empezar...
+## Explicación sencilla del funcionamiento de la API-REST
 
-Uno de las máximas de la programación es: nunca te fíes de nada que llegue desde el cliente. Por ello, he pensado en la reestructuración de la API creada en PeixePOP y hacerla lo más segura posible. 
-Gracias a una API REST (aunque realmente solo se utilice para lectura de datos) y un back-end bien estructurado, tendremos disponible una arquitectura preparada para implementar cualquier tipo de aplicación en cualquier lenguaje y además, de una forma segura. 
+Java Spring Boot es una de las herramientas principales del ecosistema de desarrollo web backend con Java. Con Spring Boot nos olvidamos de tener que desplegar 
+artefactos Jar o War de manera independiente, porque nos provee con una serie de contenedores web servlet para que se despliegue nuestra aplicación automáticamente solo con
+un "Run".
 
+ <b>Jerarquía de archivos y clases</b>
+ La jerarquía seguida para el correcto funcionamiento y orden de la aplicación es la siguiente:
+     +- App
+         +- App.java
+         |
+         +- Cliente
+         |   +- Cliente.java
+         |   +- ClienteController.java
+         |   +- ClienteNotFoundAdvice.java
+         |   +- ClienteNotFoundException.java
+         |   +- ClienteRepository.java
+         |   +- ClienteService.java
+  
+Tenemos un paquete principal "App", con la clase main de la aplicación. Es importante que todo el código esté jerárquicamente por debajo del paquete principal "App", sino, Spring no identificará los controladores y servicios.
+El paquete Cliente mostrado anteriormente constituye el modelo a seguir para implementar nuevas tablas y controladores de estas de la API.
+
+Ahora bien, ¿Que hacen todas esas clases?
+
+  -> Cliente.java - Es un modelo de la entidad. Es básicamente una clase que plasma de manera exacta los componentes de nuestra tabla de la base de datos.
+  -> ClienteRepository.java - Es un interfaz que extienda "JpaRepository", la cual nos incluye todas las queries SQL de un CRUD*.
+  -> ClienteController.java - Es el controlador que gestiona las peticiones HTTP a nuestra aplicación.
+  -> ClienteService.java - Es la clase donde generamos los métodos con las queries que no vienen por defecto en el repository. En muchos casos estará vacía, ya que no siempre es                            necesario implementar nuevos consultas SQL.
+  -> ClienteNotFoundAdvice.java y ClienteNotFoundException.java - Son las excepciones que saltan en caso de que la petición de un resultado no esperado. Ejemplo: Se pide un                                                                       cliente según un código inválido => Saltaría una excepción "Client {codigo} not found".
+  
 
 <p align="right"><a href="#top">Volver al inicio</a></p>
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-- [x] Acuario implementado con Maven
-- [x] Organizado el repositorio
-- [ ] *Pendiente*
-<!--- [ ] *Pendiente*
-- [ ] *Pendiente*
-    - [ ] *Pendiente*
-    - [ ] *Pendiente*
-    -->
-
-Echa un vistazo a [problemas abiertos](https://github.com/FlagshipDev/peixePOP/issues) para obtener una lista completa de las características propuestas (y problemas conocidos).
-
-<p align="right"><a href="#top">Volver al inicio</a></p>
-
 
 <!-- LICENSE -->
 ## License
