@@ -1,6 +1,5 @@
 package acuario;
 
-import acuario.*;
 import common.ConnDB;
 import java.util.ArrayList;
 
