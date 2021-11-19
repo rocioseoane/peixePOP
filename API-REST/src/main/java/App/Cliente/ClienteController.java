@@ -35,9 +35,4 @@ class ClienteController {
         return repository.findById(codigo)
                 .orElseThrow(() -> new ClienteNotFoundException(codigo));
     }
-
-    @GetMapping("/clientes/random")
-    String random() {
-        return "**Pendiente**";
-    }
 }

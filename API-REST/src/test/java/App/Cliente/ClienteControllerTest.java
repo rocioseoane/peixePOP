@@ -37,12 +37,4 @@ public class ClienteControllerTest {
                 .andReturn()
                 .getResponse();
     }
-
-    @Test
-    public void testClienteRandom() throws Exception {
-        mvc.perform(get("/clientes/random"))
-                .andExpect(status().isOk())
-                .andReturn()
-                .getResponse();
-    }
 }
