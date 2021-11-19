@@ -3,7 +3,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name="factura")
+@Table(name="facturas")
 public class Factura {
     @Id
     @Column(name = "codigo", nullable = false, length = 12)
