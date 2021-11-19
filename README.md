@@ -91,7 +91,7 @@ un "Run".
      +- App.java
      |
      +- Cliente
-     |  +- Cliente.java
+     |   +- Cliente.java
      |   +- ClienteController.java
      |   +- ClienteNotFoundAdvice.java
      |   +- ClienteNotFoundException.java
