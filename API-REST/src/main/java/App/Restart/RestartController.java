@@ -1,5 +1,6 @@
 package App.Restart;
 
+import App.App;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +13,7 @@ public class RestartController {
 
     @PostMapping("/restart")
     public void restart() {
-        Application.restart();
+        App.restart();
     }
 
     @PostMapping("/restartApp")
