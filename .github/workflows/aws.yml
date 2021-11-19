@@ -30,5 +30,4 @@ jobs:
           
             #Now we have got the access of EC2 and we will start the deploy .
             #cd home/ubuntu/peixePOP/
-            #git pull https://${{secrets.TOKEN}}@github.com/FlagshipDev/peixePOP.git
-            git pull
+            git pull https://${{secrets.TOKEN}}@github.com/FlagshipDev/peixePOP.git
