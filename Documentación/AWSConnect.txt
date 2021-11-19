@@ -1,0 +1,7 @@
+- Conexión a la instancia EC2 de AWS creada para la app.
+	-> Se ha de localizar la clave ssh en API-REST
+	-> Comando: ssh -i "ubuntu_aws.pem" ubuntu@ec2-15-188-62-79.eu-west-3.compute.amazonaws.com
+
+- IP de la instacia: http://15.188.62.79:8080/api
+
+
