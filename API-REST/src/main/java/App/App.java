@@ -8,7 +8,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
 public class App {
-
     @Autowired
     private static ConfigurableApplicationContext context;
 
