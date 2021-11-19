@@ -5,15 +5,7 @@ on:
     branches: [ main ]
 
 jobs:
-#First we will see the application build or not , then we will deploy in EC2
-  build:
-    runs-on: ubuntu-latest
-    
-    steps:
-    - uses: actions/checkout@v2
-
   Deploy:
-    needs: build
     runs-on: ubuntu-latest
     
     steps:
@@ -30,4 +22,6 @@ jobs:
           
             #Now we have got the access of EC2 and we will start the deploy .
             #cd home/ubuntu/peixePOP/
-            git pull https://${{secrets.TOKEN}}@github.com/FlagshipDev/peixePOP.git
+            git status
+            git pull
+            #git pull https://${{secrets.TOKEN}}@github.com/FlagshipDev/peixePOP.git
