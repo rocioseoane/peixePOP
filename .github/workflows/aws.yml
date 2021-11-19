@@ -33,5 +33,4 @@ jobs:
             #git pull https://${{secrets.TOKEN}}@github.com/FlagshipDev/peixePOP.git
             git checkout main &&
             git fetch --all &&
-            git reset --hard origin/main &&
-            git pull origin main
+            git pull
