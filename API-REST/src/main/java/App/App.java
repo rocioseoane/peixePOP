@@ -13,7 +13,7 @@ public class App {
         SpringApplication.run(App.class, args);
     }
 
-    public static void restartThread() {
+    public static void restart() {
         ApplicationArguments args = context.getBean(ApplicationArguments.class);
 
         Thread thread = new Thread(() -> {

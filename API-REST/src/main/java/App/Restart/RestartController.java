@@ -10,6 +10,6 @@ public class RestartController {
 
     @PostMapping("/restart")
     public void restart() {
-        App.restartThread();
+        App.restart();
     }
 }
