@@ -29,5 +29,5 @@ jobs:
           ssh -T -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME}
           
             #Now we have got the access of EC2 and we will start the deploy .
-            cd peixePOP/
+            cd home/ubuntu/peixePOP/
             git pull https://${{secrets.TOKEN}}@github.com/FlagshipDev/peixePOP.git
