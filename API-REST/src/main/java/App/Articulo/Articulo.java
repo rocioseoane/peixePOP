@@ -1,8 +1,12 @@
 package App.Articulo;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-@Table(name="articulos")
+@Table(name = "articulos")
 public class Articulo {
     @Id
     @Column(name = "codigo", nullable = false, length = 12)

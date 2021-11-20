@@ -1,10 +1,14 @@
 package App.Cliente;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 // Un modelo sirve para mapear la clase, es decir, Spring plasmará la clase con sus atributos como una tabla en la BBDD.
 // En este paquete tenemos nuestro clase Cliente.java y utilizaremos las @anotaciones JPA para relacionarla con nuestra tabla clientes.
 @Entity
-@Table(name="clientes")
+@Table(name = "clientes")
 public class Cliente {
     @Id
     @Column(name = "codigo", nullable = false, length = 12)

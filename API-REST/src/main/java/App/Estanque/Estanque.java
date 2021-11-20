@@ -1,8 +1,12 @@
 package App.Estanque;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-@Table(name="estanques")
+@Table(name = "estanques")
 public class Estanque {
     @Id
     @Column(name = "codigo", nullable = false, length = 12)

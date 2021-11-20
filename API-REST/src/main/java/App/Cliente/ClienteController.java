@@ -1,12 +1,12 @@
 package App.Cliente;
 
-import java.util.List;
-import java.util.Random;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.persistence.Query;
+import java.util.List;
 
 //Indiciamos que es un controlador rest
 @RestController
@@ -21,12 +21,13 @@ class ClienteController {
     }
 
     @GetMapping("/")
-    public @ResponseBody String greeting() {
+    public @ResponseBody
+    String greeting() {
         return "API Running - PeixePOP";
     }
 
     @GetMapping("/clientes")
-    public List<Cliente> findAll(){
+    public List<Cliente> findAll() {
         return repository.findAll();
     }
 

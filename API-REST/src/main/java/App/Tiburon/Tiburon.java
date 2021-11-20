@@ -1,8 +1,12 @@
 package App.Tiburon;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-@Table(name="tiburones")
+@Table(name = "tiburones")
 public class Tiburon {
     @Id
     @Column(name = "codigo", nullable = false, length = 12)

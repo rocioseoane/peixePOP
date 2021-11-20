@@ -1,9 +1,13 @@
 package App.Pedido;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.sql.Time;
 
 @Entity
-@Table(name="pedidos")
+@Table(name = "pedidos")
 public class Pedido {
     @Id
     @Column(name = "codigo", nullable = false, length = 12)
@@ -31,7 +35,9 @@ public class Pedido {
         this.fecha = fecha;
     }
 
-    public String getCodigo() { return codigo; }
+    public String getCodigo() {
+        return codigo;
+    }
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;

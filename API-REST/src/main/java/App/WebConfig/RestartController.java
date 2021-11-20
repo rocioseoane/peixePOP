@@ -1,7 +1,8 @@
 package App.WebConfig;
 
 import App.App;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class RestartController {
