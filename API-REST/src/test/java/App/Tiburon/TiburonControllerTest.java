@@ -19,7 +19,12 @@ public class TiburonControllerTest {
 
     @Test
     public void testTiburondById() throws Exception {
-        String expectedResponse = "{\"codigo\":\"baro6665time\",\"nombre\":\"TiburÃ³n Basurero\",\"tamano\":\"Mediano\",\"codigo_estanque\":\"esna7765inno\"}";
+        String expectedResponse = "{" +
+                    "\"codigo\":\"baro6665time\"," +
+                    "\"nombre\":\"TiburÃ³n Basurero\"," +
+                    "\"tamano\":\"Mediano\"," +
+                    "\"codigo_estanque\":\"esna7765inno\"" +
+                "}";
         String responseString = mvc.perform(get("/tiburones/baro6665time"))
                 .andExpect(status().isOk())
                 .andReturn()

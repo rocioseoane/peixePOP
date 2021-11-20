@@ -19,7 +19,11 @@ public class PedidoControllerTest {
 
     @Test
     public void testPedidodById() throws Exception {
-        String expectedResponse = "{\"codigo\":\"1\",\"fecha\":\"12:05:50\",\"recibido\":1}";
+        String expectedResponse = "{" +
+                    "\"codigo\":\"1\"," +
+                    "\"fecha\":\"12:05:50\"," +
+                    "\"recibido\":1" +
+                "}";
         String responseString = mvc.perform(get("/pedidos/1"))
                 .andExpect(status().isOk())
                 .andReturn()

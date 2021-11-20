@@ -20,7 +20,12 @@ public class ClienteControllerTest {
 
     @Test
     public void testClientedById() throws Exception {
-        String expectedResponse = "{\"codigo\":\"323419092000\",\"nombre\":\"Lucas\",\"direccion\":\"Ourense\",\"telefono\":\"888888888\"}";
+        String expectedResponse = "{" +
+                    "\"codigo\":\"323419092000\"," +
+                    "\"nombre\":\"Lucas\"," +
+                    "\"direccion\":\"Ourense\"," +
+                    "\"telefono\":\"888888888\"" +
+                "}";
         String responseString = mvc.perform(get("/clientes/323419092000"))
                 .andExpect(status().isOk())
                 .andReturn()

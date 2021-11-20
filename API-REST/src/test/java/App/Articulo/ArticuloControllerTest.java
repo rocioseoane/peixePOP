@@ -20,7 +20,13 @@ public class ArticuloControllerTest {
 
     @Test
     public void testArticulodById() throws Exception {
-        String expectedResponse = "{\"codigo\":\"6567acfo7182\",\"descripcion\":\"Acondicionador para agua del grifo\",\"stock\":9,\"precio\":3.49,\"tipo_articulo\":4}";
+        String expectedResponse = "{" +
+                    "\"codigo\":\"6567acfo7182\"," +
+                    "\"descripcion\":\"Acondicionador para agua del grifo\"," +
+                    "\"stock\":9,"+
+                    "\"precio\":3.49," +
+                    "\"tipo_articulo\":4" +
+                "}";
         String responseString = mvc.perform(get("/articulos/6567acfo7182"))
                 .andExpect(status().isOk())
                 .andReturn()

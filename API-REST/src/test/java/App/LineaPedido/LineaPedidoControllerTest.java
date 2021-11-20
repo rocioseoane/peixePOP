@@ -19,7 +19,13 @@ public class LineaPedidoControllerTest {
 
     @Test
     public void testLineaPedidodById() throws Exception {
-        String expectedResponse = "{\"codigo\":\"1\",\"codigo_articulo\":\"6765caon6869\",\"cantidad\":3,\"precio\":100.4,\"codigo_pedido\":2}";
+        String expectedResponse = "{" +
+                    "\"codigo\":\"1\"," +
+                    "\"codigo_articulo\":\"6765caon6869\"," +
+                    "\"cantidad\":3," +
+                    "\"precio\":100.4," +
+                    "\"codigo_pedido\":2" +
+                "}";
         String responseString = mvc.perform(get("/lineas_pedidos/1"))
                 .andExpect(status().isOk())
                 .andReturn()

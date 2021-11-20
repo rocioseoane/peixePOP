@@ -19,7 +19,13 @@ public class LineaFacturaControllerTest {
 
     @Test
     public void testLineaFacturadById() throws Exception {
-        String expectedResponse = "{\"codigo\":\"1\",\"cantidad\":2,\"descripcion\":\"GoldFish\",\"precio\":5.0,\"codigo_factura\":1}";
+        String expectedResponse = "{" +
+                    "\"codigo\":\"1\"," +
+                    "\"cantidad\":2," +
+                    "\"descripcion\":\"GoldFish\"," +
+                    "\"precio\":5.0," +
+                    "\"codigo_factura\":1" +
+                "}";
         String responseString = mvc.perform(get("/lineas_facturas/1"))
                 .andExpect(status().isOk())
                 .andReturn()

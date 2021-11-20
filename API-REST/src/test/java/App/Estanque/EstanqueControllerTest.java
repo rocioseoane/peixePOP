@@ -19,7 +19,12 @@ public class EstanqueControllerTest {
 
     @Test
     public void testEstanquedById() throws Exception {
-        String expectedResponse = "{\"codigo\":\"esel6578exno\",\"tipo\":\"Externo\",\"nombre\":\"Estanque de Angel\",\"codigo_sala\":\"exor7869samo\"}";
+        String expectedResponse = "{" +
+                    "\"codigo\":\"esel6578exno\"," +
+                    "\"tipo\":\"Externo\"," +
+                    "\"nombre\":\"Estanque de Angel\"," +
+                    "\"codigo_sala\":\"exor7869samo\"" +
+                "}";
         String responseString = mvc.perform(get("/estanques/esel6578exno"))
                 .andExpect(status().isOk())
                 .andReturn()

@@ -20,7 +20,11 @@ public class SalaControllerTest {
 
     @Test
     public void testSaladById() throws Exception {
-        String expectedResponse = "{\"codigo\":\"exor7869samo\",\"nombre\":\"Sala Nemo\",\"tipo\":\"Exterior\"}";
+        String expectedResponse = "{" +
+                    "\"codigo\":\"exor7869samo\"," +
+                    "\"nombre\":\"Sala Nemo\"," +
+                    "\"tipo\":\"Exterior\"" +
+                "}";
         String responseString = mvc.perform(get("/salas/exor7869samo"))
                 .andExpect(status().isOk())
                 .andReturn()

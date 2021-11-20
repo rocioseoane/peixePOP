@@ -19,7 +19,13 @@ public class TrabajadorControllerTest {
 
     @Test
     public void testTrabajadordById() throws Exception {
-        String expectedResponse = "{\"codigo\":\"432509081997\",\"nombre\":\"Herodes\",\"direccion\":\"Jerusalen\",\"telefono\":\"000000000\",\"salario\":1000.0}";
+        String expectedResponse = "{" +
+                    "\"codigo\":\"432509081997\"," +
+                    "\"nombre\":\"Herodes\"," +
+                    "\"direccion\":\"Jerusalen\"," +
+                    "\"telefono\":\"000000000\"," +
+                    "\"salario\":1000.0" +
+                "}";
         String responseString = mvc.perform(get("/trabajadores/432509081997"))
                 .andExpect(status().isOk())
                 .andReturn()

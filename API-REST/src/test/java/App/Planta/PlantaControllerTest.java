@@ -19,7 +19,13 @@ public class PlantaControllerTest {
 
     @Test
     public void testPlantadById() throws Exception {
-        String expectedResponse = "{\"codigo\":\"6589ayca6567\",\"medio_de_vida\":\"Acuatico\",\"nombre\":\"Ayahuasca\",\"codigo_estanque\":\"esel7765inno\",\"codigo_sala\":null}";
+        String expectedResponse = "{" +
+                    "\"codigo\":\"6589ayca6567\"," +
+                    "\"medio_de_vida\":\"Acuatico\"," +
+                    "\"nombre\":\"Ayahuasca\"," +
+                    "\"codigo_estanque\":\"esel7765inno\"," +
+                    "\"codigo_sala\":null" +
+                "}";
         String responseString = mvc.perform(get("/plantas/6589ayca6567"))
                 .andExpect(status().isOk())
                 .andReturn()
