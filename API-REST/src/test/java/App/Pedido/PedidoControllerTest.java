@@ -1,5 +1,6 @@
 package App.Pedido;
 
+import App.AppTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +19,13 @@ public class PedidoControllerTest {
     private MockMvc mvc;
 
     @Test
-    public void testPedidodById() throws Exception {
+    public void testPedidoById_equalResponse() throws Exception {
         String expectedResponse = "{" +
-                    "\"codigo\":\"1\"," +
-                    "\"fecha\":\"12:05:50\"," +
-                    "\"recibido\":1" +
+                "\"codigo\":\"1\"," +
+                "\"fecha\":\"12:05:50\"," +
+                "\"recibido\":1" +
                 "}";
-        String responseString = mvc.perform(get("/pedidos/1"))
+        String responseString = mvc.perform(AppTest.testRequest("/pedidos/1"))
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse()
@@ -34,10 +35,16 @@ public class PedidoControllerTest {
     }
 
     @Test
-    public void testPedidoFindAll() throws Exception {
-        mvc.perform(get("/pedidos"))
+    public void testPedidoAll_responseOk() throws Exception {
+        mvc.perform(AppTest.testRequest("/pedidos"))
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse();
+    }
+
+    @Test
+    public void testPedidoAll_responseForbidden() throws Exception {
+        mvc.perform(get("/pedidos"))
+                .andExpect(status().isForbidden());
     }
 }

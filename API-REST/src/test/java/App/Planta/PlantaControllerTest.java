@@ -1,5 +1,6 @@
 package App.Planta;
 
+import App.AppTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +19,15 @@ public class PlantaControllerTest {
     private MockMvc mvc;
 
     @Test
-    public void testPlantadById() throws Exception {
+    public void testPlantaById_equalResponse() throws Exception {
         String expectedResponse = "{" +
-                    "\"codigo\":\"6589ayca6567\"," +
-                    "\"medio_de_vida\":\"Acuatico\"," +
-                    "\"nombre\":\"Ayahuasca\"," +
-                    "\"codigo_estanque\":\"esel7765inno\"," +
-                    "\"codigo_sala\":null" +
+                "\"codigo\":\"6589ayca6567\"," +
+                "\"medio_de_vida\":\"Acuatico\"," +
+                "\"nombre\":\"Ayahuasca\"," +
+                "\"codigo_estanque\":\"esel7765inno\"," +
+                "\"codigo_sala\":null" +
                 "}";
-        String responseString = mvc.perform(get("/plantas/6589ayca6567"))
+        String responseString = mvc.perform(AppTest.testRequest("/plantas/6589ayca6567"))
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse()
@@ -36,10 +37,16 @@ public class PlantaControllerTest {
     }
 
     @Test
-    public void testPlantaFindAll() throws Exception {
-        mvc.perform(get("/plantas"))
+    public void testPlantaAll_responseOk() throws Exception {
+        mvc.perform(AppTest.testRequest("/plantas"))
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse();
+    }
+
+    @Test
+    public void testPlantaAll_responseForbidden() throws Exception {
+        mvc.perform(get("/plantas"))
+                .andExpect(status().isForbidden());
     }
 }

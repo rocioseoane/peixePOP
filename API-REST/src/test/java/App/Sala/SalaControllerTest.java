@@ -1,6 +1,7 @@
 package App.Sala;
 
 
+import App.AppTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +20,13 @@ public class SalaControllerTest {
     private MockMvc mvc;
 
     @Test
-    public void testSaladById() throws Exception {
+    public void testSalaById_equalResponse() throws Exception {
         String expectedResponse = "{" +
-                    "\"codigo\":\"exor7869samo\"," +
-                    "\"nombre\":\"Sala Nemo\"," +
-                    "\"tipo\":\"Exterior\"" +
+                "\"codigo\":\"exor7869samo\"," +
+                "\"nombre\":\"Sala Nemo\"," +
+                "\"tipo\":\"Exterior\"" +
                 "}";
-        String responseString = mvc.perform(get("/salas/exor7869samo"))
+        String responseString = mvc.perform(AppTest.testRequest("/salas/exor7869samo"))
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse()
@@ -35,11 +36,16 @@ public class SalaControllerTest {
     }
 
     @Test
-    public void testSalaFindAll() throws Exception {
-        mvc.perform(get("/salas"))
+    public void testSalaAll_responseOk() throws Exception {
+        mvc.perform(AppTest.testRequest("/salas"))
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse();
     }
 
+    @Test
+    public void testSalaAll_responseForbidden() throws Exception {
+        mvc.perform(get("/salas"))
+                .andExpect(status().isForbidden());
+    }
 }
