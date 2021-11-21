@@ -26,7 +26,7 @@ public class ConnDB {
     /**
      * Constructor para conectarse la base de datos por defecto
      */
-    private ConnDB() {
+    public ConnDB() {
         try {
             conn = DriverManager.getConnection("jdbc:mysql://easybyte.club:2223/peixepop", "jdbc", "peixejdbc@Servo2021*");
             System.out.println(">>>>>>>>>>> La conexión a la Base de Datos se ha creado con éxito");
