@@ -12,7 +12,7 @@ class PedidoNotFoundAdvice {
     @ResponseBody
     @ExceptionHandler(PedidoNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String employeeNotFoundHandler(PedidoNotFoundException ex) {
+    String pedidoNotFoundHandler(PedidoNotFoundException ex) {
         return ex.getMessage();
     }
 }

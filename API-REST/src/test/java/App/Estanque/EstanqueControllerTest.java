@@ -1,5 +1,6 @@
 package App.Estanque;
 
+import App.AppTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +19,14 @@ public class EstanqueControllerTest {
     private MockMvc mvc;
 
     @Test
-    public void testEstanquedById() throws Exception {
+    public void testEstanqueById_equalResponse() throws Exception {
         String expectedResponse = "{" +
-                    "\"codigo\":\"esel6578exno\"," +
-                    "\"tipo\":\"Externo\"," +
-                    "\"nombre\":\"Estanque de Angel\"," +
-                    "\"codigo_sala\":\"exor7869samo\"" +
+                "\"codigo\":\"esel6578exno\"," +
+                "\"tipo\":\"Externo\"," +
+                "\"nombre\":\"Estanque de Angel\"," +
+                "\"codigo_sala\":\"exor7869samo\"" +
                 "}";
-        String responseString = mvc.perform(get("/estanques/esel6578exno"))
+        String responseString = mvc.perform(AppTest.testRequest("/estanques/esel6578exno"))
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse()
@@ -35,10 +36,16 @@ public class EstanqueControllerTest {
     }
 
     @Test
-    public void testEstanqueFindAll() throws Exception {
-        mvc.perform(get("/estanques"))
+    public void testEstanqueAll_responseOk() throws Exception {
+        mvc.perform(AppTest.testRequest("/estanques"))
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse();
+    }
+
+    @Test
+    public void testEstanqueAll_responseForbidden() throws Exception {
+        mvc.perform(get("/estanques"))
+                .andExpect(status().isForbidden());
     }
 }

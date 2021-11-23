@@ -1,6 +1,7 @@
 package App.Cliente;
 
 
+import App.AppTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +20,14 @@ public class ClienteControllerTest {
     private MockMvc mvc;
 
     @Test
-    public void testClientedById() throws Exception {
+    public void testClienteById_equalResponse() throws Exception {
         String expectedResponse = "{" +
-                    "\"codigo\":\"323419092000\"," +
-                    "\"nombre\":\"Lucas\"," +
-                    "\"direccion\":\"Ourense\"," +
-                    "\"telefono\":\"888888888\"" +
+                "\"codigo\":\"323419092000\"," +
+                "\"nombre\":\"Lucas\"," +
+                "\"direccion\":\"Ourense\"," +
+                "\"telefono\":\"888888888\"" +
                 "}";
-        String responseString = mvc.perform(get("/clientes/323419092000"))
+        String responseString = mvc.perform(AppTest.testRequest("/clientes/323419092000"))
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse()
@@ -36,10 +37,16 @@ public class ClienteControllerTest {
     }
 
     @Test
-    public void testClienteFindAll() throws Exception {
-        mvc.perform(get("/clientes"))
+    public void testClienteAll_responseOk() throws Exception {
+        mvc.perform(AppTest.testRequest("/clientes"))
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse();
+    }
+
+    @Test
+    public void testClienteAll_responseForbidden() throws Exception {
+        mvc.perform(get("/clientes"))
+                .andExpect(status().isForbidden());
     }
 }

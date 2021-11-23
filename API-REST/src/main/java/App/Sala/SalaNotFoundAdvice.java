@@ -1,6 +1,5 @@
 package App.Sala;
 
-import App.Sala.SalaNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,7 +12,7 @@ class SalaNotFoundAdvice {
     @ResponseBody
     @ExceptionHandler(SalaNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String employeeNotFoundHandler(SalaNotFoundException ex) {
+    String salaNotFoundHandler(SalaNotFoundException ex) {
         return ex.getMessage();
     }
 }

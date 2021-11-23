@@ -12,7 +12,7 @@ class LineaPedidoNotFoundAdvice {
     @ResponseBody
     @ExceptionHandler(LineaPedidoNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String employeeNotFoundHandler(LineaPedidoNotFoundException ex) {
+    String lineaPedidoNotFoundHandler(LineaPedidoNotFoundException ex) {
         return ex.getMessage();
     }
 }

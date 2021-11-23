@@ -1,6 +1,5 @@
 package App.Articulo;
 
-import App.Articulo.ArticuloNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,7 +12,7 @@ class ArticuloNotFoundAdvice {
     @ResponseBody
     @ExceptionHandler(ArticuloNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String employeeNotFoundHandler(ArticuloNotFoundException ex) {
+    String articuloNotFoundHandler(ArticuloNotFoundException ex) {
         return ex.getMessage();
     }
 }

@@ -12,7 +12,7 @@ class TiburonNotFoundAdvice {
     @ResponseBody
     @ExceptionHandler(TiburonNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String employeeNotFoundHandler(TiburonNotFoundException ex) {
+    String tiburonNotFoundHandler(TiburonNotFoundException ex) {
         return ex.getMessage();
     }
 }

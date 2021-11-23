@@ -1,5 +1,6 @@
 package App.LineaFactura;
 
+import App.AppTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +19,15 @@ public class LineaFacturaControllerTest {
     private MockMvc mvc;
 
     @Test
-    public void testLineaFacturadById() throws Exception {
+    public void testLineaFacturaById_equalResponse() throws Exception {
         String expectedResponse = "{" +
-                    "\"codigo\":\"1\"," +
-                    "\"cantidad\":2," +
-                    "\"descripcion\":\"GoldFish\"," +
-                    "\"precio\":5.0," +
-                    "\"codigo_factura\":1" +
+                "\"codigo\":\"1\"," +
+                "\"cantidad\":2," +
+                "\"descripcion\":\"GoldFish\"," +
+                "\"precio\":5.0," +
+                "\"codigo_factura\":1" +
                 "}";
-        String responseString = mvc.perform(get("/lineas_facturas/1"))
+        String responseString = mvc.perform(AppTest.testRequest("/lineas_facturas/1"))
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse()
@@ -36,10 +37,16 @@ public class LineaFacturaControllerTest {
     }
 
     @Test
-    public void testLineaFacturaFindAll() throws Exception {
-        mvc.perform(get("/lineas_facturas"))
+    public void testLineaFacturaAll_responseOk() throws Exception {
+        mvc.perform(AppTest.testRequest("/lineas_facturas"))
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse();
+    }
+
+    @Test
+    public void testLineaFacturaAll_responseForbidden() throws Exception {
+        mvc.perform(get("/lineas_facturas"))
+                .andExpect(status().isForbidden());
     }
 }

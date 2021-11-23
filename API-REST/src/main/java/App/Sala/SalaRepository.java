@@ -1,6 +1,5 @@
 package App.Sala;
 
-import App.Sala.Sala;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SalaRepository extends JpaRepository<Sala, String> {

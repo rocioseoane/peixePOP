@@ -1,5 +1,6 @@
 package App.Tiburon;
 
+import App.AppTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +19,14 @@ public class TiburonControllerTest {
     private MockMvc mvc;
 
     @Test
-    public void testTiburondById() throws Exception {
+    public void testTiburonById_equalResponse() throws Exception {
         String expectedResponse = "{" +
-                    "\"codigo\":\"baro6665time\"," +
-                    "\"nombre\":\"TiburÃ³n Basurero\"," +
-                    "\"tamano\":\"Mediano\"," +
-                    "\"codigo_estanque\":\"esna7765inno\"" +
+                "\"codigo\":\"baro6665time\"," +
+                "\"nombre\":\"TiburÃ³n Basurero\"," +
+                "\"tamano\":\"Mediano\"," +
+                "\"codigo_estanque\":\"esna7765inno\"" +
                 "}";
-        String responseString = mvc.perform(get("/tiburones/baro6665time"))
+        String responseString = mvc.perform(AppTest.testRequest("/tiburones/baro6665time"))
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse()
@@ -35,10 +36,16 @@ public class TiburonControllerTest {
     }
 
     @Test
-    public void testTiburonFindAll() throws Exception {
-        mvc.perform(get("/tiburones"))
+    public void testTiburonAll_responseOk() throws Exception {
+        mvc.perform(AppTest.testRequest("/tiburones"))
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse();
+    }
+
+    @Test
+    public void testTiburonAll_responseForbidden() throws Exception {
+        mvc.perform(get("/tiburones"))
+                .andExpect(status().isForbidden());
     }
 }
