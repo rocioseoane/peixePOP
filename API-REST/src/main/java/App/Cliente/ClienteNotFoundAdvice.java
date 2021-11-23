@@ -12,7 +12,7 @@ class ClienteNotFoundAdvice {
     @ResponseBody
     @ExceptionHandler(ClienteNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String employeeNotFoundHandler(ClienteNotFoundException ex) {
+    String clienteNotFoundHandler(ClienteNotFoundException ex) {
         return ex.getMessage();
     }
 }

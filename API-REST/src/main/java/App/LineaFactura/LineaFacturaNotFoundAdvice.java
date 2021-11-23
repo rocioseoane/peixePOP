@@ -12,7 +12,7 @@ class LineaFacturaNotFoundAdvice {
     @ResponseBody
     @ExceptionHandler(LineaFacturaNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String employeeNotFoundHandler(LineaFacturaNotFoundException ex) {
+    String lineaFacturaNotFoundHandler(LineaFacturaNotFoundException ex) {
         return ex.getMessage();
     }
 }

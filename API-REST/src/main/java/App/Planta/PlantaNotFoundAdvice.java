@@ -12,7 +12,7 @@ class PlantaNotFoundAdvice {
     @ResponseBody
     @ExceptionHandler(PlantaNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String employeeNotFoundHandler(PlantaNotFoundException ex) {
+    String plantaNotFoundHandler(PlantaNotFoundException ex) {
         return ex.getMessage();
     }
 }

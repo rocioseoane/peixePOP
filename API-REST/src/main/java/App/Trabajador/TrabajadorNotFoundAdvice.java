@@ -12,7 +12,7 @@ class TrabajadorNotFoundAdvice {
     @ResponseBody
     @ExceptionHandler(TrabajadorNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String employeeNotFoundHandler(TrabajadorNotFoundException ex) {
+    String trabajadorNotFoundHandler(TrabajadorNotFoundException ex) {
         return ex.getMessage();
     }
 }

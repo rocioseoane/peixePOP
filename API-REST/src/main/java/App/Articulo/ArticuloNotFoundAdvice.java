@@ -12,7 +12,7 @@ class ArticuloNotFoundAdvice {
     @ResponseBody
     @ExceptionHandler(ArticuloNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String employeeNotFoundHandler(ArticuloNotFoundException ex) {
+    String articuloNotFoundHandler(ArticuloNotFoundException ex) {
         return ex.getMessage();
     }
 }

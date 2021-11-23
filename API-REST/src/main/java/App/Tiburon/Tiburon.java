@@ -21,6 +21,9 @@ public class Tiburon {
     @Column(name = "codigo_estanque", length = 12)
     private String codigo_estanque;
 
+    @Column(name = "tipo_agua")
+    private String tipo_agua;
+
     public String getCodigo_estanque() {
         return codigo_estanque;
     }

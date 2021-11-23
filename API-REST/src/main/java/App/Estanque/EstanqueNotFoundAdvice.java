@@ -12,7 +12,7 @@ class EstanqueNotFoundAdvice {
     @ResponseBody
     @ExceptionHandler(EstanqueNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String employeeNotFoundHandler(EstanqueNotFoundException ex) {
+    String estanqueNotFoundHandler(EstanqueNotFoundException ex) {
         return ex.getMessage();
     }
 }
